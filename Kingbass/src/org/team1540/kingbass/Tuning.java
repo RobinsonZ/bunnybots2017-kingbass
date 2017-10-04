@@ -17,18 +17,8 @@ public class Tuning {
   public static final double ARM_SPEED = 1;
 
   // Autoshifting
-  /**
-   * Maximum that the autoshifting will be biased in either direction. A value of x essentially
-   * means that the auto-shifter will not switch gears until roughly 20 * x ms with drivetrain
-   * current below {@link #AUTO_SHIFT_DEVIATION_THRESHOLD} or above
-   * {@link #AUTO_SHIFT_DOWN_CURRENT_THRESHOLD} have passed.
-   */
-  public static final int MAX_AUTO_SHIFTING_WEIGHT = 5;
-
   /** Current threshold below which the autoshifter will shift up. */
   public static final double AUTO_SHIFT_DEVIATION_THRESHOLD = 3;
-  /** Current threshold above which the autoshifter will shift down. */
-  public static final double AUTO_SHIFT_DOWN_CURRENT_THRESHOLD = 9;
 
   /**
    * The time, in ticks (about 20ms), between the autoshifter changing gearss.
