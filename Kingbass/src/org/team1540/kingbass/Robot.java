@@ -39,8 +39,14 @@ public class Robot extends IterativeRobot {
   public void robotInit() {
     oi = new OI();
 
+    Tuning.putTuningValues();
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
+  }
+  
+  @Override
+  public void robotPeriodic() {
+    Tuning.updateTuningValues();
   }
 
   /**

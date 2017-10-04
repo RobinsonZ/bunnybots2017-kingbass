@@ -1,5 +1,7 @@
 package org.team1540.kingbass;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Provides values (from the SmartDashboard) for tuning the robot.
  * 
@@ -17,8 +19,11 @@ public class Tuning {
   private static double armSpeed = 1;
 
   // Autoshifting
-  /** Current threshold below which the autoshifter will shift up. */
-  private static double autoShiftDeviationThreshold = 3;
+  /**
+   * The level of acceptable deviation between expected speed (as given by the motor throttle) and
+   * actual speed (as given by the wheel encoders) before the shifter will shift down.
+   */
+  private static double autoShiftDeviationThreshold = 0.1;
 
   /**
    * The time, in ticks (about 20ms), between the autoshifter changing gearss.
@@ -37,6 +42,65 @@ public class Tuning {
   // Input
   /** Axis input that is less than this value in either direction will be ignored. */
   private static double deadzone = 0.1;
+
+  public static void putDrivetrainTuningValues() {
+    SmartDashboard.putBoolean("Reverse left drive", lReverseOutput);
+    SmartDashboard.putBoolean("Reverse left encoder", lReverseSensor);
+    SmartDashboard.putBoolean("Reverse right drive", rReverseOutput);
+    SmartDashboard.putBoolean("Reverse right encoder", rReverseSensor);
+  }
+
+  public static void putArmTuningValues() {
+    SmartDashboard.putNumber("Arm speed", armSpeed);
+  }
+
+  public static void putAutoshiftTuningValues() {
+    SmartDashboard.putNumber("Autoshifter deviation threshold", autoShiftDeviationThreshold);
+    SmartDashboard.putNumber("Autoshifter update speed", autoshiftCooldown);
+  }
+
+  public static void putClawTuningValues() {
+    SmartDashboard.putNumber("Open claw duration", openClawTime);
+    SmartDashboard.putNumber("Close claw duration", closeClawTime);
+  }
+
+  public static void putIntakeTuningValues() {
+    SmartDashboard.putNumber("Intake speed", intakeSetPoint);
+  }
+
+  public static void putInputTuningValues() {
+    SmartDashboard.putNumber("Joystick deadzone", deadzone);
+  }
+
+  public static void putTuningValues() {
+    putDrivetrainTuningValues();
+    putArmTuningValues();
+    putAutoshiftTuningValues();
+    putClawTuningValues();
+    putInputTuningValues();
+    putIntakeTuningValues();
+  }
+
+  public static void updateTuningValues() {
+    lReverseOutput = SmartDashboard.getBoolean("Reverse left drive", lReverseOutput);
+    lReverseSensor = SmartDashboard.getBoolean("Reverse left encoder", lReverseSensor);
+    rReverseOutput = SmartDashboard.getBoolean("Reverse right drive", rReverseOutput);
+    rReverseSensor = SmartDashboard.getBoolean("Reverse right encoder", rReverseSensor);
+
+    armSpeed = SmartDashboard.getNumber("Arm speed", armSpeed);
+
+    autoShiftDeviationThreshold =
+        SmartDashboard.getNumber("Autoshifter deviation threshold", autoShiftDeviationThreshold);
+    autoshiftCooldown =
+        (int) SmartDashboard.getNumber("Autoshifter update speed", autoshiftCooldown);
+
+    openClawTime = SmartDashboard.getNumber("Open claw duration", openClawTime);
+    closeClawTime = SmartDashboard.getNumber("Close claw duration", closeClawTime);
+
+    intakeSetPoint = SmartDashboard.getNumber("Intake speed", intakeSetPoint);
+
+    deadzone = SmartDashboard.getNumber("Joystick deadzone", deadzone);
+  }
 
   public static boolean lReverseOutput() {
     return lReverseOutput;
