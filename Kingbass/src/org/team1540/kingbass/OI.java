@@ -5,5 +5,4 @@ package org.team1540.kingbass;
  * controller. If it is made to extend {@link DualControllerOI}, it will use bindings for two
  * controllers.
  */
-public class OI extends DualControllerOI {
-}
+public class OI extends DualControllerOI {}
