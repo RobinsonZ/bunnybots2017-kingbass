@@ -25,7 +25,7 @@ public class IntakeOut extends Command {
 
   @Override
   protected void initialize() {
-    Robot.intake.setMotor(-Tuning.INTAKE_SET_POINT);
+    Robot.intake.setMotor(-Tuning.getIntakeSetPoint());
   }
 
   @Override

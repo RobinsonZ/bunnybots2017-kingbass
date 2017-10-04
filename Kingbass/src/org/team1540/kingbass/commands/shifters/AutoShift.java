@@ -57,9 +57,9 @@ public class AutoShift extends Command {
 
     // process autoshifting weight
     if (Utilities.calcRPMDeviation(gear, Robot.driveTrain.getLeftMainTalon().get(),
-        Robot.driveTrain.getLeftMainTalon()) > Tuning.AUTO_SHIFT_DEVIATION_THRESHOLD
+        Robot.driveTrain.getLeftMainTalon()) > Tuning.getAutoShiftDeviationThreshold()
         || Utilities.calcRPMDeviation(gear, Robot.driveTrain.getRightMainTalon().get(),
-            Robot.driveTrain.getRightMainTalon()) > Tuning.AUTO_SHIFT_DEVIATION_THRESHOLD) {
+            Robot.driveTrain.getRightMainTalon()) > Tuning.getAutoShiftDeviationThreshold()) {
       weight--;
     } else {
       weight++;
@@ -73,10 +73,10 @@ public class AutoShift extends Command {
         Robot.shifters.shiftUp();
       } // if weight is 0 keep things the way they are
 
-      ticksUntilShiftUpdate = Tuning.AUTOSHIFT_COOLDOWN;
+      ticksUntilShiftUpdate = Tuning.getAutoshiftCooldown();
       
       // slightly bias the weight towards the last shift level
-      weight = Tuning.AUTOSHIFT_COOLDOWN / 2;
+      weight = Tuning.getAutoshiftCooldown() / 2;
     } else {
       ticksUntilShiftUpdate--;
     }

@@ -29,7 +29,7 @@ public class OpenClaw extends Command {
 
   @Override
   protected boolean isFinished() {
-    return t.hasPeriodPassed(Tuning.OPEN_CLAW_TIME);
+    return t.hasPeriodPassed(Tuning.getOpenClawTime());
   }
 
   @Override

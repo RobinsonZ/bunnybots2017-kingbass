@@ -38,12 +38,12 @@ public class Arm extends Subsystem {
 
   /** Raises the arm at the speed set by {@code Tuning.ARM_SPEED}. */
   public void raiseArm() {
-    armB.set(Tuning.ARM_SPEED);
+    armB.set(Tuning.getArmSpeed());
   }
 
   /** Lowers the arm at the speed set by {@code Tuning.ARM_SPEED}. */
   public void lowerArm() {
-    armA.set(Tuning.ARM_SPEED);
+    armA.set(Tuning.getArmSpeed());
   }
 
   /** Stops the arm. */

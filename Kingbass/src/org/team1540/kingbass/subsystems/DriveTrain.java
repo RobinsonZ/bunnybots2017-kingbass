@@ -40,11 +40,11 @@ public class DriveTrain extends Subsystem {
       c.setProfile(0);
     }
 
-    lMain.reverseOutput(Tuning.L_REVERSE_OUTPUT);
-    rMain.reverseOutput(Tuning.R_REVERSE_OUTPUT);
+    lMain.reverseOutput(Tuning.lReverseOutput());
+    rMain.reverseOutput(Tuning.rReverseOutput());
 
-    lMain.reverseSensor(Tuning.L_REVERSE_SENSOR);
-    rMain.reverseSensor(Tuning.R_REVERSE_SENSOR);
+    lMain.reverseSensor(Tuning.lReverseSensor());
+    rMain.reverseSensor(Tuning.rReverseSensor());
   }
 
   @Override
