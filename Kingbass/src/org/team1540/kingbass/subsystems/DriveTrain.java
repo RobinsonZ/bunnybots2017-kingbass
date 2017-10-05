@@ -3,6 +3,7 @@ package org.team1540.kingbass.subsystems;
 import org.team1540.kingbass.RobotInfo;
 import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
+import org.team1540.kingbass.motion.MotionProfile;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
@@ -29,6 +30,9 @@ public class DriveTrain extends Subsystem {
   private CANTalon[] lSlaves = {lSlaveA, lSlaveB};
   private CANTalon[] rSlaves = {rSlaveA, rSlaveB};
 
+  private MotionProfile leftProfile;
+  private MotionProfile rightProfile;
+
   public DriveTrain() {
 
     for (CANTalon c : talons) {
@@ -45,7 +49,7 @@ public class DriveTrain extends Subsystem {
 
     lMain.reverseSensor(Tuning.lReverseSensor());
     rMain.reverseSensor(Tuning.rReverseSensor());
-    
+
     lMain.changeMotionControlFramePeriod(5);
     rMain.changeMotionControlFramePeriod(5);
   }
@@ -114,17 +118,52 @@ public class DriveTrain extends Subsystem {
   public CANTalon getRightMainTalon() {
     return rMain;
   }
-  
+
   public void setPID(double p, double i, double d, double f) {
     lMain.setPID(p, i, d);
     rMain.setPID(p, i, d);
     lMain.setF(f);
     rMain.setF(f);
   }
+
+  public void setMp(double[][] left, double[][] right) {
+    leftProfile = new MotionProfile(lMain, left, left.length);
+    rightProfile = new MotionProfile(rMain, right, right.length);
+  }
   
-  public void processMpBuffer() {
-    lMain.processMotionProfileBuffer();
-    rMain.processMotionProfileBuffer();
+  public boolean controlMp() {
+    if (leftProfile != null && rightProfile != null) {
+      boolean done = leftProfile.control();
+      lMain.changeControlMode(TalonControlMode.MotionProfile);
+      lMain.set(leftProfile.getSetValue().value);
+      
+      done = (done || rightProfile.control());
+      rMain.changeControlMode(TalonControlMode.MotionProfile);
+      rMain.set(rightProfile.getSetValue().value);
+      
+      return done;
+    }
+    
+    return false;
+  }
+
+  public void startMp() {
+    if (leftProfile != null && rightProfile != null) {
+      leftProfile.startMotionProfile();
+      rightProfile.startMotionProfile();
+    }
+  }
+
+  public void stopMp() {
+    if (leftProfile != null && rightProfile != null) {
+      leftProfile.reset();
+      lMain.changeControlMode(TalonControlMode.PercentVbus);
+      lMain.set(0);
+      
+      rightProfile.reset();
+      rMain.changeControlMode(TalonControlMode.PercentVbus);
+      rMain.set(0);
+    }
   }
 
 }
