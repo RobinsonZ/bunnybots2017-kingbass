@@ -198,4 +198,24 @@ public class MotionProfile {
 
     return profile.length;
   }
+
+  public void startMotionProfile() {
+    bStart = true;
+  }
+
+  public CANTalon.SetValueMotionProfile getSetValue() {
+    return setValue;
+  }
+
+  public boolean isActivePointValid() {
+    return status.activePointValid;
+  }
+
+  public double getTargetPosition() {
+    return status.activePointValid ? status.activePoint.position : Double.NaN;
+  }
+
+  public boolean isRunning() {
+    return state == 2;
+  }
 }
