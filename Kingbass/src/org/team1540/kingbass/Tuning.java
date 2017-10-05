@@ -9,6 +9,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Tuning {
 
+  // motion profiling
+  //values should be changed, these are just copied from henny's code
+  private static double profileP = 0.1; 
+  private static double profileI = 0.00001;
+  private static double profileD = 0.1;
+  private static double profileF = 7.795;
+  
+
   // drivetrain
   private static boolean lReverseOutput = false;
   private static boolean rReverseOutput = false;
@@ -43,6 +51,12 @@ public class Tuning {
   /** Axis input that is less than this value in either direction will be ignored. */
   private static double deadzone = 0.1;
 
+  public static void putMotionProfileTuningValues() {
+    SmartDashboard.putNumber("Profile P", profileP);
+    SmartDashboard.putNumber("Profile I", profileI);
+    SmartDashboard.putNumber("Profile D", profileD);
+    SmartDashboard.putNumber("Profile F", profileF);
+  }
   public static void putDrivetrainTuningValues() {
     SmartDashboard.putBoolean("Reverse left drive", lReverseOutput);
     SmartDashboard.putBoolean("Reverse left encoder", lReverseSensor);
@@ -73,6 +87,7 @@ public class Tuning {
   }
 
   public static void putTuningValues() {
+    putMotionProfileTuningValues();
     putDrivetrainTuningValues();
     putArmTuningValues();
     putAutoshiftTuningValues();
@@ -82,6 +97,11 @@ public class Tuning {
   }
 
   public static void updateTuningValues() {
+    profileP = SmartDashboard.getNumber("Profile P", profileP);
+    profileI = SmartDashboard.getNumber("Profile I", profileI);
+    profileD = SmartDashboard.getNumber("Profile D", profileD);
+    profileF = SmartDashboard.getNumber("Profile F", profileF);
+    
     lReverseOutput = SmartDashboard.getBoolean("Reverse left drive", lReverseOutput);
     lReverseSensor = SmartDashboard.getBoolean("Reverse left encoder", lReverseSensor);
     rReverseOutput = SmartDashboard.getBoolean("Reverse right drive", rReverseOutput);

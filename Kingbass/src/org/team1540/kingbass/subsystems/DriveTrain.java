@@ -45,6 +45,9 @@ public class DriveTrain extends Subsystem {
 
     lMain.reverseSensor(Tuning.lReverseSensor());
     rMain.reverseSensor(Tuning.rReverseSensor());
+    
+    lMain.changeMotionControlFramePeriod(5);
+    rMain.changeMotionControlFramePeriod(5);
   }
 
   @Override
@@ -110,6 +113,18 @@ public class DriveTrain extends Subsystem {
 
   public CANTalon getRightMainTalon() {
     return rMain;
+  }
+  
+  public void setPID(double p, double i, double d, double f) {
+    lMain.setPID(p, i, d);
+    rMain.setPID(p, i, d);
+    lMain.setF(f);
+    rMain.setF(f);
+  }
+  
+  public void processMpBuffer() {
+    lMain.processMotionProfileBuffer();
+    rMain.processMotionProfileBuffer();
   }
 
 }
