@@ -165,4 +165,16 @@ public class Tuning {
   public static double getDeadzone() {
     return deadzone;
   }
+  public static double getProfileP() {
+    return profileP;
+  }
+  public static double getProfileI() {
+    return profileI;
+  }
+  public static double getProfileD() {
+    return profileD;
+  }
+  public static double getProfileF() {
+    return profileF;
+  }
 }
