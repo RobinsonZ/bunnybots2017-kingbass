@@ -166,4 +166,9 @@ public class DriveTrain extends Subsystem {
     }
   }
 
+  public void processMpBuffer() {
+    lMain.processMotionProfileBuffer();
+    rMain.processMotionProfileBuffer();
+  }
+
 }
