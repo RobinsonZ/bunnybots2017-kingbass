@@ -34,7 +34,7 @@ public class Tuning {
   private static double autoShiftDeviationThreshold = 0.1;
 
   /**
-   * The time, in ticks (about 20ms), between the autoshifter changing gearss.
+   * The time, in ticks (about 20ms), between the autoshifter changing gears.
    */
   private static int autoshiftCooldown = 5;
 
