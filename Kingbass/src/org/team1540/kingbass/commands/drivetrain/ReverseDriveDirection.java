@@ -1,18 +1,11 @@
 package org.team1540.kingbass.commands.drivetrain;
 
 import org.team1540.kingbass.Robot;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class ReverseDriveDirection extends Command {
-
+public class ReverseDriveDirection extends InstantCommand {
   @Override
-  protected boolean isFinished() {
-    return true;
-  }
-  
-  @Override
-  protected void initialize() {
+  protected void execute() {
     Robot.driveTrain.switchDriveDirection();
   }
-
 }
