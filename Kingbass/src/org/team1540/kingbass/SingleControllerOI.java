@@ -1,6 +1,7 @@
 package org.team1540.kingbass;
 
 import org.team1540.kingbass.commands.claw.CloseClaw;
+import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
 import org.team1540.kingbass.commands.shifters.AutoShift;
@@ -24,6 +25,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * <li>D-Pad left: return to auto-shifting</li>
  * <li>A: open and close claw</li>
  * <li>B: toggle intake in</li>
+ * <li>X: switch "forward" direction</li>
  * <li>Y: toggle intake out</li>
  * </ul>
  * 
@@ -106,6 +108,7 @@ public class SingleControllerOI {
 
     driverA.toggleWhenPressed(new CloseClaw());
     driverB.toggleWhenPressed(new IntakeIn());
+    driverX.whenPressed(new ReverseDriveDirection());
     driverY.toggleWhenPressed(new IntakeOut());
   }
 }

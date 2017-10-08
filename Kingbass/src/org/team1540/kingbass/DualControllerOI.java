@@ -1,6 +1,7 @@
 package org.team1540.kingbass;
 
 import org.team1540.kingbass.commands.claw.CloseClaw;
+import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
 import org.team1540.kingbass.commands.shifters.AutoShift;
@@ -143,6 +144,8 @@ public class DualControllerOI {
     driverDPadUp.whenPressed(new ManualShiftUp());
     driverDPadDown.whenPressed(new ManualShiftDown());
     driverDPadLeft.whenPressed(new AutoShift());
+    
+    driverX.whenPressed(new ReverseDriveDirection());
 
     copilotA.toggleWhenPressed(new CloseClaw());
     copilotB.toggleWhenPressed(new IntakeIn());

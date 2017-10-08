@@ -32,6 +32,8 @@ public class DriveTrain extends Subsystem {
 
   private MotionProfile leftProfile;
   private MotionProfile rightProfile;
+  
+  private int driveDirection = 1;
 
   public DriveTrain() {
 
@@ -66,7 +68,7 @@ public class DriveTrain extends Subsystem {
    */
   public void setRightMotors(double setPoint) {
     groupTalons();
-    rMain.set(setPoint);
+    rMain.set(driveDirection * setPoint);
   }
 
   /**
@@ -76,7 +78,7 @@ public class DriveTrain extends Subsystem {
    */
   public void setLeftMotors(double setPoint) {
     groupTalons();
-    lMain.set(setPoint);
+    lMain.set(driveDirection * setPoint);
   }
 
   @SuppressWarnings("unused")
@@ -169,6 +171,10 @@ public class DriveTrain extends Subsystem {
   public void processMpBuffer() {
     lMain.processMotionProfileBuffer();
     rMain.processMotionProfileBuffer();
+  }
+
+  public void switchDriveDirection() {
+    driveDirection*=-1;
   }
 
 }
