@@ -11,6 +11,7 @@ Team 1540K (Kingbass) robot code for the 2017 BunnyBots game.
 * D-pad left: Return to auto-shifting mode
 * A button: Open/close claw
 * B button: Toggle intake in
+* X button: Reverse control direction
 * Y button: Toggle intake out
 
 ### Dual Controller
@@ -19,6 +20,7 @@ Team 1540K (Kingbass) robot code for the 2017 BunnyBots game.
 * D-pad up: Force high gear
 * D-pad down: Force low gear
 * D-pad left: Return to auto-shifting mode
+* X button: Reverse control direction
 
 #### Copilot:
 * Right stick Y: Raise/lower arm
