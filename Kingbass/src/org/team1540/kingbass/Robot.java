@@ -1,6 +1,7 @@
 
 package org.team1540.kingbass;
 
+import org.team1540.kingbass.commands.auto.DriveForward;
 import org.team1540.kingbass.subsystems.Arm;
 import org.team1540.kingbass.subsystems.Claw;
 import org.team1540.kingbass.subsystems.DriveTrain;
@@ -40,7 +41,8 @@ public class Robot extends IterativeRobot {
     oi = new OI();
 
     Tuning.putTuningValues();
-    // chooser.addObject("My Auto", new MyAutoCommand());
+    chooser.addObject("Drive forward 5 sec", new DriveForward(5));
+    chooser.addObject("Drive forward 2.5 sec", new DriveForward(2.5));
     SmartDashboard.putData("Auto mode", chooser);
   }
   
@@ -76,13 +78,7 @@ public class Robot extends IterativeRobot {
   @Override
   public void autonomousInit() {
     autonomousCommand = chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-     * switch(autoSelected) { case "My Auto": autonomousCommand = new MyAutoCommand(); break; case
-     * "Default Auto": default: autonomousCommand = new ExampleCommand(); break; }
-     */
-
+    
     // schedule the autonomous command (example)
     if (autonomousCommand != null)
       autonomousCommand.start();
