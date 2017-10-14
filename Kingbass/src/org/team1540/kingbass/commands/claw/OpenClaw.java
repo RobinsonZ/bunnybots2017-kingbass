@@ -3,7 +3,7 @@ package org.team1540.kingbass.commands.claw;
 import org.team1540.kingbass.Robot;
 import org.team1540.kingbass.Tuning;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  * Opens the pneumatic claw.
@@ -11,27 +11,19 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Zachary Robinson
  *
  */
-public class OpenClaw extends Command {
-  Timer t = new Timer();
+public class OpenClaw extends TimedCommand {
 
   /** Constructs an {@link OpenClaw}. */
   public OpenClaw() {
-    super("Open claw");
+    super("Open claw", Tuning.getOpenClawTime());
     requires(Robot.claw);
   }
 
   @Override
   protected void initialize() {
-    t.reset();
-    t.start();
     Robot.claw.startRelease();
   }
-
-  @Override
-  protected boolean isFinished() {
-    return t.hasPeriodPassed(Tuning.getOpenClawTime());
-  }
-
+  
   @Override
   protected void end() {
     Robot.claw.stop();
