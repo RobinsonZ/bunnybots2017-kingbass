@@ -41,6 +41,6 @@ public class Utilities {
    * {@link Tuning}.
    */
   public static double processAxisDeadzone(double axis) {
-    return (axis > Tuning.getDeadzone() || axis < -Tuning.getDeadzone()) ? axis : 0;
+    return (Math.abs(axis) > Math.abs(Tuning.getDeadzone())) ? axis : 0;
   }
 }
