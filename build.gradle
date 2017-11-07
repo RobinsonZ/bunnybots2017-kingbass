@@ -1,0 +1,41 @@
+plugins {
+    id "java"
+    id "eclipse"
+    id "idea"
+    // Newer versions currently don't work with OpenCV 3.1.0
+    id "jaci.openrio.gradle.GradleRIO" version "2017.1.5"
+}
+frc {
+    team = "1540"
+    robotClass = "org.team1540.kingbass.Robot"
+}
+wpi {
+    // 5.x.x.x currently doesn't work with GradleRIO
+    talonSrxVersion = "4.4.1.14"
+    // >3.1.0 currently doesn't work with wpilib
+    opencvVersion = "3.1.0"
+}
+dependencies {
+    compile wpilib()
+    compile navx()
+    compile talonSrx()
+}
+// setting the source directory for all the code
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/']
+        }
+    }
+}
+def robotManifest = {
+    attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
+    attributes 'Robot-Class': frc.robotClass
+}
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest robotManifest
+}
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.2.1'
+}
