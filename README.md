@@ -1,5 +1,5 @@
 # bunnybots2017-kingbass
-Team 1540K (Kingbass) robot code for the 2017 BunnyBots game.
+Team 1540K (Kingbass) robot code for the 2017 BunnyBots game Hide and Seek. (Rules can be found [here](http://team1540.org/bunnybots/).)
 
 ## Bindings
 ### Single controller
@@ -13,6 +13,7 @@ Team 1540K (Kingbass) robot code for the 2017 BunnyBots game.
 * B button: Toggle intake in
 * X button: Reverse control direction
 * Y button: Toggle intake out
+* RB: Force-disable drive direction compensation
 
 ### Dual Controller
 #### Driver:
@@ -21,6 +22,7 @@ Team 1540K (Kingbass) robot code for the 2017 BunnyBots game.
 * D-pad down: Force low gear
 * D-pad left: Return to auto-shifting mode
 * X button: Reverse control direction
+* RB: Force-disable drive direction compensation
 
 #### Copilot:
 * Right stick Y: Raise/lower arm
