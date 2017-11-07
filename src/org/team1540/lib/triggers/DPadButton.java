@@ -12,7 +12,15 @@ public class DPadButton extends Button {
    * Enum representing the possible axes of a D-Pad.
    */
   public enum DPadAxis {
-    UP, DOWN, LEFT, RIGHT
+    UP(315, 45), DOWN(135, 225), LEFT(225, 315), RIGHT(45, 135);
+
+    final int min;
+    final int max;
+
+    DPadAxis(int min, int max) {
+      this.min = min;
+      this.max = max;
+    }
   }
 
   private Joystick stick;
@@ -37,21 +45,7 @@ public class DPadButton extends Button {
   @Override
   public boolean get() {
     int pov = stick.getPOV(pad);
-    if (pov == -1) {
-      return false;
-    }
 
-    switch (axis) {
-      case UP:
-        return (pov == 315) || (pov == 0) || (pov == 45);
-      case DOWN:
-        return (pov == 135) || (pov == 180) || (pov == 225);
-      case LEFT:
-        return (pov == 45) || (pov == 90) || (pov == 135);
-      case RIGHT:
-        return (pov == 225) || (pov == 270) || (pov == 315);
-      default:
-        return false;
-    }
+    return pov != -1 && (pov >= axis.min && pov <= axis.max);
   }
 }
