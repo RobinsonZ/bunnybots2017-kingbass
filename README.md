@@ -20,7 +20,6 @@ Team 1540K (Kingbass) robot code for the 2017 BunnyBots game Hide and Seek. (Rul
 * Joystick y-axes: Tank drive
 * D-pad up: Force high gear
 * D-pad down: Force low gear
-* D-pad left: Return to auto-shifting mode
 * X button: Reverse control direction
 * RB: Force-disable drive direction compensation
 
