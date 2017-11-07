@@ -1,10 +1,10 @@
 package org.team1540.kingbass.commands.auto;
 
+import edu.wpi.first.wpilibj.command.Command;
 import org.team1540.kingbass.Robot;
 import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.motion.MotionProfileLoader;
 import org.team1540.kingbass.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj.command.Command;
 
 public class RunMotionProfile extends Command {
   boolean done;
@@ -20,12 +20,10 @@ public class RunMotionProfile extends Command {
   }
 
 
-
   @Override
   protected void end() {
     dt.stopMp();
   }
-
 
 
   @Override
@@ -34,19 +32,17 @@ public class RunMotionProfile extends Command {
   }
 
 
-
   @Override
   protected void initialize() {
     done = false;
     dt.setPID(Tuning.getProfileP(), Tuning.getProfileI(), Tuning.getProfileD(),
         Tuning.getProfileF());
-    
+
     dt.setMp(MotionProfileLoader.loadFromCSV(profile + "_left"),
         MotionProfileLoader.loadFromCSV(profile + "_left"));
 
     dt.startMp();
   }
-
 
 
   @Override
@@ -55,10 +51,8 @@ public class RunMotionProfile extends Command {
   }
 
 
-
   @Override
   protected boolean isFinished() {
     return done;
   }
-
 }

@@ -19,9 +19,13 @@ import org.team1540.lib.triggers.DPadButton;
 @SuppressWarnings("unused")
 public class OI {
   // Joysticks
-  /** Joystick used by the driver. */
+  /**
+   * Joystick used by the driver.
+   */
   private static final Joystick driver = new Joystick(0);
-  /** Joystick used by the copilot. */
+  /**
+   * Joystick used by the copilot.
+   */
   private static final Joystick copilot = new Joystick(1);
 
   // Axes
@@ -35,13 +39,21 @@ public class OI {
   private static final int LEFT_TRIGGER = 2;
 
   // arm control
-  /** Joystick used for the arm constrol. */
+  /**
+   * Joystick used for the arm constrol.
+   */
   public static final Joystick ARM_JOYSTICK = copilot;
-  /** Axis used for arm control. */
+  /**
+   * Axis used for arm control.
+   */
   public static final int ARM_AXIS = LEFT_AXIS_Y;
-  /** Axis used for arm control if there are two axes (unused here). */
+  /**
+   * Axis used for arm control if there are two axes (unused here).
+   */
   public static final int ARM_AXIS_2 = 0;
-  /** Whether {@link #ARM_AXIS_2} should be used */
+  /**
+   * Whether {@link #ARM_AXIS_2} should be used
+   */
   public static final boolean TRIGGERS = false;
 
   static {

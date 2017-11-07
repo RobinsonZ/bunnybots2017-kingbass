@@ -1,13 +1,13 @@
 package org.team1540.kingbass.subsystems;
 
-import org.team1540.kingbass.RobotInfo;
-import org.team1540.kingbass.commands.claw.StopClaw;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.kingbass.RobotInfo;
+import org.team1540.kingbass.commands.claw.StopClaw;
 
 /**
  * Motorized claw.
- * 
+ *
  * @author Zachary Robinson
  */
 public class Claw extends Subsystem {
@@ -20,13 +20,17 @@ public class Claw extends Subsystem {
     left.enableBrakeMode(true);
   }
 
-  /** Closes the claw. */
+  /**
+   * Closes the claw.
+   */
   public void startGrab() {
     left.set(1);
     right.set(1);
   }
 
-  /** Opens the claw. */
+  /**
+   * Opens the claw.
+   */
   public void startRelease() {
     left.set(-1);
     right.set(-1);
@@ -41,6 +45,4 @@ public class Claw extends Subsystem {
   protected void initDefaultCommand() {
     setDefaultCommand(new StopClaw());
   }
-
-
 }

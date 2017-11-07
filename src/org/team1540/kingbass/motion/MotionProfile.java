@@ -13,6 +13,7 @@ public class MotionProfile {
       Robot.driveTrain.processMpBuffer();
     }
   }
+
   private static final int MIN_POINTS = 5;
   private static final int LOOP_TIMEOUT = 10;
   private int totalCnt;
@@ -169,7 +170,6 @@ public class MotionProfile {
     }
 
 
-
     return processTPoint(tPoint) - current;
   }
 
@@ -190,8 +190,7 @@ public class MotionProfile {
   private int processTPoint(CANTalon.TrajectoryPoint tPoint) {
     int i;
     for (i = 0; i < profile.length; i++) {
-      if (status.topBufferRem == 0)
-        return i;
+      if (status.topBufferRem == 0) { return i; }
 
       tPoint.position = profile[i][0];
       tPoint.velocity = profile[i][1];

@@ -1,13 +1,13 @@
 package org.team1540.kingbass.commands.arm;
 
-import org.team1540.kingbass.Robot;
-import org.team1540.kingbass.Utilities;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.kingbass.Robot;
+import org.team1540.lib.Utilities;
 
 /**
  * Controls the arm with a joystick axis.
- * 
+ *
  * @author Zachary Robinson
  */
 public class JoystickArmControl extends Command {
@@ -16,7 +16,9 @@ public class JoystickArmControl extends Command {
   private int axis2;
   private boolean triggers;
 
-  /** Constructs a {@link JoystickArmControl} controlled by a single axis on a joystick. */
+  /**
+   * Constructs a {@link JoystickArmControl} controlled by a single axis on a joystick.
+   */
   public JoystickArmControl(Joystick stick, int axis) {
     super("Control arm with joystick");
     requires(Robot.arm);
@@ -53,5 +55,4 @@ public class JoystickArmControl extends Command {
   protected boolean isFinished() {
     return false;
   }
-
 }

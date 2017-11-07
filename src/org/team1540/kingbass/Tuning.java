@@ -4,18 +4,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Provides values (from the SmartDashboard) for tuning the robot.
- * 
+ *
  * @author Zachary Robinson
  */
 public class Tuning {
 
   // motion profiling
   //values should be changed, these are just copied from henny's code
-  private static double profileP = 0.1; 
+  private static double profileP = 0.1;
   private static double profileI = 0.00001;
   private static double profileD = 0.1;
   private static double profileF = 7.795;
-  
+
 
   // drivetrain
   private static boolean lReverseOutput = false;
@@ -23,7 +23,9 @@ public class Tuning {
   private static boolean lReverseSensor = false;
   private static boolean rReverseSensor = false;
   // Arm
-  /** Motor set point (out of 1) for moving the arm up and down. */
+  /**
+   * Motor set point (out of 1) for moving the arm up and down.
+   */
   private static double armSpeed = 1;
 
   // Autoshifting
@@ -44,16 +46,21 @@ public class Tuning {
 
 
   // Intake
-  /** Motor set point (out of 1) for running the intake in and out. */
+  /**
+   * Motor set point (out of 1) for running the intake in and out.
+   */
   private static double intakeSetPoint = 1;
 
   // Input
-  /** Axis input that is less than this value in either direction will be ignored. */
+  /**
+   * Axis input that is less than this value in either direction will be ignored.
+   */
   private static double deadzone = 0.1;
 
   public static double getArmSpeed() {
     return armSpeed;
   }
+
   public static int getAutoshiftCooldown() {
     return autoshiftCooldown;
   }
@@ -137,6 +144,7 @@ public class Tuning {
     SmartDashboard.putNumber("Profile D", profileD);
     SmartDashboard.putNumber("Profile F", profileF);
   }
+
   public static void putTuningValues() {
     putMotionProfileTuningValues();
     putDrivetrainTuningValues();
@@ -146,18 +154,21 @@ public class Tuning {
     putInputTuningValues();
     putIntakeTuningValues();
   }
+
   public static boolean rReverseOutput() {
     return rReverseOutput;
   }
+
   public static boolean rReverseSensor() {
     return rReverseSensor;
   }
+
   public static void updateTuningValues() {
     profileP = SmartDashboard.getNumber("Profile P", profileP);
     profileI = SmartDashboard.getNumber("Profile I", profileI);
     profileD = SmartDashboard.getNumber("Profile D", profileD);
     profileF = SmartDashboard.getNumber("Profile F", profileF);
-    
+
     lReverseOutput = SmartDashboard.getBoolean("Reverse left drive", lReverseOutput);
     lReverseSensor = SmartDashboard.getBoolean("Reverse left encoder", lReverseSensor);
     rReverseOutput = SmartDashboard.getBoolean("Reverse right drive", rReverseOutput);

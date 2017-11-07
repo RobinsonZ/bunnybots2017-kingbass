@@ -1,7 +1,7 @@
 package org.team1540.kingbass.commands.claw;
 
-import org.team1540.kingbass.Robot;
 import edu.wpi.first.wpilibj.command.InstantCommand;
+import org.team1540.kingbass.Robot;
 
 public class StopClaw extends InstantCommand {
   public StopClaw() {
@@ -14,5 +14,4 @@ public class StopClaw extends InstantCommand {
   protected void initialize() {
     Robot.claw.stop();
   }
-
 }

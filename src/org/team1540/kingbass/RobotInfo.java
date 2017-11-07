@@ -4,7 +4,7 @@ package org.team1540.kingbass;
  * Robot Information such as the drive gear ratio, motor/pneumatic ports, and other such things.
  * This is for stuff rooted in the physical robot, as opposed to constants for algorithms which
  * should go in {@link Tuning}.
- * 
+ *
  * @author Zachary Robinson
  */
 public class RobotInfo {
@@ -21,41 +21,67 @@ public class RobotInfo {
 
   // motors
   // drivetrain
-  /** Left drive motor with encoder connected. */
+  /**
+   * Left drive motor with encoder connected.
+   */
   public static final int L_MASTER = 1;
-  /** Left drive motor with no encoder. */
+  /**
+   * Left drive motor with no encoder.
+   */
   public static final int L_SLAVE_A = 2;
-  /** Left drive motor with no encoder. */
+  /**
+   * Left drive motor with no encoder.
+   */
   public static final int L_SLAVE_B = 3;
 
-  /** Right drive motor with encoder connected. */
+  /**
+   * Right drive motor with encoder connected.
+   */
   public static final int R_MASTER = 4;
-  /** Right drive motor with no encoder. */
+  /**
+   * Right drive motor with no encoder.
+   */
   public static final int R_SLAVE_A = 5;
-  /** Right drive motor with no encoder. */
+  /**
+   * Right drive motor with no encoder.
+   */
   public static final int R_SLAVE_B = 6;
 
   // intake
-  /** Intake drive motor. */
+  /**
+   * Intake drive motor.
+   */
   public static final int INTAKE = 7;
 
   // arm
-  /** Arm motor with encoder. */
+  /**
+   * Arm motor with encoder.
+   */
   public static final int ARM_A = 8;
-  /** Arm motor without encoder. */
+  /**
+   * Arm motor without encoder.
+   */
   public static final int ARM_B = 9;
 
   // claw
-  /** Motor for the left claw finger. */
+  /**
+   * Motor for the left claw finger.
+   */
   public static final int L_CLAW = 10;
-  /** Motor for the right claw finger. */
+  /**
+   * Motor for the right claw finger.
+   */
   public static final int R_CLAW = 11;
 
 
   // pneumatics
   // shifters
-  /** Shifter for the left gearbox. */
+  /**
+   * Shifter for the left gearbox.
+   */
   public static final int L_SHIFTER = 1;
-  /** Shifter for the right gearbox. */
+  /**
+   * Shifter for the right gearbox.
+   */
   public static final int R_SHIFTER = 2;
 }

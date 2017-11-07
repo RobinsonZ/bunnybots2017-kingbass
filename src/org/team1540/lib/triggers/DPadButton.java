@@ -8,10 +8,13 @@ import edu.wpi.first.wpilibj.buttons.Button;
  * it can be used for triggering commands.
  */
 public class DPadButton extends Button {
-  /** Enum representing the possible axes of a D-Pad. */
+  /**
+   * Enum representing the possible axes of a D-Pad.
+   */
   public enum DPadAxis {
     UP, DOWN, LEFT, RIGHT
   }
+
   private Joystick stick;
   private int pad;
 
@@ -19,7 +22,7 @@ public class DPadButton extends Button {
 
   /**
    * Constructs a {@link DPadButton}.
-   * 
+   *
    * @param stick The joystick with the button.
    * @param pad The ID of the d-pad.
    * @param axis The axis of the button.
@@ -51,5 +54,4 @@ public class DPadButton extends Button {
         return false;
     }
   }
-
 }

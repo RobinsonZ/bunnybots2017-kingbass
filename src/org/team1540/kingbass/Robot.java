@@ -1,18 +1,18 @@
 
 package org.team1540.kingbass;
 
-import org.team1540.kingbass.commands.auto.DriveForward;
-import org.team1540.kingbass.subsystems.Arm;
-import org.team1540.kingbass.subsystems.Claw;
-import org.team1540.kingbass.subsystems.DriveTrain;
-import org.team1540.kingbass.subsystems.Intake;
-import org.team1540.kingbass.subsystems.Shifters;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team1540.kingbass.commands.auto.DriveForward;
+import org.team1540.kingbass.subsystems.Arm;
+import org.team1540.kingbass.subsystems.Claw;
+import org.team1540.kingbass.subsystems.DriveTrain;
+import org.team1540.kingbass.subsystems.Intake;
+import org.team1540.kingbass.subsystems.Shifters;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -45,12 +45,11 @@ public class Robot extends IterativeRobot {
   @Override
   public void autonomousInit() {
     autonomousCommand = chooser.getSelected();
-    
+
     // schedule the autonomous command (example)
-    if (autonomousCommand != null)
-      autonomousCommand.start();
+    if (autonomousCommand != null) { autonomousCommand.start(); }
   }
-  
+
   /**
    * This function is called periodically during autonomous
    */
@@ -98,8 +97,7 @@ public class Robot extends IterativeRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (autonomousCommand != null)
-      autonomousCommand.cancel();
+    if (autonomousCommand != null) { autonomousCommand.cancel(); }
   }
 
   /**
