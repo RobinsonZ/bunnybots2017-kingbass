@@ -8,7 +8,6 @@ import org.team1540.kingbass.commands.claw.OpenClaw;
 import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
-import org.team1540.kingbass.commands.shifters.AutoShift;
 import org.team1540.kingbass.commands.shifters.ManualShiftDown;
 import org.team1540.kingbass.commands.shifters.ManualShiftUp;
 import org.team1540.lib.triggers.DPadButton;
@@ -97,7 +96,7 @@ public class OI {
 
     driverRightBumper.whenPressed(new ManualShiftUp());
     driverLeftBumper.whenPressed(new ManualShiftDown());
-    driverDPadLeft.whenPressed(new AutoShift());
+    // driverDPadLeft.whenPressed(new AutoShift());
 
     driverX.whenPressed(new ReverseDriveDirection());
 
