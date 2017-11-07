@@ -2,14 +2,14 @@ package org.team1540.kingbass.commands.shifters;
 
 import org.team1540.kingbass.Robot;
 import org.team1540.kingbass.Tuning;
-import org.team1540.kingbass.Utilities;
+import org.team1540.lib.Utilities;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Uses an auto-shifting algorithm to control the gearbox.
- * 
- * @author Zachary Robinson
  *
+ * @author Zachary Robinson
+ * @deprecated Probably doesn't work and a bad idea anyway
  */
 public class AutoShift extends Command {
   private int weight;
@@ -48,7 +48,7 @@ public class AutoShift extends Command {
     if (Utilities.calcRPMDeviation(gear, Robot.driveTrain.getLeftMainTalon().get(),
         Robot.driveTrain.getLeftMainTalon()) > Tuning.getAutoShiftDeviationThreshold()
         || Utilities.calcRPMDeviation(gear, Robot.driveTrain.getRightMainTalon().get(),
-            Robot.driveTrain.getRightMainTalon()) > Tuning.getAutoShiftDeviationThreshold()) {
+        Robot.driveTrain.getRightMainTalon()) > Tuning.getAutoShiftDeviationThreshold()) {
       weight--;
     } else {
       weight++;
@@ -63,13 +63,12 @@ public class AutoShift extends Command {
       } // if weight is 0 keep things the way they are
 
       ticksUntilShiftUpdate = Tuning.getAutoshiftCooldown();
-      
+
       // slightly bias the weight towards the last shift level
       weight = Tuning.getAutoshiftCooldown() / 2;
     } else {
       ticksUntilShiftUpdate--;
     }
-
   }
 
   @Override

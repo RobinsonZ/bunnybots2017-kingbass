@@ -11,9 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * 6-cim drive train.
- * 
- * @author Zachary Robinson
  *
+ * @author Zachary Robinson
  */
 public class DriveTrain extends Subsystem {
   private CANTalon lMain = new CANTalon(RobotInfo.L_MASTER);
@@ -32,7 +31,7 @@ public class DriveTrain extends Subsystem {
 
   private MotionProfile leftProfile;
   private MotionProfile rightProfile;
-  
+
   private int driveDirection = 1;
 
   public DriveTrain() {
@@ -61,18 +60,20 @@ public class DriveTrain extends Subsystem {
       boolean done = leftProfile.control();
       lMain.changeControlMode(TalonControlMode.MotionProfile);
       lMain.set(leftProfile.getSetValue().value);
-      
+
       done = (done || rightProfile.control());
       rMain.changeControlMode(TalonControlMode.MotionProfile);
       rMain.set(rightProfile.getSetValue().value);
-      
+
       return done;
     }
-    
+
     return false;
   }
 
-  /** Gets the output current of each of the talons, averaged. */
+  /**
+   * Gets the output current of each of the talons, averaged.
+   */
   public double getAvgCurrentDraw() {
     double totDraw = 0;
 
@@ -98,7 +99,7 @@ public class DriveTrain extends Subsystem {
 
   /**
    * Sets the speed of the left-side motors.
-   * 
+   *
    * @param setPoint The speed of the right-side motors, from -1 to 1 inclusive.
    */
   public void setLeftMotors(double setPoint) {
@@ -120,7 +121,7 @@ public class DriveTrain extends Subsystem {
 
   /**
    * Sets the speed of the right-side motors.
-   * 
+   *
    * @param setPoint The speed of the right-side motors, from -1 to 1 inclusive.
    */
   public void setRightMotors(double setPoint) {
@@ -134,7 +135,7 @@ public class DriveTrain extends Subsystem {
       rightProfile.startMotionProfile();
     }
   }
-  
+
   public void stop() {
     setLeftMotors(0);
     setRightMotors(0);
@@ -145,7 +146,7 @@ public class DriveTrain extends Subsystem {
       leftProfile.reset();
       lMain.changeControlMode(TalonControlMode.PercentVbus);
       lMain.set(0);
-      
+
       rightProfile.reset();
       rMain.changeControlMode(TalonControlMode.PercentVbus);
       rMain.set(0);
@@ -153,7 +154,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void switchDriveDirection() {
-    driveDirection*=-1;
+    driveDirection *= -1;
   }
 
   private void groupTalons() {
@@ -176,10 +177,9 @@ public class DriveTrain extends Subsystem {
       c.changeControlMode(TalonControlMode.PercentVbus);
     }
   }
-  
+
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
   }
-
 }
