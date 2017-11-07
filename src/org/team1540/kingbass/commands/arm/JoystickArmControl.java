@@ -3,6 +3,7 @@ package org.team1540.kingbass.commands.arm;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import org.team1540.kingbass.Robot;
+import org.team1540.kingbass.Tuning;
 import org.team1540.lib.Utilities;
 
 /**
@@ -44,9 +45,10 @@ public class JoystickArmControl extends Command {
   protected void execute() {
     if (triggers) {
       Robot.arm
-          .setArm(Utilities.processAxisDeadzone(stick.getRawAxis(axis2) - stick.getRawAxis(axis)));
+          .setArm(Utilities.processAxisDeadzone(stick.getRawAxis(axis2) - stick.getRawAxis(axis),
+              Tuning.getDeadzone()));
     } else {
-      Robot.arm.setArm(Utilities.processAxisDeadzone(stick.getRawAxis(axis)));
+      Robot.arm.setArm(Utilities.processAxisDeadzone(stick.getRawAxis(axis), Tuning.getDeadzone()));
     }
   }
 

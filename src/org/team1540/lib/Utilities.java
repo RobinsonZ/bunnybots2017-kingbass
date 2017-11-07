@@ -2,7 +2,6 @@ package org.team1540.lib;
 
 import com.ctre.CANTalon;
 import org.team1540.kingbass.RobotInfo;
-import org.team1540.kingbass.Tuning;
 
 /**
  * Static utility functions.
@@ -13,6 +12,7 @@ public class Utilities {
   /**
    * Calculates the expected motor velocity.
    *
+   * @deprecated Probably doesn't work
    * @param gear The gear the robot is currently in ({@code false} for low, {@code true} for high)
    *
    * @return The expected motor velocity, in revolutions per minute.
@@ -26,6 +26,7 @@ public class Utilities {
    * Calculates the difference (from 0 to 1) between the expected velocity based on the motor
    * throttle and the actual velocity from the encoder.
    *
+   * @deprecated Probably doesn't work
    * @param gear The gear the robot is currently in ({@code false} for low, {@code true} for high)
    * @param throttle The current power level of the motor.
    * @param encoderTalon The {@code CANTalon} that the encoder is connected to.
@@ -39,10 +40,12 @@ public class Utilities {
   }
 
   /**
-   * Processes an axis and returns the value only if it is outside the deadzone set in {@link
-   * Tuning}.
+   * Processes an axis and returns the value only if it is outside the provided deadzone.
+   * @param axis The axis to return
+   * @param deadzone The deadzone to use.
+   * @return If |{@code axis}| > |{@code deadzone}|, returns {@code axis}; otherwise, returns 0.
    */
-  public static double processAxisDeadzone(double axis) {
-    return (Math.abs(axis) > Math.abs(Tuning.getDeadzone())) ? axis : 0;
+  public static double processAxisDeadzone(double axis, double deadzone) {
+    return (Math.abs(axis) > Math.abs(deadzone)) ? axis : 0;
   }
 }
