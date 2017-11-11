@@ -9,6 +9,13 @@ frc {
     team = "1540"
     robotClass = "org.team1540.kingbass.Robot"
 }
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs "lib"
+    }
+}
+
 wpi {
     // 5.x.x.x currently doesn't work with GradleRIO
     talonSrxVersion = "4.4.1.14"
@@ -19,6 +26,8 @@ dependencies {
     compile wpilib()
     compile navx()
     compile talonSrx()
+    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.0'
+    compile ":sgfilter"
 }
 // setting the source directory for all the code
 sourceSets {
