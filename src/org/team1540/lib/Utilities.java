@@ -48,4 +48,22 @@ public class Utilities {
   public static double processAxisDeadzone(double axis, double deadzone) {
     return (Math.abs(axis) > Math.abs(deadzone)) ? axis : 0;
   }
+
+  public static int[] lineUpIndices(int aLength, int bLength) {
+    if (aLength == bLength) { return new int[]{0, 0, aLength, bLength}; }
+    int[] out = new int[4];
+    if (aLength > bLength) {
+      out[0] = (aLength / 2) - (bLength / 2);
+      out[1] = 0;
+      out[2] = (aLength / 2) + (bLength / 2) + 1;
+      out[3] = bLength;
+    } else {
+      out[0] = 0;
+      out[1] = (bLength / 2) - (aLength / 2);
+      out[2] = aLength;
+      out[3] = (bLength / 2) + (aLength / 2) + 1;
+    }
+    return out;
+  }
+
 }
