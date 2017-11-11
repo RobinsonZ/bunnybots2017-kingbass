@@ -11,9 +11,6 @@ frc {
 }
 repositories {
     mavenCentral()
-    flatDir {
-        dirs "lib"
-    }
 }
 
 wpi {
@@ -26,8 +23,6 @@ dependencies {
     compile wpilib()
     compile navx()
     compile talonSrx()
-    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.0'
-    compile ":sgfilter"
     compile 'junit:junit:4.12'
 }
 // setting the source directory for all the code
