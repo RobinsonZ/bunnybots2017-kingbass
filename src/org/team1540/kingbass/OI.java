@@ -98,7 +98,7 @@ public class OI {
     driverLeftBumper.whenPressed(new ManualShiftDown());
     // driverDPadLeft.whenPressed(new AutoShift());
 
-    driverX.whenPressed(new ReverseDriveDirection());
+    driverLeftStick.whenPressed(new ReverseDriveDirection());
 
     copilotRightBumper.whileHeld(new CloseClaw());
     copilotLeftBumper.whileHeld(new OpenClaw());
