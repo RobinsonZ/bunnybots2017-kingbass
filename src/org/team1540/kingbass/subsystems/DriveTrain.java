@@ -1,8 +1,11 @@
 package org.team1540.kingbass.subsystems;
 
+import static com.ctre.CANTalon.FeedbackDevice.QuadEncoder;
+import static com.ctre.CANTalon.TalonControlMode.Follower;
+import static com.ctre.CANTalon.TalonControlMode.MotionProfile;
+import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
+
 import com.ctre.CANTalon;
-import com.ctre.CANTalon.FeedbackDevice;
-import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team1540.kingbass.RobotInfo;
 import org.team1540.kingbass.Tuning;
@@ -35,13 +38,12 @@ public class DriveTrain extends Subsystem {
   private int driveDirection = 1;
 
   public DriveTrain() {
-
     for (CANTalon c : talons) {
       c.setVoltageRampRate(0);
       c.enableBrakeMode(true);
     }
     for (CANTalon c : mains) {
-      c.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+      c.setFeedbackDevice(QuadEncoder);
       c.setProfile(0);
     }
 
@@ -58,11 +60,11 @@ public class DriveTrain extends Subsystem {
   public boolean controlMp() {
     if (leftProfile != null && rightProfile != null) {
       boolean done = leftProfile.control();
-      lMain.changeControlMode(TalonControlMode.MotionProfile);
+      lMain.changeControlMode(MotionProfile);
       lMain.set(leftProfile.getSetValue().value);
 
       done = (done || rightProfile.control());
-      rMain.changeControlMode(TalonControlMode.MotionProfile);
+      rMain.changeControlMode(MotionProfile);
       rMain.set(rightProfile.getSetValue().value);
 
       return done;
@@ -144,11 +146,11 @@ public class DriveTrain extends Subsystem {
   public void stopMp() {
     if (leftProfile != null && rightProfile != null) {
       leftProfile.reset();
-      lMain.changeControlMode(TalonControlMode.PercentVbus);
+      lMain.changeControlMode(PercentVbus);
       lMain.set(0);
 
       rightProfile.reset();
-      rMain.changeControlMode(TalonControlMode.PercentVbus);
+      rMain.changeControlMode(PercentVbus);
       rMain.set(0);
     }
   }
@@ -158,15 +160,15 @@ public class DriveTrain extends Subsystem {
   }
 
   private void groupTalons() {
-    lMain.changeControlMode(TalonControlMode.PercentVbus);
+    lMain.changeControlMode(PercentVbus);
     for (CANTalon c : lSlaves) {
-      c.changeControlMode(TalonControlMode.Follower);
+      c.changeControlMode(Follower);
       c.set(lMain.getDeviceID());
     }
 
-    rMain.changeControlMode(TalonControlMode.PercentVbus);
+    rMain.changeControlMode(PercentVbus);
     for (CANTalon c : rSlaves) {
-      c.changeControlMode(TalonControlMode.Follower);
+      c.changeControlMode(Follower);
       c.set(rMain.getDeviceID());
     }
   }
@@ -174,7 +176,7 @@ public class DriveTrain extends Subsystem {
   @SuppressWarnings("unused")
   private void makeTalonsIndependent() {
     for (CANTalon c : talons) {
-      c.changeControlMode(TalonControlMode.PercentVbus);
+      c.changeControlMode(PercentVbus);
     }
   }
 

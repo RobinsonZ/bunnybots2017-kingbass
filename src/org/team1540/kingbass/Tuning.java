@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Tuning {
 
+  // advanced drive
+  private static int velHistorySize = 5;
+
   // motion profiling
   //values should be changed, these are just copied from henny's code
   private static double profileP = 0.1;
@@ -109,6 +112,14 @@ public class Tuning {
     return lReverseSensor;
   }
 
+  public static int getVelHistorySize() {
+    return velHistorySize;
+  }
+
+  public static void setVelHistorySize(int velHistorySize) {
+    Tuning.velHistorySize = velHistorySize;
+  }
+
   public static void putArmTuningValues() {
     SmartDashboard.putNumber("Arm speed", armSpeed);
   }
@@ -145,6 +156,10 @@ public class Tuning {
     SmartDashboard.putNumber("Profile F", profileF);
   }
 
+  public static void putAdvDriveTuningValues() {
+    SmartDashboard.putNumber("Velocity History Size", velHistorySize);
+  }
+
   public static void putTuningValues() {
     putMotionProfileTuningValues();
     putDrivetrainTuningValues();
@@ -153,6 +168,7 @@ public class Tuning {
     putClawTuningValues();
     putInputTuningValues();
     putIntakeTuningValues();
+    putAdvDriveTuningValues();
   }
 
   public static boolean rReverseOutput() {
@@ -187,5 +203,7 @@ public class Tuning {
     intakeSetPoint = SmartDashboard.getNumber("Intake speed", intakeSetPoint);
 
     deadzone = SmartDashboard.getNumber("Joystick deadzone", deadzone);
+
+    velHistorySize = (int) SmartDashboard.getNumber("Velocity History Size", velHistorySize);
   }
 }
