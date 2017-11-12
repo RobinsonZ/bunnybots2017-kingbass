@@ -1,13 +1,13 @@
 package org.team1540.kingbass.subsystems;
 
-import org.team1540.kingbass.RobotInfo;
-import org.team1540.kingbass.Tuning;
-import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
-import org.team1540.kingbass.motion.MotionProfile;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.kingbass.RobotInfo;
+import org.team1540.kingbass.Tuning;
+import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
+import org.team1540.kingbass.motion.MotionProfile;
 
 /**
  * 6-cim drive train.
@@ -176,6 +176,14 @@ public class DriveTrain extends Subsystem {
     for (CANTalon c : talons) {
       c.changeControlMode(TalonControlMode.PercentVbus);
     }
+  }
+
+  public double getLeftVelocity() {
+    return lMain.getEncVelocity();
+  }
+
+  public double getRightVelocity() {
+    return rMain.getEncVelocity();
   }
 
   @Override

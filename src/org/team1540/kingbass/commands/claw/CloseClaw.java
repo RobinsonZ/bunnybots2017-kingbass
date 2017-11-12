@@ -1,8 +1,9 @@
 package org.team1540.kingbass.commands.claw;
 
+import static org.team1540.kingbass.Robot.claw;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import org.team1540.kingbass.Robot;
 
 /**
  * Closes the pneumatic claw.
@@ -17,17 +18,17 @@ public class CloseClaw extends Command {
    */
   public CloseClaw() {
     super("Close claw");
-    requires(Robot.claw);
+    requires(claw);
   }
 
   @Override
   protected void end() {
-    Robot.claw.stop();
+    claw.stop();
   }
 
   @Override
   protected void initialize() {
-    Robot.claw.startGrab();
+    claw.startGrab();
   }
 
   @Override

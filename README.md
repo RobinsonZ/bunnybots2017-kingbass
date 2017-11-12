@@ -1,4 +1,4 @@
-# bunnybots2017-kingbass
+# bunnybots-kingbass-2017
 Team 1540K (Kingbass) robot code for the 2017 BunnyBots game Hide and Seek. (Rules can be found [here](http://team1540.org/bunnybots/).)
 
 ## Bindings

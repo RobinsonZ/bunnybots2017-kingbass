@@ -1,7 +1,8 @@
 package org.team1540.kingbass.commands.intake;
 
+import static org.team1540.kingbass.Robot.intake;
+
 import edu.wpi.first.wpilibj.command.InstantCommand;
-import org.team1540.kingbass.Robot;
 
 /**
  * Stops the intake.
@@ -15,11 +16,11 @@ public class IntakeStop extends InstantCommand {
    */
   public IntakeStop() {
     super("Stop intake");
-    requires(Robot.intake);
+    requires(intake);
   }
 
   @Override
   protected void initialize() {
-    Robot.intake.setMotor(0);
+    intake.setMotor(0);
   }
 }

@@ -1,7 +1,8 @@
 package org.team1540.kingbass.commands.claw;
 
+import static org.team1540.kingbass.Robot.claw;
+
 import edu.wpi.first.wpilibj.command.TimedCommand;
-import org.team1540.kingbass.Robot;
 import org.team1540.kingbass.Tuning;
 
 /**
@@ -16,17 +17,17 @@ public class OpenClaw extends TimedCommand {
    */
   public OpenClaw() {
     super("Open claw", Tuning.getOpenClawTime());
-    requires(Robot.claw);
+    requires(claw);
   }
 
   @Override
   protected void end() {
-    Robot.claw.stop();
+    claw.stop();
   }
 
   @Override
   protected void initialize() {
-    Robot.claw.startRelease();
+    claw.startRelease();
   }
 
   @Override

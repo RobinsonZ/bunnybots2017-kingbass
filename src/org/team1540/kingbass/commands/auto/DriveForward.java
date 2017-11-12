@@ -1,25 +1,26 @@
 package org.team1540.kingbass.commands.auto;
 
-import org.team1540.kingbass.Robot;
+import static org.team1540.kingbass.Robot.driveTrain;
+
 import edu.wpi.first.wpilibj.command.TimedCommand;
 
 public class DriveForward extends TimedCommand {
 
   public DriveForward(double timeout) {
     super("Drive forward " + timeout + " sec", timeout);
-    requires(Robot.driveTrain);
+    requires(driveTrain);
   }
 
   @Override
   protected void end() {
-    Robot.driveTrain.setLeftMotors(0);
-    Robot.driveTrain.setRightMotors(0);
+    driveTrain.setLeftMotors(0);
+    driveTrain.setRightMotors(0);
   }
 
   @Override
   protected void initialize() {
-    Robot.driveTrain.setLeftMotors(1);
-    Robot.driveTrain.setRightMotors(1);
+    driveTrain.setLeftMotors(1);
+    driveTrain.setRightMotors(1);
   }
 
   @Override
