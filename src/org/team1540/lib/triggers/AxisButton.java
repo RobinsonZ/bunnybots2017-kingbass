@@ -31,7 +31,7 @@ public class AxisButton extends Button {
   }
 
   /**
-   * Helper function so that it can be properly unit-tested
+   * Helper function so that it can be properly unit-tested. Should not be called directly.
    */
   public static boolean process(double axis, double threshold) {
     return (Math.abs(axis) >= Math.abs(threshold) && Math.signum(axis) == Math.signum(threshold));
