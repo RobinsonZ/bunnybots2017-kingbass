@@ -9,7 +9,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team1540.kingbass.RobotInfo;
 import org.team1540.kingbass.Tuning;
-import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
+import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
 import org.team1540.kingbass.motion.MotionProfile;
 
 /**
@@ -190,6 +190,6 @@ public class DriveTrain extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new JoystickDrive());
+    setDefaultCommand(AdvancedDrive.getInstance());
   }
 }

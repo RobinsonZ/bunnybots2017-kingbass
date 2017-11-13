@@ -12,6 +12,7 @@ import org.team1540.lib.FixedSizeHistory;
 import org.team1540.lib.math.SavitskyGolayFilter;
 
 public class AdvancedDrive extends Command {
+  private static AdvancedDrive instance;
   // taken from https://en.wikipedia.org/wiki/Savitzky–Golay_filter#Tables_of_selected_convolution_coefficients
   // first derivative using linear/quadratic polynomial
   private static final double[] COEFFS = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
@@ -27,9 +28,15 @@ public class AdvancedDrive extends Command {
   private double lastThrotL;
   private double lastThrotR;
 
-  public AdvancedDrive() {
+  private AdvancedDrive() {
     requires(driveTrain);
     SmartDashboard.putNumber("Drive P-Value", 0.01);
+  }
+
+  public static AdvancedDrive getInstance() {
+    if (instance == null) { instance = new AdvancedDrive(); }
+
+    return instance;
   }
 
   @Override

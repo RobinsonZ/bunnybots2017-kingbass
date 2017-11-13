@@ -5,11 +5,14 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.team1540.kingbass.commands.claw.CloseClaw;
 import org.team1540.kingbass.commands.claw.OpenClaw;
+import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
+import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
 import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
 import org.team1540.kingbass.commands.shifters.ManualShiftDown;
 import org.team1540.kingbass.commands.shifters.ManualShiftUp;
+import org.team1540.lib.triggers.AxisButton;
 import org.team1540.lib.triggers.DPadButton;
 
 /**
@@ -94,8 +97,14 @@ public class OI {
     Button copilotDPadLeft = new DPadButton(copilot, 0, DPadButton.DPadAxis.LEFT);
     Button copilotDPadRight = new DPadButton(copilot, 0, DPadButton.DPadAxis.RIGHT);
 
+    Button driverRightTrigger = new AxisButton(driver, 0.5, RIGHT_TRIGGER);
+
     driverRightBumper.whenPressed(new ManualShiftUp());
     driverLeftBumper.whenPressed(new ManualShiftDown());
+
+    driverRightTrigger.whenPressed(new JoystickDrive());
+    driverRightTrigger.whenReleased(AdvancedDrive.getInstance());
+
     // driverDPadLeft.whenPressed(new AutoShift());
 
     driverLeftStick.whenPressed(new ReverseDriveDirection());
