@@ -10,8 +10,9 @@ package org.team1540.kingbass;
 public class RobotInfo {
   // info
   // ratios are between the motor shaft and the encoder
-  public static final double DRIVE_LOW_GEAR_RATIO = 0.05;
-  public static final double DRIVE_HIGH_GEAR_RATIO = 0.5;
+  // three-stage gearbox, 14:64, 20:60, and shifting stage 20:54 low or 30:44 high
+  public static final double DRIVE_LOW_GEAR_RATIO = 0.02700617284;
+  public static final double DRIVE_HIGH_GEAR_RATIO = 0.04971590909;
 
   // motor stats
   public static final int CIM_FREE_SPEED = 5330;
