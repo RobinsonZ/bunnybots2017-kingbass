@@ -112,11 +112,6 @@ public class AdvancedDrive extends Command {
   }
 
   @Override
-  protected void end() {
-
-  }
-
-  @Override
   protected boolean isFinished() {
     return false;
   }
