@@ -7,8 +7,11 @@ import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 
-public enum TelemetryType {
-  STRING(String.class), INT(Integer.TYPE), DOUBLE(Double.TYPE), BOOLEAN(Boolean.TYPE),
+enum TelemetryType {
+  STRING(String.class),
+  INT(Integer.TYPE),
+  DOUBLE(Double.TYPE),
+  BOOLEAN(Boolean.TYPE),
   //TODO: Implement more possible types
   SOLENOID(Solenoid.class),
   // DOUBLE_SOLENOID(DoubleSolenoid.class),

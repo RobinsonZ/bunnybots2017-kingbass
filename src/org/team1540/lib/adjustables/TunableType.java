@@ -1,6 +1,6 @@
 package org.team1540.lib.adjustables;
 
-public enum TunableType {
+enum TunableType {
   STRING(String.class), INT(Integer.TYPE), DOUBLE(Double.TYPE), BOOLEAN(Boolean.TYPE);
 
   final Class<?> cls;
