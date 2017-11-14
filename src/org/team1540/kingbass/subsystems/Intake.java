@@ -12,13 +12,15 @@ import org.team1540.kingbass.commands.intake.IntakeStop;
  * @author Zachary Robinson
  */
 public class Intake extends Subsystem {
-  private CANTalon intake = new CANTalon(RobotInfo.INTAKE);
+  private CANTalon intakeA = new CANTalon(RobotInfo.INTAKE_A);
+  private CANTalon intakeB = new CANTalon(RobotInfo.INTAKE_B);
+
 
   /**
    * Gets the output current of the intake motor.
    */
   public double getCurrent() {
-    return intake.getOutputCurrent();
+    return (intakeA.getOutputCurrent() + intakeB.getOutputCurrent()) / 2;
   }
 
   /**
@@ -27,8 +29,10 @@ public class Intake extends Subsystem {
    * @param setPoint The point to set the motor to, between -1 and 1 inclusive.
    */
   public void setMotor(double setPoint) {
-    intake.changeControlMode(TalonControlMode.PercentVbus);
-    intake.set(setPoint);
+    intakeA.changeControlMode(TalonControlMode.PercentVbus);
+    intakeB.changeControlMode(TalonControlMode.Follower);
+    intakeB.set(intakeA.getDeviceID());
+    intakeA.set(setPoint);
   }
 
   @Override

@@ -52,7 +52,8 @@ public class RobotInfo {
   /**
    * Intake drive motor.
    */
-  public static final int INTAKE = 7;
+  public static final int INTAKE_A = 7;
+  public static final int INTAKE_B = 8;
 
   // arm
   /**
