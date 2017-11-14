@@ -53,7 +53,7 @@ public class FixedSizeHistory<T> {
    *
    * @param index The element index to return
    *
-   * @return tThe element at the specified position in the history
+   * @return The element at the specified position in the history
    *
    * @throws IndexOutOfBoundsException if the index is out of range <code>(index < 0 || index >=
    * {@link #size()})</code>
