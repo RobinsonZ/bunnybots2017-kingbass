@@ -53,7 +53,29 @@ public class Utilities {
     return (Math.abs(axis) > Math.abs(deadzone)) ? axis : 0;
   }
 
+
+  /**
+   * Matches up two arrays' indices given their lengths. This matches the arrays around their
+   * central points rather then truncating one array's end. The returned values should be used as
+   * start and end points for iterating over the array where one would normally use {@code 0}  and
+   * {@code arr.length} as start and end.
+   *
+   * <p>Generally, if {@code aLength == bLength}, the returned values will point to the start and
+   * end indices of both arrays. If {@code aLength > bLength}, the function's returned values will
+   * indicate {@code bLength} values from the middle of an array with length {@code aLength}. If
+   * {@code aLength < bLength}, the function's returned values will indicate {@code aLength} values
+   * from the middle of an array with length {@code bLength}.
+   *
+   * @param aLength the length of the first array to match
+   * @param bLength the length of the second array to match
+   *
+   * @return a {@code double[]} containing start and end indices for both arrays, in the format
+   * {@code [aStart, bStart, aEnd, bEnd]}.
+   */
   public static int[] lineUpIndices(int aLength, int bLength) {
+    if (aLength < 0) { throw new IllegalArgumentException("aLength cannot be less than 0"); }
+    if (bLength < 0) { throw new IllegalArgumentException("bLength cannot be less than 0"); }
+
     if (aLength == bLength) { return new int[]{0, 0, aLength, bLength}; }
     int[] out;
     if (aLength > bLength) {
