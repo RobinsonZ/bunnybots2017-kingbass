@@ -3,7 +3,9 @@ package org.team1540.lib.math;
 import org.team1540.lib.Utilities;
 
 /**
- * Methods for a simple implementation of a <a href="https://en.wikipedia.org/wiki/Savitzky–Golay_filter">Savitsky-Golay
+ * <i>Savitsky-Golay Filter? I hardly know 'er!</i> -Duncan Soiffer, 2017
+ *
+ * <p>Methods for a simple implementation of a <a href="https://en.wikipedia.org/wiki/Savitzky–Golay_filter">Savitsky-Golay
  * Filter</a>. Currently convolution coefficients must be supplied explicitly. (Tables of
  * pre-calculated coefficients can be found <a href="https://en.wikipedia.org/wiki/Savitzky–Golay_filter#Tables_of_selected_convolution_coefficients">here</a>.)
  */
