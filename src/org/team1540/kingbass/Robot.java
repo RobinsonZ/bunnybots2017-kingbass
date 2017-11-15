@@ -13,6 +13,7 @@ import org.team1540.kingbass.subsystems.Claw;
 import org.team1540.kingbass.subsystems.DriveTrain;
 import org.team1540.kingbass.subsystems.Intake;
 import org.team1540.kingbass.subsystems.Shifters;
+import org.team1540.lib.adjustables.AdjustableManager;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -76,7 +77,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void robotInit() {
-    Tuning.putTuningValues();
+    AdjustableManager.getInstance().add(new Tuning());
     chooser.addObject("Drive forward 5 sec", new DriveForward(5));
     chooser.addObject("Drive forward 2.5 sec", new DriveForward(2.5));
     SmartDashboard.putData("Auto mode", chooser);
@@ -84,7 +85,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void robotPeriodic() {
-    Tuning.updateTuningValues();
+    AdjustableManager.getInstance().update();
   }
 
   @Override

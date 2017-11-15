@@ -1,6 +1,7 @@
 package org.team1540.kingbass;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team1540.lib.adjustables.Tunable;
 
 /**
  * Provides values (from the SmartDashboard) for tuning the robot.
@@ -10,55 +11,67 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Tuning {
 
   // advanced drive
-  private static int velHistorySize = 5;
+  @Tunable("Velocity History Size")
+  public static int velHistorySize = 5;
 
   // motion profiling
   //values should be changed, these are just copied from henny's code
-  private static double profileP = 0.1;
-  private static double profileI = 0.00001;
-  private static double profileD = 0.1;
-  private static double profileF = 7.795;
+  @Tunable("Profile P")
+  public static double profileP = 0.1;
+  @Tunable("Profile I")
+  public static double profileI = 0.00001;
+  @Tunable("Profile D")
+  public static double profileD = 0.1;
+  @Tunable("Profile F")
+  public static double profileF = 7.795;
 
 
   // drivetrain
-  private static boolean lReverseOutput = false;
-  private static boolean rReverseOutput = false;
-  private static boolean lReverseSensor = false;
-  private static boolean rReverseSensor = false;
+  @Tunable("Left reverse output")
+  public static boolean lReverseOutput = false;
+  @Tunable("Right reverse output")
+  public static boolean rReverseOutput = false;
+  @Tunable("Left reverse sensor")
+  public static boolean lReverseSensor = false;
+  @Tunable("Right reverse sensor")
+  public static boolean rReverseSensor = false;
   // Arm
   /**
    * Motor set point (out of 1) for moving the arm up and down.
    */
-  private static double armSpeed = 1;
+  @Tunable("Arm set point")
+  public static double armSpeed = 1;
 
   // Autoshifting
   /**
    * The level of acceptable deviation between expected speed (as given by the motor throttle) and
    * actual speed (as given by the wheel encoders) before the shifter will shift down.
    */
-  private static double autoShiftDeviationThreshold = 0.1;
+  public static double autoShiftDeviationThreshold = 0.1;
 
   /**
    * The time, in ticks (about 20ms), between the autoshifter changing gears.
    */
-  private static int autoshiftCooldown = 5;
+  public static int autoshiftCooldown = 5;
 
   // claw
-  private static double openClawTime = 1;
-  private static double closeClawTime = 1;
+  public static double openClawTime = 1;
+  public static double closeClawTime = 1;
 
 
   // Intake
   /**
    * Motor set point (out of 1) for running the intake in and out.
    */
-  private static double intakeSetPoint = 1;
+  @Tunable("Intake setpoint")
+  public static double intakeSetPoint = 1;
 
   // Input
   /**
    * Axis input that is less than this value in either direction will be ignored.
    */
-  private static double deadzone = 0.1;
+  @Tunable("Deadzone")
+  public static double deadzone = 0.1;
 
   public static double getArmSpeed() {
     return armSpeed;
@@ -161,6 +174,7 @@ public class Tuning {
   }
 
   public static void putTuningValues() {
+    /*
     putMotionProfileTuningValues();
     putDrivetrainTuningValues();
     putArmTuningValues();
@@ -169,6 +183,7 @@ public class Tuning {
     putInputTuningValues();
     putIntakeTuningValues();
     putAdvDriveTuningValues();
+    */
   }
 
   public static boolean rReverseOutput() {
@@ -180,30 +195,32 @@ public class Tuning {
   }
 
   public static void updateTuningValues() {
-    profileP = SmartDashboard.getNumber("Profile P", profileP);
-    profileI = SmartDashboard.getNumber("Profile I", profileI);
-    profileD = SmartDashboard.getNumber("Profile D", profileD);
-    profileF = SmartDashboard.getNumber("Profile F", profileF);
+/*
+profileP = SmartDashboard.getNumber("Profile P", profileP);
+profileI = SmartDashboard.getNumber("Profile I", profileI);
+profileD = SmartDashboard.getNumber("Profile D", profileD);
+profileF = SmartDashboard.getNumber("Profile F", profileF);
 
-    lReverseOutput = SmartDashboard.getBoolean("Reverse left drive", lReverseOutput);
-    lReverseSensor = SmartDashboard.getBoolean("Reverse left encoder", lReverseSensor);
-    rReverseOutput = SmartDashboard.getBoolean("Reverse right drive", rReverseOutput);
-    rReverseSensor = SmartDashboard.getBoolean("Reverse right encoder", rReverseSensor);
+lReverseOutput = SmartDashboard.getBoolean("Reverse left drive", lReverseOutput);
+lReverseSensor = SmartDashboard.getBoolean("Reverse left encoder", lReverseSensor);
+rReverseOutput = SmartDashboard.getBoolean("Reverse right drive", rReverseOutput);
+rReverseSensor = SmartDashboard.getBoolean("Reverse right encoder", rReverseSensor);
 
-    armSpeed = SmartDashboard.getNumber("Arm speed", armSpeed);
+armSpeed = SmartDashboard.getNumber("Arm speed", armSpeed);
 
-    autoShiftDeviationThreshold =
-        SmartDashboard.getNumber("Autoshifter deviation threshold", autoShiftDeviationThreshold);
-    autoshiftCooldown =
-        (int) SmartDashboard.getNumber("Autoshifter update speed", autoshiftCooldown);
+autoShiftDeviationThreshold =
+SmartDashboard.getNumber("Autoshifter deviation threshold", autoShiftDeviationThreshold);
+autoshiftCooldown =
+(int) SmartDashboard.getNumber("Autoshifter update speed", autoshiftCooldown);
 
-    openClawTime = SmartDashboard.getNumber("Open claw duration", openClawTime);
-    closeClawTime = SmartDashboard.getNumber("Close claw duration", closeClawTime);
+openClawTime = SmartDashboard.getNumber("Open claw duration", openClawTime);
+closeClawTime = SmartDashboard.getNumber("Close claw duration", closeClawTime);
 
-    intakeSetPoint = SmartDashboard.getNumber("Intake speed", intakeSetPoint);
+intakeSetPoint = SmartDashboard.getNumber("Intake speed", intakeSetPoint);
 
-    deadzone = SmartDashboard.getNumber("Joystick deadzone", deadzone);
+deadzone = SmartDashboard.getNumber("Joystick deadzone", deadzone);
 
-    velHistorySize = (int) SmartDashboard.getNumber("Velocity History Size", velHistorySize);
+velHistorySize = (int) SmartDashboard.getNumber("Velocity History Size", velHistorySize);
+*/
   }
 }
