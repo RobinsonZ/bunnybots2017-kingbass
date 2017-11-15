@@ -21,8 +21,6 @@ import org.team1540.kingbass.subsystems.Shifters;
  * resource directory.
  */
 public class Robot extends IterativeRobot {
-  public static OI oi; // oi oi NA NA NA NANA NA NA NA
-
   public static Arm arm = new Arm();
   public static Claw claw = new Claw();
   public static DriveTrain driveTrain = new DriveTrain();
@@ -78,8 +76,6 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void robotInit() {
-    oi = new OI();
-
     Tuning.putTuningValues();
     chooser.addObject("Drive forward 5 sec", new DriveForward(5));
     chooser.addObject("Drive forward 2.5 sec", new DriveForward(2.5));
