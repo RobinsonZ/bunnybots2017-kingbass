@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target(FIELD)
 public @interface Telemetry {
-  String label();
+  String value();
 }

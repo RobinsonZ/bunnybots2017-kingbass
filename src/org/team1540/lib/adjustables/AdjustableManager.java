@@ -60,7 +60,7 @@ public class AdjustableManager {
           continue;
         }
 
-        tunables.add(new TunableField(object, field, tt, tunable.label()));
+        tunables.add(new TunableField(object, field, tt, tunable.value()));
         noneFound = false;
       }
 
@@ -84,7 +84,7 @@ public class AdjustableManager {
           continue;
         }
 
-        telemetry.add(new TelemetryField(object, field, tt, teleAnnotation.label()));
+        telemetry.add(new TelemetryField(object, field, tt, teleAnnotation.value()));
         noneFound = false;
       }
     }

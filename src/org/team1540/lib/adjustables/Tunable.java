@@ -16,5 +16,5 @@ public @interface Tunable {
   /**
    * Label for the entry on the SmartDashboard.
    */
-  String label();
+  String value();
 }
