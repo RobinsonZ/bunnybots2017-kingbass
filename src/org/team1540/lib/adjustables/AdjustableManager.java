@@ -12,7 +12,11 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
-//TODO: Documentation
+/**
+ * Class to manage creating and updating adjustables (tunables and telemetry values.) Add an object
+ * containing fields marked with {@link Tunable} or {@link Telemetry} to have those values show up
+ * on the SmartDashboard.
+ */
 public class AdjustableManager {
 
   private static AdjustableManager instance = new AdjustableManager();
@@ -23,6 +27,12 @@ public class AdjustableManager {
     return instance;
   }
 
+  /**
+   * Adds an object to the {@code AdjustableManager}.
+   *
+   * @param object The object to add. One or more of the fields in this object should be marked with
+   * {@link Telemetry} or {@link Tunable}.
+   */
   public void add(Object object) {
     // reflection time
     Field[] fields = object.getClass().getFields();
@@ -85,6 +95,10 @@ public class AdjustableManager {
     }
   }
 
+  /**
+   * Updates adjustable values. This method should be called in {@code robotPeriodic()} in your main
+   * {@code Robot} class.
+   */
   public void update() {
     // Update tunables
     for (TunableField tf : tunables) {
