@@ -167,6 +167,98 @@ public class ProfileSegmentFactory {
     return segment;
   }
 
+  public ProfileSegment createCurve(double dist, double endAngle, boolean rampUp,
+      boolean rampDown) {
+    // find the radius of the curve
+    double radius = (dist / 2) / Math.sin(endAngle / 2);
+
+    double leftRadius = radius - (wheelBase / 2);
+    double rightRadius = radius + (wheelBase / 2);
+
+    double leftCirc = Math.PI * leftRadius * leftRadius;
+    double rightCirc = Math.PI * rightRadius * rightRadius;
+
+    // scale between left and right circumference
+    double scale = Math.min(leftCirc, rightCirc) / Math.max(leftCirc, rightCirc);
+
+    double maxRampTime = maxSpeed / maxAccel; // time to accelerate
+
+    double maxRampDistTraveled = 0;
+
+    if (rampUp) {
+      maxRampDistTraveled += (maxSpeed * maxRampTime) / 2; // area under triangle
+    }
+    if (rampDown) { maxRampDistTraveled += (maxSpeed * maxRampTime) / 2; }
+
+    double maxCruiseDistTraveled = Math.max(
+        (endAngle / (2 * Math.PI)) * leftCirc - maxRampDistTraveled,
+        (endAngle / (2 * Math.PI)) * rightCirc - maxRampDistTraveled);
+
+    double cruiseTime = maxCruiseDistTraveled / maxSpeed;
+
+    double totTime = cruiseTime + (rampUp ? maxRampTime : 0) + (rampDown ? maxRampTime : 0);
+
+    //calc number of points necessary
+    int numPts = (int) Math.ceil((totTime * 1000) / resolution);
+
+    //noinspection Duplicates
+    DoubleFunction<Double> maxVelCalc = time -> {
+      if (time < maxRampTime * 1000) {
+        return time * (maxAccel / 1000);
+      } else if (time > (maxRampTime + cruiseTime) * 1000) {
+        return (time % maxRampTime) * (maxAccel / 1000);
+      } else {
+        return maxSpeed;
+      }
+    };
+
+    DoubleFunction<Double> minVelCalc = time -> {
+      if (time < maxRampTime * 1000) {
+        return time * (maxAccel / 1000) * scale;
+      } else if (time > (maxRampTime + cruiseTime) * 1000) {
+        return (time % maxRampTime) * (maxAccel / 1000) * scale;
+      } else {
+        return maxSpeed * scale;
+      }
+    };
+
+    DoubleFunction<Double> maxPosCalc =
+        time -> integrator.integrate(1000, maxVelCalc::apply, 0, time * 1000);
+    DoubleFunction<Double> minPosCalc =
+        time -> integrator.integrate(1000, minVelCalc::apply, 0, time * 1000);
+
+    double currTime = 0;
+
+    // create two point arrays
+    double[][] minPts = new double[numPts][3];
+    double[][] maxPts = new double[numPts][3];
+
+    for (double[] point : minPts) {
+      point[0] = minPosCalc.apply(currTime); // position
+      point[1] = minVelCalc.apply(currTime); // velocity
+      point[2] = resolution; // duration
+      currTime += resolution;
+    }
+
+    currTime = 0;
+
+    for (double[] point : maxPts) {
+      point[0] = maxPosCalc.apply(currTime); // position
+      point[1] = maxVelCalc.apply(currTime); // velocity
+      point[2] = resolution; // duration
+      currTime += resolution;
+    }
+
+    // create our segment
+    ProfileCurve segment = new ProfileCurve();
+    segment.numPoints = numPts;
+
+    segment.left = leftCirc > rightCirc ? maxPts : minPts;
+    segment.right = leftCirc > rightCirc ? minPts : maxPts;
+
+    return segment;
+  }
+
   /**
    *
    */
