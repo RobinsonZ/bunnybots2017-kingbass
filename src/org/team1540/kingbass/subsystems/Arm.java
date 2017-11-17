@@ -1,11 +1,15 @@
 package org.team1540.kingbass.subsystems;
 
+import static com.ctre.CANTalon.TalonControlMode.Follower;
+import static org.team1540.kingbass.OI.ARM_AXIS;
+import static org.team1540.kingbass.OI.ARM_AXIS_2;
+import static org.team1540.kingbass.OI.ARM_JOYSTICK;
+import static org.team1540.kingbass.RobotInfo.ARM_A;
+import static org.team1540.kingbass.Tuning.getArmSpeed;
+
 import com.ctre.CANTalon;
-import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team1540.kingbass.OI;
-import org.team1540.kingbass.RobotInfo;
-import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.commands.arm.JoystickArmControl;
 
 /**
@@ -14,15 +18,15 @@ import org.team1540.kingbass.commands.arm.JoystickArmControl;
  * @author Zachary Robinson
  */
 public class Arm extends Subsystem {
-  private CANTalon armA = new CANTalon(RobotInfo.ARM_A);
-  private CANTalon armB = new CANTalon(RobotInfo.ARM_A);
+  private CANTalon armA = new CANTalon(ARM_A);
+  private CANTalon armB = new CANTalon(ARM_A);
 
   /**
    * Constructs an {@link Arm}.
    */
   public Arm() {
     super();
-    armB.changeControlMode(TalonControlMode.Follower);
+    armB.changeControlMode(Follower);
     armB.set(armA.getDeviceID());
     armA.enableBrakeMode(true);
     armB.enableBrakeMode(true);
@@ -32,14 +36,14 @@ public class Arm extends Subsystem {
    * Lowers the arm at the speed set by {@code Tuning.ARM_SPEED}.
    */
   public void lowerArm() {
-    armA.set(Tuning.getArmSpeed());
+    armA.set(getArmSpeed());
   }
 
   /**
    * Raises the arm at the speed set by {@code Tuning.ARM_SPEED}.
    */
   public void raiseArm() {
-    armB.set(Tuning.getArmSpeed());
+    armB.set(getArmSpeed());
   }
 
   /**
@@ -61,9 +65,9 @@ public class Arm extends Subsystem {
   @Override
   protected void initDefaultCommand() {
     if (OI.TRIGGERS) {
-      setDefaultCommand(new JoystickArmControl(OI.ARM_JOYSTICK, OI.ARM_AXIS));
+      setDefaultCommand(new JoystickArmControl(ARM_JOYSTICK, ARM_AXIS));
     } else {
-      setDefaultCommand(new JoystickArmControl(OI.ARM_JOYSTICK, OI.ARM_AXIS, OI.ARM_AXIS_2));
+      setDefaultCommand(new JoystickArmControl(ARM_JOYSTICK, ARM_AXIS, ARM_AXIS_2));
     }
   }
 }

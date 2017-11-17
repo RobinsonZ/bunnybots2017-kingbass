@@ -4,11 +4,19 @@ import static com.ctre.CANTalon.FeedbackDevice.QuadEncoder;
 import static com.ctre.CANTalon.TalonControlMode.Follower;
 import static com.ctre.CANTalon.TalonControlMode.MotionProfile;
 import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
+import static org.team1540.kingbass.RobotInfo.L_MASTER;
+import static org.team1540.kingbass.RobotInfo.L_SLAVE_A;
+import static org.team1540.kingbass.RobotInfo.L_SLAVE_B;
+import static org.team1540.kingbass.RobotInfo.R_MASTER;
+import static org.team1540.kingbass.RobotInfo.R_SLAVE_A;
+import static org.team1540.kingbass.RobotInfo.R_SLAVE_B;
+import static org.team1540.kingbass.Tuning.lReverseOutput;
+import static org.team1540.kingbass.Tuning.lReverseSensor;
+import static org.team1540.kingbass.Tuning.rReverseOutput;
+import static org.team1540.kingbass.Tuning.rReverseSensor;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team1540.kingbass.RobotInfo;
-import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
 import org.team1540.kingbass.motion.MotionProfile;
 
@@ -18,13 +26,13 @@ import org.team1540.kingbass.motion.MotionProfile;
  * @author Zachary Robinson
  */
 public class DriveTrain extends Subsystem {
-  private CANTalon lMain = new CANTalon(RobotInfo.L_MASTER);
-  private CANTalon lSlaveA = new CANTalon(RobotInfo.L_SLAVE_A);
-  private CANTalon lSlaveB = new CANTalon(RobotInfo.L_SLAVE_B);
+  private CANTalon lMain = new CANTalon(L_MASTER);
+  private CANTalon lSlaveA = new CANTalon(L_SLAVE_A);
+  private CANTalon lSlaveB = new CANTalon(L_SLAVE_B);
 
-  private CANTalon rMain = new CANTalon(RobotInfo.R_MASTER);
-  private CANTalon rSlaveA = new CANTalon(RobotInfo.R_SLAVE_A);
-  private CANTalon rSlaveB = new CANTalon(RobotInfo.R_SLAVE_B);
+  private CANTalon rMain = new CANTalon(R_MASTER);
+  private CANTalon rSlaveA = new CANTalon(R_SLAVE_A);
+  private CANTalon rSlaveB = new CANTalon(R_SLAVE_B);
 
   // various arrays to make code cleaner and easier to write
   private CANTalon[] talons = {lMain, rMain, lSlaveA, rSlaveA, lSlaveB, rSlaveB};
@@ -47,11 +55,11 @@ public class DriveTrain extends Subsystem {
       c.setProfile(0);
     }
 
-    lMain.reverseOutput(Tuning.lReverseOutput());
-    rMain.reverseOutput(Tuning.rReverseOutput());
+    lMain.reverseOutput(lReverseOutput());
+    rMain.reverseOutput(rReverseOutput());
 
-    lMain.reverseSensor(Tuning.lReverseSensor());
-    rMain.reverseSensor(Tuning.rReverseSensor());
+    lMain.reverseSensor(lReverseSensor());
+    rMain.reverseSensor(rReverseSensor());
 
     lMain.changeMotionControlFramePeriod(5);
     rMain.changeMotionControlFramePeriod(5);
