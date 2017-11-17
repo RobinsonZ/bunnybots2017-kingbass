@@ -1,9 +1,12 @@
 package org.team1540.kingbass.subsystems;
 
+import static com.ctre.CANTalon.TalonControlMode.Follower;
+import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
+import static org.team1540.kingbass.RobotInfo.INTAKE_A;
+import static org.team1540.kingbass.RobotInfo.INTAKE_B;
+
 import com.ctre.CANTalon;
-import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team1540.kingbass.RobotInfo;
 import org.team1540.kingbass.commands.intake.IntakeStop;
 
 /**
@@ -12,8 +15,8 @@ import org.team1540.kingbass.commands.intake.IntakeStop;
  * @author Zachary Robinson
  */
 public class Intake extends Subsystem {
-  private CANTalon intakeA = new CANTalon(RobotInfo.INTAKE_A);
-  private CANTalon intakeB = new CANTalon(RobotInfo.INTAKE_B);
+  private CANTalon intakeA = new CANTalon(INTAKE_A);
+  private CANTalon intakeB = new CANTalon(INTAKE_B);
 
 
   /**
@@ -29,8 +32,8 @@ public class Intake extends Subsystem {
    * @param setPoint The point to set the motor to, between -1 and 1 inclusive.
    */
   public void setMotor(double setPoint) {
-    intakeA.changeControlMode(TalonControlMode.PercentVbus);
-    intakeB.changeControlMode(TalonControlMode.Follower);
+    intakeA.changeControlMode(PercentVbus);
+    intakeB.changeControlMode(Follower);
     intakeB.set(intakeA.getDeviceID());
     intakeA.set(setPoint);
   }

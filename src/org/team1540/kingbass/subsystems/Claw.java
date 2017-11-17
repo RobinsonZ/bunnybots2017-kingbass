@@ -1,8 +1,10 @@
 package org.team1540.kingbass.subsystems;
 
+import static org.team1540.kingbass.RobotInfo.L_CLAW;
+import static org.team1540.kingbass.RobotInfo.R_CLAW;
+
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team1540.kingbass.RobotInfo;
 import org.team1540.kingbass.commands.claw.StopClaw;
 
 /**
@@ -11,8 +13,8 @@ import org.team1540.kingbass.commands.claw.StopClaw;
  * @author Zachary Robinson
  */
 public class Claw extends Subsystem {
-  private CANTalon left = new CANTalon(RobotInfo.L_CLAW);
-  private CANTalon right = new CANTalon(RobotInfo.R_CLAW);
+  private CANTalon left = new CANTalon(L_CLAW);
+  private CANTalon right = new CANTalon(R_CLAW);
 
   public Claw() {
     super();
