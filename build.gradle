@@ -43,6 +43,8 @@ dependencies {
     compile wpilib()
     compile navx()
     compile ctre()
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-math3
+    compile group: 'org.apache.commons', name: 'commons-math4', version: '4.0'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.1'
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.0.1'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.1'
