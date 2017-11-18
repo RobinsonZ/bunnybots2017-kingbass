@@ -35,6 +35,8 @@ public class Tuning {
   public static boolean lReverseSensor = false;
   @Tunable("Right reverse sensor")
   public static boolean rReverseSensor = false;
+  @Tunable("Intake timeout")
+  public static double intakeTimeout = 5;
   // Arm
   /**
    * Motor set point (out of 1) for moving the arm up and down.
@@ -65,6 +67,8 @@ public class Tuning {
    */
   @Tunable("Intake setpoint")
   public static double intakeSetPoint = 1;
+  @Tunable("Intake stop threshold")
+  public static double intakeStopThresh = 5;
 
   // Input
   /**

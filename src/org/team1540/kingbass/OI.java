@@ -8,6 +8,7 @@ import org.team1540.kingbass.commands.claw.OpenClaw;
 import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
 import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
+import org.team1540.kingbass.commands.intake.IntakeBunny;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
 import org.team1540.kingbass.commands.shifters.ManualShiftDown;
@@ -111,6 +112,7 @@ public class OI {
 
     copilotRightBumper.whileHeld(new CloseClaw());
     copilotLeftBumper.whileHeld(new OpenClaw());
+    copilotA.whenPressed(new IntakeBunny());
     copilotB.toggleWhenPressed(new IntakeIn());
     copilotY.toggleWhenPressed(new IntakeOut());
   }
