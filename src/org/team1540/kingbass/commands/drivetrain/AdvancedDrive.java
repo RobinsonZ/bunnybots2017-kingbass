@@ -1,13 +1,14 @@
 package org.team1540.kingbass.commands.drivetrain;
 
+import static org.team1540.kingbass.OI.getDriveLeftJoystick;
+import static org.team1540.kingbass.OI.getDriveRightJoystick;
 import static org.team1540.kingbass.Robot.driveTrain;
-import static org.team1540.kingbass.Tuning.getVelHistorySize;
+import static org.team1540.kingbass.Tuning.velHistorySize;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.Arrays;
-import org.team1540.kingbass.OI;
 import org.team1540.lib.FixedSizeHistory;
 import org.team1540.lib.math.SavitskyGolayFilter;
 
@@ -42,29 +43,29 @@ public class AdvancedDrive extends Command {
   @Override
   protected void initialize() {
     // check if output is odd and within the number of coeffs we have, otherwise use a default
-    int velHistorySize = getVelHistorySize();
+    int velHistSize = velHistorySize;
 
-    if (velHistorySize % 2 == 0) {
+    if (velHistSize % 2 == 0) {
       DriverStation.reportWarning("Velocity history size should be an odd number, but was "
-          + velHistorySize
+          + velHistSize
           + "; using fallback value", false);
-      velHistorySize = 5;
+      velHistSize = 5;
     }
-    if (velHistorySize > 9) {
+    if (velHistSize > 9) {
       DriverStation.reportWarning("Velocity history size should be less than 9, but was "
-          + velHistorySize
+          + velHistSize
           + "; using fallback value", false);
-      velHistorySize = 5;
+      velHistSize = 5;
     }
     // re-instantiate everything
-    lVelocityHistory = new FixedSizeHistory<>(velHistorySize);
-    rVelocityHistory = new FixedSizeHistory<>(velHistorySize);
+    lVelocityHistory = new FixedSizeHistory<>(velHistSize);
+    rVelocityHistory = new FixedSizeHistory<>(velHistSize);
 
-    lHistWrapper = new Double[velHistorySize];
-    rHistWrapper = new Double[velHistorySize];
+    lHistWrapper = new Double[velHistSize];
+    rHistWrapper = new Double[velHistSize];
 
-    lHistArr = new double[velHistorySize];
-    rHistArr = new double[velHistorySize];
+    lHistArr = new double[velHistSize];
+    rHistArr = new double[velHistSize];
 
     lErrorAccum = 0;
     rErrorAccum = 0;
@@ -75,8 +76,8 @@ public class AdvancedDrive extends Command {
 
   @Override
   protected void execute() {
-    double lThrot = OI.getDriveLeftJoystick();
-    double rThrot = OI.getDriveRightJoystick();
+    double lThrot = getDriveLeftJoystick();
+    double rThrot = getDriveRightJoystick();
 
     lVelocityHistory.add(driveTrain.getLeftVelocity());
     rVelocityHistory.add(driveTrain.getRightVelocity());

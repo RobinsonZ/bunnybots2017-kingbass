@@ -1,11 +1,12 @@
 package org.team1540.kingbass.commands.drivetrain;
 
+import static org.team1540.kingbass.OI.getDriveLeftJoystick;
+import static org.team1540.kingbass.OI.getDriveRightJoystick;
 import static org.team1540.kingbass.Robot.driveTrain;
+import static org.team1540.kingbass.Tuning.deadzone;
+import static org.team1540.lib.Utilities.processAxisDeadzone;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team1540.kingbass.OI;
-import org.team1540.kingbass.Tuning;
-import org.team1540.lib.Utilities;
 
 /**
  * Drives the robot using the left and right joysticks to control motor speed.
@@ -20,10 +21,10 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    driveTrain.setLeftMotors(Utilities.processAxisDeadzone(OI.getDriveLeftJoystick(),
-        Tuning.getDeadzone()));
-    driveTrain.setRightMotors(Utilities.processAxisDeadzone(OI.getDriveRightJoystick(),
-        Tuning.getDeadzone()));
+    driveTrain.setLeftMotors(processAxisDeadzone(getDriveLeftJoystick(),
+        deadzone));
+    driveTrain.setRightMotors(processAxisDeadzone(getDriveRightJoystick(),
+        deadzone));
   }
 
   @Override
