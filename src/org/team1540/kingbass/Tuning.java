@@ -71,16 +71,4 @@ public class Tuning {
    */
   @Tunable("Deadzone")
   public static double deadzone = 0.1;
-
-  public static double getArmSpeed() {
-    return armSpeed;
-  }
-
-  public static int getAutoshiftCooldown() {
-    return autoshiftCooldown;
-  }
-
-  public static double getAutoShiftDeviationThreshold() {
-    return autoShiftDeviationThreshold;
-  }
 }
