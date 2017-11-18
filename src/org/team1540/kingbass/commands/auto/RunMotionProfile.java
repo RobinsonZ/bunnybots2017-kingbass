@@ -1,9 +1,12 @@
 package org.team1540.kingbass.commands.auto;
 
 import static org.team1540.kingbass.Robot.driveTrain;
+import static org.team1540.kingbass.Tuning.profileD;
+import static org.team1540.kingbass.Tuning.profileF;
+import static org.team1540.kingbass.Tuning.profileI;
+import static org.team1540.kingbass.Tuning.profileP;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.motion.MotionProfileLoader;
 
 public class RunMotionProfile extends Command {
@@ -32,8 +35,7 @@ public class RunMotionProfile extends Command {
   @Override
   protected void initialize() {
     done = false;
-    driveTrain.setPID(Tuning.getProfileP(), Tuning.getProfileI(), Tuning.getProfileD(),
-        Tuning.getProfileF());
+    driveTrain.setPID(profileP, profileI, profileD, profileF);
 
     driveTrain.setMp(MotionProfileLoader.loadFromCSV(profile + "_left"),
         MotionProfileLoader.loadFromCSV(profile + "_left"));
