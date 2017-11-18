@@ -37,7 +37,7 @@ public class MotorTestRobot extends IterativeRobot {
     CANTalon talon = talons.getSelected();
     double output = SmartDashboard.getNumber("Motor Output", 0.5);
 
-    if (joystick.getRawButton(0)) {
+    if (joystick.getRawButton(1)) {
       talon.set(output);
     } else {
       talon.set(0);
