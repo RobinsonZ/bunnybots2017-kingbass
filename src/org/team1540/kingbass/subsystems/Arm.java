@@ -5,7 +5,7 @@ import static org.team1540.kingbass.OI.ARM_AXIS;
 import static org.team1540.kingbass.OI.ARM_AXIS_2;
 import static org.team1540.kingbass.OI.ARM_JOYSTICK;
 import static org.team1540.kingbass.RobotInfo.ARM_A;
-import static org.team1540.kingbass.Tuning.getArmSpeed;
+import static org.team1540.kingbass.Tuning.armSpeed;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -36,14 +36,14 @@ public class Arm extends Subsystem {
    * Lowers the arm at the speed set by {@code Tuning.ARM_SPEED}.
    */
   public void lowerArm() {
-    armA.set(getArmSpeed());
+    armA.set(armSpeed);
   }
 
   /**
    * Raises the arm at the speed set by {@code Tuning.ARM_SPEED}.
    */
   public void raiseArm() {
-    armB.set(getArmSpeed());
+    armB.set(armSpeed);
   }
 
   /**

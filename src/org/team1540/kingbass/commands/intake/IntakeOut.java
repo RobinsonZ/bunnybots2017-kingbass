@@ -1,9 +1,9 @@
 package org.team1540.kingbass.commands.intake;
 
 import static org.team1540.kingbass.Robot.intake;
+import static org.team1540.kingbass.Tuning.intakeSetPoint;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team1540.kingbass.Tuning;
 
 /**
  * Runs the intake outwards.
@@ -22,7 +22,7 @@ public class IntakeOut extends Command {
 
   @Override
   protected void initialize() {
-    intake.setMotor(-Tuning.getIntakeSetPoint());
+    intake.setMotor(-intakeSetPoint);
   }
 
   @Override
