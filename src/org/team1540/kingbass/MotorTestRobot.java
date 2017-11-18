@@ -42,7 +42,6 @@ public class MotorTestRobot extends IterativeRobot {
     chooser.addObject("Motor 11", 11);
     chooser.addObject("Motor 12", 12);
 
-    SmartDashboard.putData("Motors", talons);
     SmartDashboard.putNumber("Motor Output", 0.5);
     SmartDashboard.putData("Motor", chooser);
   }
