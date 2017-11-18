@@ -1,11 +1,11 @@
 package org.team1540.kingbass.commands.arm;
 
 import static org.team1540.kingbass.Robot.arm;
+import static org.team1540.kingbass.Tuning.deadzone;
+import static org.team1540.lib.Utilities.processAxisDeadzone;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import org.team1540.kingbass.Tuning;
-import org.team1540.lib.Utilities;
 
 /**
  * Controls the arm with a joystick axis.
@@ -45,10 +45,10 @@ public class JoystickArmControl extends Command {
   @Override
   protected void execute() {
     if (triggers) {
-      arm.setArm(Utilities.processAxisDeadzone(stick.getRawAxis(axis2) - stick.getRawAxis(axis),
-          Tuning.getDeadzone()));
+      arm.setArm(processAxisDeadzone(stick.getRawAxis(axis2) - stick.getRawAxis(axis),
+          deadzone));
     } else {
-      arm.setArm(Utilities.processAxisDeadzone(stick.getRawAxis(axis), Tuning.getDeadzone()));
+      arm.setArm(processAxisDeadzone(stick.getRawAxis(axis), deadzone));
     }
   }
 

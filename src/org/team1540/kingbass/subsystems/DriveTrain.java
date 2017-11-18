@@ -55,11 +55,11 @@ public class DriveTrain extends Subsystem {
       c.setProfile(0);
     }
 
-    lMain.reverseOutput(lReverseOutput());
-    rMain.reverseOutput(rReverseOutput());
+    lMain.reverseOutput(lReverseOutput);
+    rMain.reverseOutput(rReverseOutput);
 
-    lMain.reverseSensor(lReverseSensor());
-    rMain.reverseSensor(rReverseSensor());
+    lMain.reverseSensor(lReverseSensor);
+    rMain.reverseSensor(rReverseSensor);
 
     lMain.changeMotionControlFramePeriod(5);
     rMain.changeMotionControlFramePeriod(5);
