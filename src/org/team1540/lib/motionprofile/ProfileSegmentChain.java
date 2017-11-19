@@ -1,5 +1,6 @@
 package org.team1540.lib.motionprofile;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @see ProfileSegmentFactory
  */
 public class ProfileSegmentChain {
-  private List<ProfileSegment> segments;
+  private List<ProfileSegment> segments = new LinkedList<>();
   // cache compilation result
   private double[][] leftCache;
   private double[][] rightCache;
