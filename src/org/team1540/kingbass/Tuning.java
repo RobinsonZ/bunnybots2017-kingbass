@@ -9,6 +9,10 @@ import org.team1540.lib.adjustables.Tunable;
  */
 public class Tuning {
 
+  @Tunable("Vision P")
+  public static double visionP = 0.5;
+  @Tunable("Return Threshold")
+  public static double returnThreshold = 500;
   // advanced drive
   @Tunable("Velocity History Size")
   public static int velHistorySize = 5;

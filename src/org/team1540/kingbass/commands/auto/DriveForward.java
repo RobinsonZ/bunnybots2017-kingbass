@@ -5,10 +5,16 @@ import static org.team1540.kingbass.Robot.driveTrain;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 
 public class DriveForward extends TimedCommand {
+  private double driveSpeed;
 
   public DriveForward(double timeout) {
+    this(timeout, 1);
+
+  }
+  public DriveForward(double timeout, double driveSpeed) {
     super("Drive forward " + timeout + " sec", timeout);
     requires(driveTrain);
+    this.driveSpeed = driveSpeed;
   }
 
   @Override
@@ -19,8 +25,8 @@ public class DriveForward extends TimedCommand {
 
   @Override
   protected void initialize() {
-    driveTrain.setLeftMotors(1);
-    driveTrain.setRightMotors(1);
+    driveTrain.setLeftMotors(driveSpeed);
+    driveTrain.setRightMotors(driveSpeed);
   }
 
   @Override
