@@ -14,8 +14,12 @@ public class Tuning {
   @Tunable("Return Threshold")
   public static double returnThreshold = 500;
   // advanced drive
-  @Tunable("Velocity History Size")
-  public static int velHistorySize = 5;
+  @Tunable("A-factor")
+  public static double kA = 1;
+  @Tunable("V-factor")
+  public static double kV = 1;
+  @Tunable("V-intercept")
+  public static double vIntercept = 1;
 
   // motion profiling
   //values should be changed, these are just copied from henny's code

@@ -4,6 +4,7 @@ import static com.ctre.CANTalon.FeedbackDevice.QuadEncoder;
 import static com.ctre.CANTalon.TalonControlMode.Follower;
 import static com.ctre.CANTalon.TalonControlMode.MotionProfile;
 import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
+import static com.ctre.CANTalon.TalonControlMode.Voltage;
 import static org.team1540.kingbass.RobotInfo.L_MASTER;
 import static org.team1540.kingbass.RobotInfo.L_SLAVE_A;
 import static org.team1540.kingbass.RobotInfo.L_SLAVE_B;
@@ -139,6 +140,16 @@ public class DriveTrain extends Subsystem {
     rMain.set(driveDirection * setPoint);
   }
 
+  public void setLeftVoltage(double voltage) {
+    groupTalonsVoltageMode();
+    lMain.set(voltage);
+  }
+
+  public void setRightVoltage(double voltage) {
+    groupTalonsVoltageMode();
+    rMain.set(voltage);
+  }
+
   public void startMp() {
     if (leftProfile != null && rightProfile != null) {
       leftProfile.startMotionProfile();
@@ -179,6 +190,12 @@ public class DriveTrain extends Subsystem {
       c.changeControlMode(Follower);
       c.set(rMain.getDeviceID());
     }
+  }
+
+  private void groupTalonsVoltageMode() {
+    groupTalons();
+    lMain.changeControlMode(Voltage);
+    rMain.changeControlMode(Voltage);
   }
 
   @SuppressWarnings("unused")
