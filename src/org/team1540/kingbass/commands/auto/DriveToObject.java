@@ -11,7 +11,7 @@ import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.vision.Blob;
 
 
-public class AutoDriveToObject extends Command {
+public class DriveToObject extends Command {
 
   private NetworkTable table;
   private int minDistI = 0;
@@ -22,7 +22,7 @@ public class AutoDriveToObject extends Command {
   private LinkedList<Blob> usableBlobs = new LinkedList<>();
   int amtUsableBlobs = 0;
 
-  public AutoDriveToObject() {
+  public DriveToObject() {
     table = NetworkTable.getTable("GRIP/myBlobsReport");
     double centerX = RobotInfo.CAMERA_CENTER_X;
     double centerY = RobotInfo.CAMERA_CENTER_Y;
