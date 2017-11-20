@@ -1,19 +1,11 @@
-package org.team1540.kingbass.motion;
+package org.team1540.lib.motionprofile;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
-import org.team1540.kingbass.Robot;
 
 
-public class MotionProfile {
-  class PeriodicMpRunnable implements Runnable {
-    @Override
-    public void run() {
-      Robot.driveTrain.processMpBuffer();
-    }
-  }
-
+public class ProfileExecuter {
   private static final int MIN_POINTS = 5;
   private static final int LOOP_TIMEOUT = 10;
   private int totalCnt;
@@ -24,13 +16,16 @@ public class MotionProfile {
   private boolean bStart;
   private CANTalon.SetValueMotionProfile setValue;
   private int loaded;
+  private Notifier processor = new Notifier(new Runnable() {
+    @Override
+    public void run() {
+      talon.processMotionProfileBuffer();
+    }
+  });
 
   private CANTalon.MotionProfileStatus status;
 
-  Notifier mpNotifier = new Notifier(new PeriodicMpRunnable());
-
-  public MotionProfile(CANTalon talon, double[][] profile, int totalCnt) {
-    mpNotifier.startPeriodic(0.005);
+  public ProfileExecuter(CANTalon talon, double[][] profile, int totalCnt) {
     this.talon = talon;
     this.profile = profile;
     this.totalCnt = totalCnt;

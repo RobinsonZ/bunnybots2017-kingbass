@@ -1,4 +1,4 @@
-package org.team1540.kingbass.motion;
+package org.team1540.lib.motionprofile;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import java.io.BufferedReader;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class MotionProfileLoader {
+public class CSVProfileLoader {
   public static double[][] loadFromCSV(String filename) {
     try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
       Stream<String> lines = reader.lines();
