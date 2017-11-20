@@ -11,15 +11,13 @@ import org.team1540.kingbass.Tuning;
  * FRC Team 449 the Blair Robot Project.
  */
 public class AdvancedDrive extends Command {
-  private static AdvancedDrive instance;
+  private static AdvancedDrive instance = new AdvancedDrive();
 
   private AdvancedDrive() {
     requires(driveTrain);
   }
 
   public static AdvancedDrive getInstance() {
-    if (instance == null) { instance = new AdvancedDrive(); }
-
     return instance;
   }
 
