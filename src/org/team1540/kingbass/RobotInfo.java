@@ -86,4 +86,6 @@ public class RobotInfo {
    * Shifter for the right gearbox.
    */
   public static final int R_SHIFTER = 2;
+  public static final int CAMERA_CENTER_X = 320;
+  public static final int CAMERA_CENTER_Y = 240;
 }
