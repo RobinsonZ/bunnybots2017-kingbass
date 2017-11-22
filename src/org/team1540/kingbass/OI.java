@@ -25,11 +25,11 @@ public class OI {
   /**
    * Joystick used by the driver.
    */
-  private static final Joystick driver = new Joystick(0);
+  public static final Joystick driver = new Joystick(0);
   /**
    * Joystick used by the copilot.
    */
-  private static final Joystick copilot = new Joystick(1);
+  public static final Joystick copilot = new Joystick(1);
 
   // Axes
   private static final int RIGHT_AXIS_Y = 5;

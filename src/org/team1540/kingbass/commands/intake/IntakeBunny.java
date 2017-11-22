@@ -5,6 +5,8 @@ import static org.team1540.kingbass.Tuning.intakeStopThresh;
 import static org.team1540.kingbass.Tuning.intakeTimeout;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.kingbass.OI;
+import org.team1540.kingbass.commands.controller.VibrateController;
 
 public class IntakeBunny extends Command {
 
@@ -25,5 +27,6 @@ public class IntakeBunny extends Command {
   @Override
   protected void end() {
     intake.setMotor(0);
+    new VibrateController(.25, OI.driver).start();
   }
 }
