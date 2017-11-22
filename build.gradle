@@ -44,7 +44,7 @@ dependencies {
     compile wpilib()
     compile navx()
     compile ctre()
-    compile 'com.github.flamingchickens1540:reference-libraries:711741d3cc'
+    compile 'com.github.flamingchickens1540:reference-libraries:gradle-integration-SNAPSHOT'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.1'
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.0.1'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.1'
