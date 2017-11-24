@@ -17,7 +17,7 @@ import static org.team1540.kingbass.Tuning.rReverseSensor;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
+import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
 import org.team1540.lib.motionprofile.ProfileExecuter;
 
 /**
@@ -198,6 +198,6 @@ public class DriveTrain extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(AdvancedDrive.getInstance());
+    setDefaultCommand(new JoystickDrive());
   }
 }

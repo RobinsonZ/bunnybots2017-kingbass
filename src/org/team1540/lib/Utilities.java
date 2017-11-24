@@ -42,19 +42,6 @@ public class Utilities {
   }
 
   /**
-   * Processes an axis and returns the value only if it is outside the provided deadzone.
-   *
-   * @param axis The axis to return
-   * @param deadzone The deadzone to use.
-   *
-   * @return If |{@code axis}| > |{@code deadzone}|, returns {@code axis}; otherwise, returns 0.
-   */
-  public static double processAxisDeadzone(double axis, double deadzone) {
-    return (Math.abs(axis) > Math.abs(deadzone)) ? axis : 0;
-  }
-
-
-  /**
    * Matches up two arrays' indices given their lengths. This matches the arrays around their
    * central points rather then truncating one array's end. The returned values should be used as
    * start and end points for iterating over the array where one would normally use {@code 0}  and

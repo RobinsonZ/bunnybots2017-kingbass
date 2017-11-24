@@ -37,12 +37,14 @@ deploy {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     compile wpilib()
     compile navx()
     compile ctre()
+    compile 'com.github.flamingchickens1540:reference-libraries:gradle-integration-SNAPSHOT'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-math3
     compile group: 'org.apache.commons', name: 'commons-math3', version: '3.0'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.1'
@@ -55,11 +57,6 @@ sourceSets {
     main {
         java {
             srcDirs = ['src/']
-        }
-    }
-    test {
-        java {
-            srcDirs = ['test/']
         }
     }
 }

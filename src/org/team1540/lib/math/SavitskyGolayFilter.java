@@ -1,6 +1,6 @@
 package org.team1540.lib.math;
 
-import org.team1540.lib.Utilities;
+import static org.team1540.lib.Utilities.lineUpIndices;
 
 /**
  * <i>Savitsky-Golay Filter? I hardly know 'er!</i> -Duncan Soiffer, 2017
@@ -47,7 +47,7 @@ public class SavitskyGolayFilter {
     int coeffStart;
     int coeffEnd;
 
-    int[] startEnds = Utilities.lineUpIndices(data.length, coefficients.length);
+    int[] startEnds = lineUpIndices(data.length, coefficients.length);
     dataStart = startEnds[0];
     dataEnd = startEnds[2];
     coeffStart = startEnds[1];
