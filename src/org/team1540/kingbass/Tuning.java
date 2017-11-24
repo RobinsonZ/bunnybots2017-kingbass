@@ -1,6 +1,7 @@
 package org.team1540.kingbass;
 
-import org.team1540.lib.adjustables.Tunable;
+
+import org.team1540.base.adjustables.Tunable;
 
 /**
  * Provides values (from the SmartDashboard) for tuning the robot.
