@@ -73,8 +73,8 @@ public class CoefficientTestRobot extends IterativeRobot {
     protected void initialize() {
       long ts = System.currentTimeMillis(); // used for making filenames unique
       try {
-        leftCSV = new PrintStream(new File("/home/lvuser/advanced-drive/left" + ts + ".csv"));
-        rightCSV = new PrintStream(new File("/home/lvuser/advanced-drive/right" + ts + ".csv"));
+        leftCSV = new PrintStream(new File("/home/lvuser/advanced-drive/" + ts + "left.csv"));
+        rightCSV = new PrintStream(new File("/home/lvuser/advanced-drive/" + ts + "right.csv"));
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }
