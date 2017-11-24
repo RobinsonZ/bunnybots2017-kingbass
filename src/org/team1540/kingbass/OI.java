@@ -3,6 +3,8 @@ package org.team1540.kingbass;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.team1540.base.triggers.AxisButton;
+import org.team1540.base.triggers.DPadButton;
 import org.team1540.kingbass.commands.claw.CloseClaw;
 import org.team1540.kingbass.commands.claw.OpenClaw;
 import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
@@ -12,8 +14,6 @@ import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
 import org.team1540.kingbass.commands.shifters.ManualShiftDown;
 import org.team1540.kingbass.commands.shifters.ManualShiftUp;
-import org.team1540.lib.triggers.AxisButton;
-import org.team1540.lib.triggers.DPadButton;
 
 /**
  * Operator Interface.
