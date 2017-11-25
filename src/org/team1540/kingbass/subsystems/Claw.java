@@ -4,7 +4,7 @@ import static org.team1540.kingbass.RobotInfo.L_CLAW;
 import static org.team1540.kingbass.RobotInfo.R_CLAW;
 
 import com.ctre.CANTalon;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.base.ChickenSubsystem;
 import org.team1540.kingbass.commands.claw.StopClaw;
 
 /**
@@ -12,7 +12,7 @@ import org.team1540.kingbass.commands.claw.StopClaw;
  *
  * @author Zachary Robinson
  */
-public class Claw extends Subsystem {
+public class Claw extends ChickenSubsystem {
   private CANTalon left = new CANTalon(L_CLAW);
   private CANTalon right = new CANTalon(R_CLAW);
 
@@ -46,5 +46,26 @@ public class Claw extends Subsystem {
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new StopClaw());
+  }
+
+  @Override
+  public double getCurrent() {
+    return left.getOutputCurrent() + right.getOutputCurrent();
+  }
+
+  @Override
+  public void setAbsolutePowerLimit(double limit) {
+    left.setCurrentLimit((int) limit);
+    right.setCurrentLimit((int) limit);
+
+    // why are these uppercase
+    left.EnableCurrentLimit(true);
+    right.EnableCurrentLimit(true);
+  }
+
+  @Override
+  public void stopLimitingPower() {
+    left.EnableCurrentLimit(false);
+    right.EnableCurrentLimit(false);
   }
 }

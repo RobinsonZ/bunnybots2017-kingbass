@@ -16,7 +16,7 @@ import static org.team1540.kingbass.Tuning.rReverseOutput;
 import static org.team1540.kingbass.Tuning.rReverseSensor;
 
 import com.ctre.CANTalon;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.base.ChickenSubsystem;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
 import org.team1540.kingbass.motion.MotionProfile;
 
@@ -25,7 +25,7 @@ import org.team1540.kingbass.motion.MotionProfile;
  *
  * @author Zachary Robinson
  */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends ChickenSubsystem {
   private CANTalon lMain = new CANTalon(L_MASTER);
   private CANTalon lSlaveA = new CANTalon(L_SLAVE_A);
   private CANTalon lSlaveB = new CANTalon(L_SLAVE_B);
@@ -199,5 +199,31 @@ public class DriveTrain extends Subsystem {
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
+  }
+
+  @Override
+  public double getCurrent() {
+    double totCurrent = 0;
+
+    for (CANTalon ct : talons) {
+      totCurrent += ct.getOutputCurrent();
+    }
+
+    return totCurrent;
+  }
+
+  @Override
+  public void setAbsolutePowerLimit(double limit) {
+    for (CANTalon ct : talons) {
+      ct.setCurrentLimit((int) limit);
+      ct.EnableCurrentLimit(true);
+    }
+  }
+
+  @Override
+  public void stopLimitingPower() {
+    for (CANTalon ct : talons) {
+      ct.EnableCurrentLimit(false);
+    }
   }
 }
