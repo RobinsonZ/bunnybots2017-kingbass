@@ -78,7 +78,9 @@ public class CoefficientTestRobot extends IterativeRobot {
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }
-
+      // print headers
+      leftCSV.println("Voltage,Velocity");
+      rightCSV.println("Voltage,Velocity");
 
       lastTime = System.currentTimeMillis();
       currentAppliedVoltage = 0;
