@@ -9,14 +9,13 @@ import org.team1540.kingbass.OI;
 import org.team1540.kingbass.commands.controller.VibrateController;
 
 public class IntakeBunny extends Command {
-
   public IntakeBunny() {
     super("Intake Bunny", intakeTimeout);
   }
 
   @Override
   protected boolean isFinished() {
-    return intake.getCurrent() >= intakeStopThresh;
+    return intake.getCurrent() >= intakeStopThresh || isTimedOut();
   }
 
   @Override
