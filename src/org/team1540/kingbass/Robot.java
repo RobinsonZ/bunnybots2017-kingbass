@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team1540.base.adjustables.AdjustableManager;
 import org.team1540.kingbass.commands.auto.DriveForward;
 import org.team1540.kingbass.subsystems.Arm;
 import org.team1540.kingbass.subsystems.Claw;
 import org.team1540.kingbass.subsystems.DriveTrain;
 import org.team1540.kingbass.subsystems.Intake;
 import org.team1540.kingbass.subsystems.Shifters;
-import org.team1540.lib.adjustables.AdjustableManager;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to

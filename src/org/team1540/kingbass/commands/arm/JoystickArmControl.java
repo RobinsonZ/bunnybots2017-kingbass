@@ -1,8 +1,8 @@
 package org.team1540.kingbass.commands.arm;
 
+import static org.team1540.base.Utilities.processAxisDeadzone;
 import static org.team1540.kingbass.Robot.arm;
 import static org.team1540.kingbass.Tuning.deadzone;
-import static org.team1540.lib.Utilities.processAxisDeadzone;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
