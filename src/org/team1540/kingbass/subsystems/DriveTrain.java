@@ -213,7 +213,7 @@ public class DriveTrain extends ChickenSubsystem {
   }
 
   @Override
-  public void setAbsolutePowerLimit(double limit) {
+  public void limitPower(double limit) {
     for (CANTalon ct : talons) {
       ct.setCurrentLimit((int) limit);
       ct.EnableCurrentLimit(true);

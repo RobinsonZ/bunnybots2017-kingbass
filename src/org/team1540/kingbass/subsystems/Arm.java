@@ -25,7 +25,6 @@ public class Arm extends ChickenSubsystem {
    * Constructs an {@link Arm}.
    */
   public Arm() {
-    super();
     armB.changeControlMode(Follower);
     armB.set(armA.getDeviceID());
     armA.enableBrakeMode(true);
@@ -77,7 +76,7 @@ public class Arm extends ChickenSubsystem {
   }
 
   @Override
-  public void setAbsolutePowerLimit(double limit) {
+  public void limitPower(double limit) {
     armA.setCurrentLimit((int) limit);
     armA.setCurrentLimit((int) limit);
 

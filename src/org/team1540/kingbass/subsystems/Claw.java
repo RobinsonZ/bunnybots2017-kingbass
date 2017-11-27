@@ -54,7 +54,7 @@ public class Claw extends ChickenSubsystem {
   }
 
   @Override
-  public void setAbsolutePowerLimit(double limit) {
+  public void limitPower(double limit) {
     left.setCurrentLimit((int) limit);
     right.setCurrentLimit((int) limit);
 

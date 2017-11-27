@@ -21,7 +21,7 @@ public class Intake extends ChickenSubsystem {
   }
 
   @Override
-  public void setAbsolutePowerLimit(double limit) {
+  public void limitPower(double limit) {
     intake.setCurrentLimit((int) limit);
     intake.EnableCurrentLimit(true);
   }
