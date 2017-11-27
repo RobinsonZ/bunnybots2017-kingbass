@@ -6,13 +6,13 @@ import static org.team1540.kingbass.Robot.driveTrain;
 import static org.team1540.kingbass.Tuning.velHistorySize;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.Arrays;
+import org.team1540.base.ChickenCommand;
 import org.team1540.lib.FixedSizeHistory;
 import org.team1540.lib.math.SavitskyGolayFilter;
 
-public class AdvancedDrive extends Command {
+public class AdvancedDrive extends ChickenCommand {
   private static AdvancedDrive instance;
   // taken from https://en.wikipedia.org/wiki/Savitzky–Golay_filter#Tables_of_selected_convolution_coefficients
   // first derivative using linear/quadratic polynomial
@@ -30,7 +30,8 @@ public class AdvancedDrive extends Command {
   private double lastThrotR;
 
   private AdvancedDrive() {
-    requires(driveTrain);
+    addRequirement(driveTrain);
+    setPriority(10);
     SmartDashboard.putNumber("Drive P-Value", 0.01);
   }
 
@@ -42,6 +43,7 @@ public class AdvancedDrive extends Command {
 
   @Override
   protected void initialize() {
+    super.initialize();
     // check if output is odd and within the number of coeffs we have, otherwise use a default
     int velHistSize = velHistorySize;
 

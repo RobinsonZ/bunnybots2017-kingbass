@@ -2,16 +2,15 @@ package org.team1540.kingbass.commands.auto;
 
 import static org.team1540.kingbass.Robot.driveTrain;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import java.util.ArrayList;
 import java.util.LinkedList;
+import org.team1540.base.ChickenCommand;
 import org.team1540.kingbass.RobotInfo;
 import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.vision.Blob;
 
 
-public class DriveToObject extends Command {
+public class DriveToObject extends ChickenCommand {
 
   private NetworkTable table;
   private int minDistI = 0;
@@ -26,13 +25,8 @@ public class DriveToObject extends Command {
     table = NetworkTable.getTable("GRIP/myBlobsReport");
     double centerX = RobotInfo.CAMERA_CENTER_X;
     double centerY = RobotInfo.CAMERA_CENTER_Y;
-    requires(driveTrain);
-
-  }
-
-  @Override
-  protected void initialize() {
-
+    addRequirement(driveTrain);
+    setPriority(10);
   }
 
   @Override
@@ -79,10 +73,6 @@ public class DriveToObject extends Command {
 
   @Override
   protected boolean isFinished() {
-    if (lastBlob.size > Tuning.returnThreshold) {
-      return true;
-    }
-    return false;
-
+    return lastBlob.size > Tuning.returnThreshold;
   }
 }

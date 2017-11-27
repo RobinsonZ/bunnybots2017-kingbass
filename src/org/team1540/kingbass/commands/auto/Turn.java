@@ -2,11 +2,10 @@ package org.team1540.kingbass.commands.auto;
 
 import static org.team1540.kingbass.Robot.driveTrain;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
-import org.team1540.kingbass.Robot;
+import org.team1540.base.ChickenCommand;
 
 
-public class Turn extends TimedCommand {
+public class Turn extends ChickenCommand {
 
   private int turnLeftSpeed;
   private int turnRightSpeed;
@@ -15,11 +14,17 @@ public class Turn extends TimedCommand {
     super(timeout);
     this.turnLeftSpeed = turnLeftSpeed;
     this.turnRightSpeed = turnRightSpeed;
-    requires(driveTrain);
+    addRequirement(driveTrain);
+    setPriority(10);
   }
 
   protected void execute() {
     driveTrain.setLeftMotors(turnLeftSpeed);
     driveTrain.setRightMotors(turnRightSpeed);
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return isTimedOut();
   }
 }

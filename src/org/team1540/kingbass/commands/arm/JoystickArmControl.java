@@ -5,14 +5,14 @@ import static org.team1540.kingbass.Robot.arm;
 import static org.team1540.kingbass.Tuning.deadzone;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.base.ChickenCommand;
 
 /**
  * Controls the arm with a joystick axis.
  *
  * @author Zachary Robinson
  */
-public class JoystickArmControl extends Command {
+public class JoystickArmControl extends ChickenCommand {
   private Joystick stick;
   private int axis;
   private int axis2;
@@ -23,7 +23,9 @@ public class JoystickArmControl extends Command {
    */
   public JoystickArmControl(Joystick stick, int axis) {
     super("Control arm with joystick");
-    requires(arm);
+    addRequirement(arm);
+    setPriority(2.5);
+
     this.stick = stick;
     this.axis = axis;
     this.triggers = false;
@@ -35,7 +37,9 @@ public class JoystickArmControl extends Command {
    */
   public JoystickArmControl(Joystick stick, int axis, int axis2) {
     super("Control arm with triggers");
-    requires(arm);
+    addRequirement(arm);
+    setPriority(2.5);
+
     this.stick = stick;
     this.axis = axis;
     this.axis2 = axis2;

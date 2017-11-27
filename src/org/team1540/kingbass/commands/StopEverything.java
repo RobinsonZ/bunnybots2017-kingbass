@@ -5,15 +5,16 @@ import static org.team1540.kingbass.Robot.claw;
 import static org.team1540.kingbass.Robot.driveTrain;
 import static org.team1540.kingbass.Robot.intake;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import org.team1540.base.ChickenCommand;
 
-public class StopEverything extends InstantCommand {
+public class StopEverything extends ChickenCommand {
 
   public StopEverything() {
-    requires(arm);
-    requires(claw);
-    requires(driveTrain);
-    requires(intake);
+    addRequirement(arm);
+    addRequirement(claw);
+    addRequirement(driveTrain);
+    addRequirement(intake);
+    setPriority(15);
   }
 
   @Override
@@ -23,5 +24,10 @@ public class StopEverything extends InstantCommand {
     driveTrain.setLeftMotors(0);
     driveTrain.setRightMotors(0);
     intake.setMotor(0);
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return true;
   }
 }

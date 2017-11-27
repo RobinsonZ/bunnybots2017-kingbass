@@ -1,25 +1,33 @@
 package org.team1540.kingbass.commands.claw;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
-import org.team1540.kingbass.Robot;
+import static org.team1540.kingbass.Robot.claw;
+
+import org.team1540.base.ChickenCommand;
 
 /**
  *
  */
-public class OpenClawForTime extends TimedCommand {
+public class OpenClawForTime extends ChickenCommand {
 
   public OpenClawForTime(double timeout) {
     super(timeout);
-    requires(Robot.claw);
+    addRequirement(claw);
+    setPriority(7.5);
   }
 
   // Called once when the command executes
   protected void execute() {
-    Robot.claw.startRelease();
+    claw.startRelease();
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return isTimedOut();
   }
 
   @Override
   protected void end() {
-    Robot.claw.stop();
+    super.end();
+    claw.stop();
   }
 }

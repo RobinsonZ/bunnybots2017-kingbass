@@ -32,7 +32,7 @@ dependencies {
     compile wpilib()
     compile navx()
     compile ctre()
-    compile 'com.github.flamingchickens1540:reference-libraries:12dae7a2f2'
+    compile 'com.github.flamingchickens1540:reference-libraries:0ba5982805'
 }
 
 // setting the source directory for all the code

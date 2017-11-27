@@ -6,22 +6,24 @@ import static org.team1540.kingbass.Tuning.profileF;
 import static org.team1540.kingbass.Tuning.profileI;
 import static org.team1540.kingbass.Tuning.profileP;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.base.ChickenCommand;
 import org.team1540.kingbass.motion.MotionProfileLoader;
 
-public class RunMotionProfile extends Command {
+public class RunMotionProfile extends ChickenCommand {
   boolean done;
   String profile;
 
   public RunMotionProfile(String profile) {
     super("Run motion profile");
-    requires(driveTrain);
+    addRequirement(driveTrain);
+    setPriority(10);
     this.profile = profile;
   }
 
 
   @Override
   protected void end() {
+    super.end();
     driveTrain.stopMp();
   }
 
@@ -34,6 +36,7 @@ public class RunMotionProfile extends Command {
 
   @Override
   protected void initialize() {
+    super.initialize();
     done = false;
     driveTrain.setPID(profileP, profileI, profileD, profileF);
 

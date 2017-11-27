@@ -6,17 +6,18 @@ import static org.team1540.kingbass.OI.getDriveRightJoystick;
 import static org.team1540.kingbass.Robot.driveTrain;
 import static org.team1540.kingbass.Tuning.deadzone;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.base.ChickenCommand;
 
 /**
  * Drives the robot using the left and right joysticks to control motor speed.
  *
  * @author Zachary Robinson
  */
-public class JoystickDrive extends Command {
+public class JoystickDrive extends ChickenCommand {
   public JoystickDrive() {
     super("Drive with joysticks");
-    requires(driveTrain);
+    addRequirement(driveTrain);
+    setPriority(10);
   }
 
   @Override

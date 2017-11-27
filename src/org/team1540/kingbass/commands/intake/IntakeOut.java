@@ -3,35 +3,38 @@ package org.team1540.kingbass.commands.intake;
 import static org.team1540.kingbass.Robot.intake;
 import static org.team1540.kingbass.Tuning.intakeSetPoint;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.base.ChickenCommand;
 
 /**
  * Runs the intake outwards.
  *
  * @author Zachary Robinson
  */
-public class IntakeOut extends Command {
+public class IntakeOut extends ChickenCommand {
 
   /**
    * Constructs an {@link IntakeOut}.
    */
   public IntakeOut() {
     super("Run Intake Out");
-    requires(intake);
+    addRequirement(intake);
+    setPriority(5);
   }
 
   @Override
   protected void initialize() {
+    super.initialize();
     intake.setMotor(-intakeSetPoint);
   }
 
   @Override
-  protected void interrupted() {
+  protected void end() {
+    super.end();
     intake.setMotor(0);
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 }

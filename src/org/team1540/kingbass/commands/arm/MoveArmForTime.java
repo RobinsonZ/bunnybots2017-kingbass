@@ -1,19 +1,28 @@
 package org.team1540.kingbass.commands.arm;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
-import org.team1540.kingbass.Robot;
+import static org.team1540.kingbass.Robot.arm;
 
-public class MoveArmForTime extends TimedCommand {
+import org.team1540.base.ChickenCommand;
+
+public class MoveArmForTime extends ChickenCommand {
 
   double moveSpeed;
 
   public MoveArmForTime(double timeout, double moveSpeed) {
     super(timeout);
-    requires(Robot.arm);
+
+    addRequirement(arm);
+    setPriority(2.5);
+
     this.moveSpeed = moveSpeed;
   }
 
   protected void execute() {
-    Robot.arm.setArm(moveSpeed);
+    arm.setArm(moveSpeed);
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return isTimedOut();
   }
 }
