@@ -42,5 +42,6 @@ public class MotorTestRobot extends IterativeRobot {
     } else {
       talon.set(0);
     }
+    SmartDashboard.putNumber("Current", talon.getOutputCurrent());
   }
 }
