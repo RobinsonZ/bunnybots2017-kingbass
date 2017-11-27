@@ -109,11 +109,10 @@ public class OI {
     // driverDPadLeft.whenPressed(new AutoShift());
 
     driverLeftStick.whenPressed(new ReverseDriveDirection());
-
-    copilotRightBumper.whileHeld(new CloseClaw());
-    copilotLeftBumper.whileHeld(new OpenClaw());
-    copilotA.whenPressed(new IntakeBunny());
-    copilotB.toggleWhenPressed(new IntakeIn());
+    copilotRightBumper.whenPressed(new IntakeBunny());
+    copilotB.whileHeld(new CloseClaw());
+    copilotA.whileHeld(new OpenClaw());
+    copilotX.toggleWhenPressed(new IntakeIn());
     copilotY.toggleWhenPressed(new IntakeOut());
   }
 
