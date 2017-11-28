@@ -13,6 +13,8 @@ public class IntakeBunny extends Command {
     super("Intake Bunny", intakeTimeout);
   }
 
+  Command vibrateControllerCmd = new VibrateController(.25, OI.driver);
+
   @Override
   protected boolean isFinished() {
     return intake.getCurrent() >= intakeStopThresh || isTimedOut();
@@ -26,6 +28,6 @@ public class IntakeBunny extends Command {
   @Override
   protected void end() {
     intake.setMotor(0);
-    new VibrateController(.25, OI.driver).start();
+    if (intake.getCurrent() >= intakeStopThresh) { vibrateControllerCmd.start(); }
   }
 }
