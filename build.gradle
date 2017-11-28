@@ -9,7 +9,7 @@ plugins {
 }
 
 def TEAM = 1540
-def ROBOT_CLASS = "org.team1540.kingbass.MotorTestRobot"
+def ROBOT_CLASS = "org.team1540.kingbass.Robot"
 
 deploy {
     targets {
