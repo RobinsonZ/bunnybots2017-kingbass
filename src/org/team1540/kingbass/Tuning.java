@@ -29,7 +29,12 @@ public class Tuning {
   @Tunable("Profile F")
   public static double profileF = 7.795;
 
-
+  @Tunable("Arm P")
+  public static double armP = 0.1;
+  @Tunable("Arm I")
+  public static double armI = 0.00001;
+  @Tunable("Arm D")
+  public static double armD = 0.1;
   // drivetrain
   @Tunable("Left reverse output")
   public static boolean lReverseOutput = false;
@@ -37,9 +42,9 @@ public class Tuning {
   public static boolean rReverseOutput = false;
   @Tunable("Left reverse sensor")
   public static boolean lReverseSensor = false;
-  @Tunable("Right reverse sensor")
+  //@Tunable("Right reverse sensor")
   public static boolean rReverseSensor = false;
-  @Tunable("Intake timeout")
+  //@Tunable("Intake timeout")
   public static double intakeTimeout = 5;
   // Arm
   /**
@@ -47,18 +52,6 @@ public class Tuning {
    */
   @Tunable("Arm set point")
   public static double armSpeed = 1;
-
-  // Autoshifting
-  /**
-   * The level of acceptable deviation between expected speed (as given by the motor throttle) and
-   * actual speed (as given by the wheel encoders) before the shifter will shift down.
-   */
-  public static double autoShiftDeviationThreshold = 0.1;
-
-  /**
-   * The time, in ticks (about 20ms), between the autoshifter changing gears.
-   */
-  public static int autoshiftCooldown = 5;
 
   // claw
   public static double openClawTime = 1;
@@ -69,9 +62,9 @@ public class Tuning {
   /**
    * Motor set point (out of 1) for running the intake in and out.
    */
-  @Tunable("Intake setpoint")
+  //@Tunable("Intake setpoint")
   public static double intakeSetPoint = 0.5;
-  @Tunable("Intake stop threshold")
+  //@Tunable("Intake stop threshold")
   public static double intakeStopThresh = 10;
 
   // Input
@@ -80,6 +73,6 @@ public class Tuning {
    */
   @Tunable("Deadzone")
   public static double deadzone = 0.1;
-  @Tunable("Intake min time")
+  //@Tunable("Intake min time")
   public static double intakeMinTime = 1;
 }
