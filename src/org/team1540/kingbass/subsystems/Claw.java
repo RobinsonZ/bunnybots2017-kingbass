@@ -19,7 +19,8 @@ public class Claw extends Subsystem {
   public Claw() {
     super();
     left.enableBrakeMode(true);
-    left.enableBrakeMode(true);
+    left.setInverted(true);
+    right.enableBrakeMode(true);
   }
 
   /**
