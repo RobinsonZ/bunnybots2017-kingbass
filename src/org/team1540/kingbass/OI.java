@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.team1540.base.triggers.AxisButton;
 import org.team1540.base.triggers.DPadButton;
 import org.team1540.kingbass.commands.auto.DriveToObject;
-import org.team1540.kingbass.commands.claw.CloseClaw;
-import org.team1540.kingbass.commands.claw.OpenClaw;
 import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
 import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
@@ -112,8 +110,7 @@ public class OI {
     copilotRightBumper.whenPressed(new IntakeBunny());
     driverRightTrigger.whenPressed(new ReverseDriveDirection());
     driverLeftStick.whenPressed(new DriveToObject());
-    copilotB.whileHeld(new CloseClaw());
-    copilotA.whileHeld(new OpenClaw());
+
     copilotX.toggleWhenPressed(new IntakeIn());
     copilotY.toggleWhenPressed(new IntakeOut());
   }

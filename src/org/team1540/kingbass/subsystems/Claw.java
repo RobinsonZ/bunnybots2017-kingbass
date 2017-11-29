@@ -5,7 +5,7 @@ import static org.team1540.kingbass.RobotInfo.R_CLAW;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team1540.kingbass.commands.claw.StopClaw;
+import org.team1540.kingbass.commands.claw.TriggerClawControl;
 
 /**
  * Motorized claw.
@@ -43,8 +43,13 @@ public class Claw extends Subsystem {
     right.set(0);
   }
 
+  public void set(double value) {
+    left.set(value);
+    right.set(value);
+  }
+
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new StopClaw());
+    setDefaultCommand(new TriggerClawControl());
   }
 }
