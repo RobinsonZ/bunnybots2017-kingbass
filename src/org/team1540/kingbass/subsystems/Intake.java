@@ -5,7 +5,6 @@ import static org.team1540.kingbass.RobotInfo.INTAKE_A;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team1540.kingbass.commands.intake.IntakeStop;
 
 /**
  * Intake for bunnies.
@@ -15,6 +14,12 @@ import org.team1540.kingbass.commands.intake.IntakeStop;
 public class Intake extends Subsystem {
   private CANTalon intake = new CANTalon(INTAKE_A);
 
+  public Intake() {
+    intake.setInverted(true);
+  }
+
+  @Override
+  protected void initDefaultCommand() {}
 
   /**
    * Gets the output current of the intake motor.
@@ -31,10 +36,5 @@ public class Intake extends Subsystem {
   public void setMotor(double setPoint) {
     intake.changeControlMode(PercentVbus);
     intake.set(setPoint);
-  }
-
-  @Override
-  protected void initDefaultCommand() {
-    setDefaultCommand(new IntakeStop());
   }
 }
