@@ -70,9 +70,9 @@ public class Tuning {
    * Motor set point (out of 1) for running the intake in and out.
    */
   @Tunable("Intake setpoint")
-  public static double intakeSetPoint = 1;
+  public static double intakeSetPoint = 0.5;
   @Tunable("Intake stop threshold")
-  public static double intakeStopThresh = 5;
+  public static double intakeStopThresh = 10;
 
   // Input
   /**
@@ -80,4 +80,6 @@ public class Tuning {
    */
   @Tunable("Deadzone")
   public static double deadzone = 0.1;
+  @Tunable("Intake min time")
+  public static double intakeMinTime = 1;
 }
