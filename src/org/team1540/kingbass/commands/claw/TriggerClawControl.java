@@ -17,8 +17,8 @@ public class TriggerClawControl extends Command {
 
   @Override
   protected void execute() {
-    claw.set(processAxisDeadzone(getCopilotRightTrigger(),
-        deadzone) - processAxisDeadzone(getCopilotLeftTrigger(), deadzone));
+    claw.set(0.25 * -processAxisDeadzone(getCopilotRightTrigger() + getCopilotLeftTrigger(),
+        deadzone));
   }
 
   @Override
