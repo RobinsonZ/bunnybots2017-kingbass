@@ -52,6 +52,7 @@ public class DriveTrain extends Subsystem {
     }
     for (CANTalon c : mains) {
       c.setFeedbackDevice(QuadEncoder);
+      c.configEncoderCodesPerRev(1024);
       c.setProfile(0);
     }
 
