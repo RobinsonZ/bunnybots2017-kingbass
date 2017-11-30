@@ -79,6 +79,19 @@ public class Claw extends Subsystem {
     return left.getPosition(); //might change to average later
   }
 
+  public double getLeftPosition() {
+    return left.getPosition();
+  }
+
+  public double getRightPosition() {
+    return right.getPosition();
+  }
+
+  public void zeroPosition() {
+    left.setPosition(0);
+    right.setPosition(0);
+  }
+
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new TriggerClawControl());
