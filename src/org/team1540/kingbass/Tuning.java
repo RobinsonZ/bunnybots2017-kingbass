@@ -32,9 +32,9 @@ public class Tuning {
 
   // drivetrain
   @Tunable("Left reverse output")
-  public static boolean lReverseOutput = false;
+  public static boolean lReverseOutput = true;
   @Tunable("Right reverse output")
-  public static boolean rReverseOutput = false;
+  public static boolean rReverseOutput = true;
   @Tunable("Left reverse sensor")
   public static boolean lReverseSensor = false;
   @Tunable("Right reverse sensor")
@@ -72,7 +72,7 @@ public class Tuning {
   @Tunable("Intake setpoint")
   public static double intakeSetPoint = 0.5;
   @Tunable("Intake stop threshold")
-  public static double intakeStopThresh = 10;
+  public static double intakeStopThresh = 7.5;
 
   // Input
   /**
