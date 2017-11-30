@@ -80,11 +80,11 @@ public class RobotInfo {
   /**
    * Shifter for the left gearbox.
    */
-  public static final int L_SHIFTER = 1;
+  public static final int L_SHIFTER = 0;
   /**
    * Shifter for the right gearbox.
    */
-  public static final int R_SHIFTER = 2;
+  public static final int R_SHIFTER = 1;
   public static final int CAMERA_CENTER_X = 320;
   public static final int CAMERA_CENTER_Y = 240;
 }
