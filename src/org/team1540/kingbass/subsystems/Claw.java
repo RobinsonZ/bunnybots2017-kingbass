@@ -11,7 +11,6 @@ import static org.team1540.kingbass.Tuning.clawP;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team1540.kingbass.commands.claw.TriggerClawControl;
 
 /**
  * Motorized claw.
@@ -94,7 +93,7 @@ public class Claw extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new TriggerClawControl());
+    //setDefaultCommand(new TriggerClawControl());
   }
 
   private void setTalonsToPositionMode() {
