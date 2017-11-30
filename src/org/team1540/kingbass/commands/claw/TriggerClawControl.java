@@ -7,8 +7,10 @@ import static org.team1540.kingbass.Robot.claw;
 import static org.team1540.kingbass.Tuning.deadzone;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.kingbass.Tuning;
 
 public class TriggerClawControl extends Command {
+  private double position;
 
   public TriggerClawControl() {
     super("Claw control");
@@ -16,9 +18,17 @@ public class TriggerClawControl extends Command {
   }
 
   @Override
+  protected void initialize() {
+    super.initialize(); // here for later power mgmt compatibility
+    position = claw.getPosition();
+  }
+
+  @Override
   protected void execute() {
-    claw.set(0.25 * -processAxisDeadzone(getCopilotRightTrigger() + getCopilotLeftTrigger(),
-        deadzone));
+    position +=
+        Tuning.clawMult * -processAxisDeadzone(getCopilotRightTrigger() + getCopilotLeftTrigger(),
+            deadzone);
+    claw.setPosition(position);
   }
 
   @Override

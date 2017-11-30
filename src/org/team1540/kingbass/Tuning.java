@@ -81,4 +81,6 @@ public class Tuning {
   public static double armI = 0.0001;
   @Tunable("Arm D")
   public static double armD = 0.1;
+  @Tunable("Claw multiplier")
+  public static double clawMult = 0.01;
 }

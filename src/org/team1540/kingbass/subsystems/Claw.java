@@ -1,5 +1,7 @@
 package org.team1540.kingbass.subsystems;
 
+import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
+import static com.ctre.CANTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.RobotInfo.L_CLAW;
 import static org.team1540.kingbass.RobotInfo.R_CLAW;
 import static org.team1540.kingbass.Tuning.clawD;
@@ -41,6 +43,7 @@ public class Claw extends Subsystem {
    * Closes the claw.
    */
   public void startGrab() {
+    setTalonsToVbusMode();
     left.set(1);
     right.set(1);
   }
@@ -49,22 +52,45 @@ public class Claw extends Subsystem {
    * Opens the claw.
    */
   public void startRelease() {
+    setTalonsToVbusMode();
     left.set(-1);
     right.set(-1);
   }
 
   public void stop() {
+    setTalonsToVbusMode();
     left.set(0);
     right.set(0);
   }
 
   public void set(double value) {
+    setTalonsToVbusMode();
     left.set(value);
     right.set(value);
+  }
+
+  public void setPosition(double pos) {
+    setTalonsToPositionMode();
+    left.set(pos);
+    right.set(-pos);
+  }
+
+  public double getPosition() {
+    return left.getPosition(); //might change to average later
   }
 
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new TriggerClawControl());
+  }
+
+  private void setTalonsToPositionMode() {
+    left.changeControlMode(Position);
+    right.changeControlMode(Position);
+  }
+
+  private void setTalonsToVbusMode() {
+    left.changeControlMode(PercentVbus);
+    right.changeControlMode(PercentVbus);
   }
 }

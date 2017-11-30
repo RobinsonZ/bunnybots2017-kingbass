@@ -1,6 +1,7 @@
 
 package org.team1540.kingbass;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -22,6 +23,7 @@ import org.team1540.kingbass.subsystems.Shifters;
  * resource directory.
  */
 public class Robot extends IterativeRobot {
+  public static Compressor compressor = new Compressor();
   public static Arm arm = new Arm();
   public static Claw claw = new Claw();
   public static DriveTrain driveTrain = new DriveTrain();
@@ -81,6 +83,7 @@ public class Robot extends IterativeRobot {
     chooser.addObject("Drive forward 5 sec", new DriveForward(5));
     chooser.addObject("Drive forward 2.5 sec", new DriveForward(2.5));
     SmartDashboard.putData("Auto mode", chooser);
+    SmartDashboard.putData("Compressor", compressor);
   }
 
   @Override
