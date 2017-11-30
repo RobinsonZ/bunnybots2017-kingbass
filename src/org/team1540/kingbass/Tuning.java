@@ -29,12 +29,12 @@ public class Tuning {
   @Tunable("Profile F")
   public static double profileF = 7.795;
 
-  @Tunable("Arm P")
-  public static double armP = 0.1;
-  @Tunable("Arm I")
-  public static double armI = 0.00001;
-  @Tunable("Arm D")
-  public static double armD = 0.1;
+  @Tunable("Claw P")
+  public static double clawP = 0.1;
+  @Tunable("Claw I")
+  public static double clawI = 0.00001;
+  @Tunable("Claw D")
+  public static double clawD = 0.1;
   // drivetrain
   @Tunable("Left reverse output")
   public static boolean lReverseOutput = false;
@@ -75,4 +75,10 @@ public class Tuning {
   public static double deadzone = 0.1;
   //@Tunable("Intake min time")
   public static double intakeMinTime = 1;
+  @Tunable("Arm P")
+  public static double armP = 0.1;
+  @Tunable("Arm I")
+  public static double armI = 0.0001;
+  @Tunable("Arm D")
+  public static double armD = 0.1;
 }

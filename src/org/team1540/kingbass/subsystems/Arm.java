@@ -8,8 +8,10 @@ import static org.team1540.kingbass.RobotInfo.ARM_A;
 import static org.team1540.kingbass.Tuning.armSpeed;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team1540.kingbass.OI;
+import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.commands.arm.JoystickArmControl;
 
 /**
@@ -28,8 +30,18 @@ public class Arm extends Subsystem {
     super();
     armB.changeControlMode(Follower);
     armB.set(armA.getDeviceID());
+    armA.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    armA.configEncoderCodesPerRev(1024);
+    armB.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    armB.configEncoderCodesPerRev(1024);
     armA.enableBrakeMode(true);
     armB.enableBrakeMode(true);
+    armA.setP(Tuning.armP);
+    armA.setI(Tuning.armI);
+    armA.setD(Tuning.armD);
+    armB.setP(Tuning.armP);
+    armB.setI(Tuning.armI);
+    armB.setD(Tuning.armD);
   }
 
   /**
