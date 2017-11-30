@@ -2,8 +2,12 @@ package org.team1540.kingbass.subsystems;
 
 import static org.team1540.kingbass.RobotInfo.L_CLAW;
 import static org.team1540.kingbass.RobotInfo.R_CLAW;
+import static org.team1540.kingbass.Tuning.clawD;
+import static org.team1540.kingbass.Tuning.clawI;
+import static org.team1540.kingbass.Tuning.clawP;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team1540.kingbass.commands.claw.TriggerClawControl;
 
@@ -21,6 +25,16 @@ public class Claw extends Subsystem {
     left.enableBrakeMode(true);
     left.setInverted(true);
     right.enableBrakeMode(true);
+    left.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    left.configEncoderCodesPerRev(1024);
+    right.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    right.configEncoderCodesPerRev(1024);
+    left.setP(clawP);
+    left.setI(clawI);
+    left.setD(clawD);
+    right.setP(clawP);
+    right.setI(clawI);
+    right.setD(clawD);
   }
 
   /**
