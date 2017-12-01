@@ -50,16 +50,13 @@ public class Arm extends Subsystem {
     super();
     armA.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     armA.configEncoderCodesPerRev(1024);
-    armB.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    armB.configEncoderCodesPerRev(1024);
     armA.enableBrakeMode(true);
+    armA.reverseOutput(true);
     armB.enableBrakeMode(true);
+    armB.reverseOutput(false);
     armA.setP(Tuning.armP);
     armA.setI(Tuning.armI);
     armA.setD(Tuning.armD);
-    armB.setP(Tuning.armP);
-    armB.setI(Tuning.armI);
-    armB.setD(Tuning.armD);
     powerLimiterNotifier.startPeriodic(0.05);
   }
 
@@ -69,9 +66,11 @@ public class Arm extends Subsystem {
    * @param setPoint The speed of the arm motors, from -1 to 1 inclusive.
    */
   public void setArm(double setPoint) {
-    synchronized (talonLock) {
-      setTalonsToVbusMode();
-      armA.set(setPoint);
+    if (!armIsCurrentLimited) {
+      synchronized (talonLock) {
+        setTalonsToVbusMode();
+        armA.set(setPoint);
+      }
     }
   }
 
@@ -86,18 +85,18 @@ public class Arm extends Subsystem {
   }
 
   public void setPosition(double position) {
-    synchronized (talonLock) {
-      setTalonsToPositionMode();
+    if (!armIsCurrentLimited) {
+      synchronized (talonLock) {
+        setTalonsToPositionMode();
 
-      armA.set(position);
-      armB.set(position);
+        armA.set(position);
+      }
     }
   }
 
   public void zeroPosition() {
     synchronized (talonLock) {
       armA.setPosition(0);
-      armB.setPosition(0);
     }
   }
 
@@ -105,8 +104,12 @@ public class Arm extends Subsystem {
     return armA.getPosition();
   }
 
-  public double getPositionB() {
-    return armB.getPosition();
+  public double getCurrentA() {
+    return armA.getOutputCurrent();
+  }
+
+  public double getCurrentB() {
+    return armB.getOutputCurrent();
   }
 
   @Override
@@ -123,6 +126,11 @@ public class Arm extends Subsystem {
 
   private void setTalonsToPositionMode() {
     armA.changeControlMode(Position);
-    armB.changeControlMode(Position);
+    armB.changeControlMode(Follower);
+    armB.set(armA.getDeviceID());
+  }
+
+  public boolean isCurrentLimited() {
+    return armIsCurrentLimited;
   }
 }
