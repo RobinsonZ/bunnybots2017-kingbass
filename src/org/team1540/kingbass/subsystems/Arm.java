@@ -4,7 +4,6 @@ import static com.ctre.CANTalon.TalonControlMode.Follower;
 import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
 import static com.ctre.CANTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.OI.ARM_AXIS;
-import static org.team1540.kingbass.OI.ARM_AXIS_2;
 import static org.team1540.kingbass.OI.ARM_JOYSTICK;
 import static org.team1540.kingbass.RobotInfo.ARM_A;
 
@@ -12,7 +11,6 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team1540.kingbass.OI;
 import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.commands.arm.JoystickArmControl;
 
@@ -113,11 +111,7 @@ public class Arm extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    if (OI.TRIGGERS) {
-      setDefaultCommand(new JoystickArmControl(ARM_JOYSTICK, ARM_AXIS));
-    } else {
-      setDefaultCommand(new JoystickArmControl(ARM_JOYSTICK, ARM_AXIS, ARM_AXIS_2));
-    }
+    setDefaultCommand(new JoystickArmControl(ARM_JOYSTICK, ARM_AXIS));
   }
 
   // Following two methods should only be called in a "synchronized (talonLock) {}" block.
