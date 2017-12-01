@@ -83,4 +83,8 @@ public class Tuning {
   public static double armD = 0.1;
   @Tunable("Claw multiplier")
   public static double clawMult = 0.01;
+  @Tunable("Open Claw Value")
+  public static double openClawPos = 0.1;
+  @Tunable("Close Claw Value")
+  public static double closeClawPos = 0.0;
 }
