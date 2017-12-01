@@ -17,7 +17,7 @@ public class CSVProfileLoader {
       List<double[]> points = new ArrayList<double[]>();
 
       while (lineIter.hasNext()) {
-        String[] stringPoint = lineIter.next().split(",");
+        String[] stringPoint = lineIter.next().split(",\t");
         points.add(new double[]{
             Double.valueOf(stringPoint[0]), Double.valueOf(stringPoint[1]),
             Double.valueOf(stringPoint[2])
