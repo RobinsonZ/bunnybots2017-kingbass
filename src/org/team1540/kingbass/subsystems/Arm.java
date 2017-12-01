@@ -6,6 +6,8 @@ import static com.ctre.CANTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.OI.ARM_AXIS;
 import static org.team1540.kingbass.OI.ARM_JOYSTICK;
 import static org.team1540.kingbass.RobotInfo.ARM_A;
+import static org.team1540.kingbass.Tuning.armD;
+import static org.team1540.kingbass.Tuning.armI;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -55,8 +57,8 @@ public class Arm extends Subsystem {
     armB.enableBrakeMode(true);
     armB.reverseOutput(false);
     armA.setP(Tuning.armP);
-    armA.setI(Tuning.armI);
-    armA.setD(Tuning.armD);
+    armA.setI(armI);
+    armA.setD(armD);
     powerLimiterNotifier.startPeriodic(0.05);
   }
 
@@ -132,5 +134,9 @@ public class Arm extends Subsystem {
 
   public boolean isCurrentLimited() {
     return armIsCurrentLimited;
+  }
+
+  public void updatePIDs() {
+    armA.setPID(Tuning.armP, armI, armD);
   }
 }

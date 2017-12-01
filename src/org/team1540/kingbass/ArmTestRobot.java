@@ -22,6 +22,7 @@ public class ArmTestRobot extends IterativeRobot {
 
   @Override
   public void robotPeriodic() {
+    arm.updatePIDs();
     AdjustableManager.getInstance().update();
     SmartDashboard.putNumber("A position", arm.getPositionA());
     SmartDashboard.putNumber("A current", arm.getCurrentA());
