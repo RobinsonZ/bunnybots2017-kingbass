@@ -81,4 +81,7 @@ public class Tuning {
   public static double armI = 0.0001;
   @Tunable("Arm D")
   public static double armD = 0.1;
+  // Stall current for a 775pro is 134A so this should be sufficient
+  @Tunable("Arm current limit threshold")
+  public static double armCurrLimThresh = 100;
 }
