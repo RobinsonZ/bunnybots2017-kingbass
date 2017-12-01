@@ -1,5 +1,6 @@
 package org.team1540.kingbass.subsystems;
 
+import static com.ctre.CANTalon.TalonControlMode.MotionProfile;
 import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
 import static com.ctre.CANTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.RobotInfo.L_CLAW;
@@ -11,6 +12,7 @@ import static org.team1540.kingbass.Tuning.clawP;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.lib.motionprofile.ProfileExecuter;
 
 /**
  * Motorized claw.
@@ -20,6 +22,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Claw extends Subsystem {
   private CANTalon left = new CANTalon(L_CLAW);
   private CANTalon right = new CANTalon(R_CLAW);
+
+  private ProfileExecuter leftProfile;
+  private ProfileExecuter rightProfile;
 
   public Claw() {
     super();
@@ -36,6 +41,56 @@ public class Claw extends Subsystem {
     right.setP(clawP);
     right.setI(clawI);
     right.setD(clawD);
+
+    left.changeMotionControlFramePeriod(5);
+    right.changeMotionControlFramePeriod(5);
+  }
+
+  public void setMp(double[][] lPts, double[][] rPts) {
+    leftProfile = new ProfileExecuter(left, lPts, lPts.length);
+    rightProfile = new ProfileExecuter(right, rPts, rPts.length);
+  }
+
+  @SuppressWarnings("Duplicates")
+  public boolean controlMp() {
+    if (leftProfile != null && rightProfile != null) {
+      boolean done = leftProfile.control();
+      left.changeControlMode(MotionProfile);
+      left.set(leftProfile.getSetValue().value);
+
+      done = (done || rightProfile.control());
+      right.changeControlMode(MotionProfile);
+      right.set(rightProfile.getSetValue().value);
+
+      return done;
+    }
+
+    return false;
+  }
+
+  public void setPID(double p, double i, double d) {
+    left.setPID(p, i, d);
+    right.setPID(p, i, d);
+  }
+
+  public void startMp() {
+    if (leftProfile != null && rightProfile != null) {
+      leftProfile.startMotionProfile();
+      rightProfile.startMotionProfile();
+    }
+  }
+
+  @SuppressWarnings("Duplicates")
+  public void stopMp() {
+    if (leftProfile != null && rightProfile != null) {
+      leftProfile.reset();
+      left.changeControlMode(PercentVbus);
+      left.set(0);
+
+      rightProfile.reset();
+      right.changeControlMode(PercentVbus);
+      right.set(0);
+    }
   }
 
   /**
@@ -45,15 +100,6 @@ public class Claw extends Subsystem {
     setTalonsToVbusMode();
     left.set(1);
     right.set(1);
-  }
-
-  /**
-   * Opens the claw.
-   */
-  public void startRelease() {
-    setTalonsToVbusMode();
-    left.set(-1);
-    right.set(-1);
   }
 
   public void stop() {
