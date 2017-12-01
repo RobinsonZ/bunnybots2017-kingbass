@@ -1,6 +1,11 @@
 package org.team1540.lib.motionprofile;
 
+import static com.ctre.CANTalon.SetValueMotionProfile.Disable;
+import static com.ctre.CANTalon.SetValueMotionProfile.Enable;
+import static com.ctre.CANTalon.SetValueMotionProfile.Hold;
+
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.SetValueMotionProfile;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 
@@ -14,7 +19,7 @@ public class ProfileExecuter {
   private int state;
   private int loopTimeout;
   private boolean bStart;
-  private CANTalon.SetValueMotionProfile setValue;
+  private SetValueMotionProfile setValue;
   private int loaded;
   private Notifier processor = new Notifier(new Runnable() {
     @Override
@@ -32,7 +37,7 @@ public class ProfileExecuter {
     this.state = 0;
     this.loopTimeout = -1;
     this.bStart = false;
-    this.setValue = CANTalon.SetValueMotionProfile.Disable;
+    this.setValue = Disable;
     this.status = new CANTalon.MotionProfileStatus();
   }
 
@@ -44,15 +49,12 @@ public class ProfileExecuter {
      * track time, this is rudimentary but that's okay, we just want to make sure things never get
      * stuck.
      */
-    if (loopTimeout < 0) {
-      /* do nothing, timeout is disabled */
-    } else {
+    if (loopTimeout >= 0) {
       /* our timeout is nonzero */
-      if (loopTimeout == 0) {
-      } else {
+      if (loopTimeout != 0) {
         --loopTimeout;
       }
-    }
+    } /* else do nothing, timeout is disabled */
 
     /* first check if we are in MP mode */
     if (talon.getControlMode() != CANTalon.TalonControlMode.MotionProfile) {
@@ -72,7 +74,7 @@ public class ProfileExecuter {
           if (bStart) {
             bStart = false;
 
-            setValue = CANTalon.SetValueMotionProfile.Disable;
+            setValue = Disable;
             loaded += startFilling();
             /*
              * MP is being sent to CAN bus, wait a small amount of time
@@ -87,7 +89,7 @@ public class ProfileExecuter {
           /* do we have a minimum numberof points in Talon */
           if (status.btmBufferCnt > MIN_POINTS) {
             /* start (once) the motion profile */
-            setValue = CANTalon.SetValueMotionProfile.Enable;
+            setValue = Enable;
             /* MP will start once the control frame gets scheduled */
             state = 2;
             loopTimeout = LOOP_TIMEOUT;
@@ -114,7 +116,7 @@ public class ProfileExecuter {
             /*
              * because we set the last point's isLast to true, we will get here when the MP is done
              */
-            setValue = CANTalon.SetValueMotionProfile.Hold;
+            setValue = Hold;
             state = 0;
             loopTimeout = -1;
             return true;
@@ -127,7 +129,7 @@ public class ProfileExecuter {
     return false;
   }
 
-  public CANTalon.SetValueMotionProfile getSetValue() {
+  public SetValueMotionProfile getSetValue() {
     return setValue;
   }
 
@@ -145,7 +147,7 @@ public class ProfileExecuter {
 
   public void reset() {
     talon.clearMotionProfileTrajectories();
-    setValue = CANTalon.SetValueMotionProfile.Disable;
+    setValue = Disable;
     state = 0;
     loopTimeout = -1;
     bStart = false;
