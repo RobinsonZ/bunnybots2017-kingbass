@@ -10,7 +10,6 @@ import org.team1540.kingbass.commands.claw.CloseClaw;
 import org.team1540.kingbass.commands.claw.OpenClaw;
 import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
-import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
 import org.team1540.kingbass.commands.intake.IntakeBunny;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
@@ -110,12 +109,11 @@ public class OI {
     // driverDPadLeft.whenPressed(new AutoShift());
 
     copilotRightBumper.whenPressed(new IntakeBunny());
-    driverRightTrigger.whenPressed(new ReverseDriveDirection());
     driverLeftStick.whenPressed(new DriveToObject());
     copilotB.whileHeld(new CloseClaw());
     copilotA.whileHeld(new OpenClaw());
-    copilotX.toggleWhenPressed(new IntakeIn());
-    copilotY.toggleWhenPressed(new IntakeOut());
+    copilotX.whileHeld(new IntakeIn());
+    copilotY.whileHeld(new IntakeOut());
   }
 
   public static double getCopilotDPadX() {
