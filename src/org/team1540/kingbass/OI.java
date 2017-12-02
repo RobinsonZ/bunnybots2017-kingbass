@@ -8,8 +8,6 @@ import org.team1540.base.triggers.DPadButton;
 import org.team1540.kingbass.commands.auto.DriveToObject;
 import org.team1540.kingbass.commands.claw.CloseClaw;
 import org.team1540.kingbass.commands.claw.OpenClaw;
-import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
-import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
 import org.team1540.kingbass.commands.intake.IntakeBunny;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
@@ -102,9 +100,6 @@ public class OI {
 
     driverRightBumper.whenPressed(new ManualShiftUp());
     driverLeftBumper.whenPressed(new ManualShiftDown());
-
-    driverRightTrigger.whenPressed(new JoystickDrive());
-    driverRightTrigger.whenReleased(AdvancedDrive.getInstance());
 
     // driverDPadLeft.whenPressed(new AutoShift());
 
