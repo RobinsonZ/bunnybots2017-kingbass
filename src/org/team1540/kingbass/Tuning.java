@@ -64,6 +64,7 @@ public class Tuning {
    */
   //@Tunable("Intake setpoint")
   public static double intakeSetPoint = 0.5;
+
   @Tunable("Intake stop threshold")
   public static double intakeStopThresh = 7.5;
 
@@ -76,11 +77,22 @@ public class Tuning {
   //@Tunable("Intake min time")
   public static double intakeMinTime = 1;
   @Tunable("Arm P")
-  public static double armP = 0.1;
+  public static double armP = 1;
   @Tunable("Arm I")
-  public static double armI = 0.0001;
+  public static double armI = 0;
   @Tunable("Arm D")
-  public static double armD = 0.1;
+  public static double armD = 1;
+  // Stall current for a 775pro is 134A so this should be sufficient
+  @Tunable("Arm current limit threshold")
+  public static double armCurrLimThresh = 100;
+  @Tunable("Arm multiplier")
+  public static double armMult = 0.010;
+  @Tunable("Arm Limit")
+  public static double armLimit = 0.7;
+  @Tunable("Arm bounceback")
+  public static double armBounceBack = 0.05;
+  @Tunable("Arm end threshold")
+  public static double armEndThreshold = 0.05;
   @Tunable("Claw multiplier")
   public static double clawMult = 0.01;
   @Tunable("Open Claw Value")

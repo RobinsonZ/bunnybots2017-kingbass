@@ -2,6 +2,7 @@ package org.team1540.kingbass.commands.controller;
 
 import static edu.wpi.first.wpilibj.GenericHID.RumbleType.kLeftRumble;
 import static edu.wpi.first.wpilibj.GenericHID.RumbleType.kRightRumble;
+import static org.team1540.kingbass.Robot.controller;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.TimedCommand;
@@ -11,6 +12,8 @@ public class VibrateController extends TimedCommand {
 
   public VibrateController(double timeout, Joystick joystick) {
     super(timeout);
+
+    requires(controller);
 
     this.joystick = joystick;
   }
