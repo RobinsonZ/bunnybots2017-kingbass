@@ -21,9 +21,10 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    driveTrain.setLeftMotors(processAxisDeadzone(getDriveLeftJoystick(),
+    // Don't ask
+    driveTrain.setRightMotors(-processAxisDeadzone(getDriveRightJoystick(),
         deadzone));
-    driveTrain.setRightMotors(processAxisDeadzone(getDriveRightJoystick(),
+    driveTrain.setLeftMotors(-processAxisDeadzone(getDriveLeftJoystick(),
         deadzone));
   }
 
