@@ -1,14 +1,14 @@
 package org.team1540.kingbass;
 
+import static org.team1540.kingbass.Tuning.clawLimit;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.team1540.base.triggers.AxisButton;
 import org.team1540.base.triggers.DPadButton;
 import org.team1540.kingbass.commands.auto.DriveToObject;
-import org.team1540.kingbass.commands.claw.CloseClaw;
-import org.team1540.kingbass.commands.claw.OpenClaw;
-import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
+import org.team1540.kingbass.commands.claw.MoveClawToPosition;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
 import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
 import org.team1540.kingbass.commands.intake.IntakeBunny;
@@ -105,7 +105,7 @@ public class OI {
     driverLeftBumper.whenPressed(new ManualShiftDown());
 
     driverRightTrigger.whenPressed(new JoystickDrive());
-    driverRightTrigger.whenReleased(AdvancedDrive.getInstance());
+    //driverRightTrigger.whenReleased(AdvancedDrive.getInstance());
 
     // driverDPadLeft.whenPressed(new AutoShift());
 
@@ -115,8 +115,8 @@ public class OI {
 
     copilotX.toggleWhenPressed(new IntakeIn());
     copilotY.toggleWhenPressed(new IntakeOut());
-    copilotA.whenPressed(new OpenClaw());
-    copilotB.whenPressed(new CloseClaw());
+    copilotA.whenPressed(new MoveClawToPosition(clawLimit));
+    copilotB.whenPressed(new MoveClawToPosition(0));
   }
 
   public static double getCopilotDPadX() {

@@ -14,8 +14,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team1540.base.adjustables.AdjustableManager;
-import org.team1540.kingbass.commands.claw.CloseClaw;
-import org.team1540.kingbass.commands.claw.OpenClaw;
 
 public class ClawTestRobot extends IterativeRobot {
   private JoystickButton button;
@@ -30,9 +28,6 @@ public class ClawTestRobot extends IterativeRobot {
 
     Button copilotA = new JoystickButton(joystick, 1);
     Button copilotB = new JoystickButton(joystick, 2);
-
-    copilotA.whenPressed(new OpenClaw());
-    copilotB.whenPressed(new CloseClaw());
   }
 
   @Override
