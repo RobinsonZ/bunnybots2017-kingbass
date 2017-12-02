@@ -91,5 +91,5 @@ public class Tuning {
   @Tunable("Arm bounceback")
   public static double armBounceBack = 0.05;
   @Tunable("Arm end threshold")
-  public static double armEndThreshold;
+  public static double armEndThreshold = 0.05;
 }
