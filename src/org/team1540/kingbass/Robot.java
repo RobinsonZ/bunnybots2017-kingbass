@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team1540.base.adjustables.AdjustableManager;
+import org.team1540.kingbass.commands.arm.ZeroArmPosition;
 import org.team1540.kingbass.commands.auto.DriveForward;
+import org.team1540.kingbass.commands.claw.ZeroClawPosition;
 import org.team1540.kingbass.subsystems.Arm;
 import org.team1540.kingbass.subsystems.Claw;
 import org.team1540.kingbass.subsystems.Controller;
@@ -87,6 +89,8 @@ public class Robot extends IterativeRobot {
     chooser.addObject("Drive forward 2.5 sec", new DriveForward(2.5));
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData("Compressor", compressor);
+    SmartDashboard.putData(new ZeroClawPosition());
+    SmartDashboard.putData(new ZeroArmPosition());
   }
 
   @Override
