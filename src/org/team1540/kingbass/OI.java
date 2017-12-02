@@ -1,5 +1,6 @@
 package org.team1540.kingbass;
 
+import static org.team1540.kingbass.Tuning.clawEndPoint;
 import static org.team1540.kingbass.Tuning.clawLimit;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -10,7 +11,6 @@ import org.team1540.base.triggers.DPadButton;
 import org.team1540.kingbass.commands.auto.DriveToObject;
 import org.team1540.kingbass.commands.claw.MoveClawToPosition;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
-import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
 import org.team1540.kingbass.commands.intake.IntakeBunny;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
@@ -110,13 +110,13 @@ public class OI {
     // driverDPadLeft.whenPressed(new AutoShift());
 
     copilotRightBumper.whenPressed(new IntakeBunny());
-    driverRightTrigger.whenPressed(new ReverseDriveDirection());
+    //driverRightTrigger.whenPressed(new ReverseDriveDirection());
     driverLeftStick.whenPressed(new DriveToObject());
 
     copilotX.toggleWhenPressed(new IntakeIn());
     copilotY.toggleWhenPressed(new IntakeOut());
     copilotA.whenPressed(new MoveClawToPosition(clawLimit));
-    copilotB.whenPressed(new MoveClawToPosition(0));
+    copilotB.whenPressed(new MoveClawToPosition(clawEndPoint));
   }
 
   public static double getCopilotDPadX() {

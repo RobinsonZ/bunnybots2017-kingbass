@@ -37,9 +37,9 @@ public class Tuning {
   public static double clawD = 0.1;
   // drivetrain
   @Tunable("Left reverse output")
-  public static boolean lReverseOutput = false;
+  public static boolean lReverseOutput = true;
   @Tunable("Right reverse output")
-  public static boolean rReverseOutput = false;
+  public static boolean rReverseOutput = true;
   @Tunable("Left reverse sensor")
   public static boolean lReverseSensor = false;
   //@Tunable("Right reverse sensor")
@@ -97,6 +97,8 @@ public class Tuning {
   public static double clawMult = 0.01;
   @Tunable("Claw Limit")
   public static double clawLimit = 0.09;
+  @Tunable("Claw Grab Point")
+  public static double clawEndPoint = -0.03;
   @Tunable("Claw Bounce Back")
   public static double clawBounceBack = 0.005;
   @Tunable("Claw end threshold")

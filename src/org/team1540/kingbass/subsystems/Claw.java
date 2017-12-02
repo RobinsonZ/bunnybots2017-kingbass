@@ -7,6 +7,7 @@ import static org.team1540.kingbass.RobotInfo.L_CLAW;
 import static org.team1540.kingbass.RobotInfo.R_CLAW;
 import static org.team1540.kingbass.Tuning.clawBounceBack;
 import static org.team1540.kingbass.Tuning.clawD;
+import static org.team1540.kingbass.Tuning.clawEndPoint;
 import static org.team1540.kingbass.Tuning.clawI;
 import static org.team1540.kingbass.Tuning.clawP;
 
@@ -120,11 +121,9 @@ public class Claw extends Subsystem {
   }
 
   public double setPosition(double pos) {
-    boolean atLim = false;
     if (!clawIsCurrentLimited) {
-        atLim = pos >= clawLimit || pos < 0;
         pos = pos < clawLimit ? pos : clawLimit - clawBounceBack;
-        pos = pos >= 0 ? pos : 0 + clawBounceBack;
+      pos = pos >= clawEndPoint ? pos : clawEndPoint + clawBounceBack;
         setTalonsToPositionMode();
         left.set(pos);
         right.set(-pos);
