@@ -151,4 +151,9 @@ public class Claw extends Subsystem {
     left.changeControlMode(PercentVbus);
     right.changeControlMode(PercentVbus);
   }
+
+  public void updatePIDs() {
+    left.setPID(clawP, clawI, clawD);
+    right.setPID(clawP, clawI, clawD);
+  }
 }
