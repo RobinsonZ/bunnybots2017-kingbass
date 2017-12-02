@@ -115,8 +115,8 @@ public class OI {
 
     copilotX.toggleWhenPressed(new IntakeIn());
     copilotY.toggleWhenPressed(new IntakeOut());
-    copilotA.whileHeld(new OpenClaw());
-    copilotB.whileHeld(new CloseClaw());
+    copilotA.whenPressed(new OpenClaw());
+    copilotB.whenPressed(new CloseClaw());
   }
 
   public static double getCopilotDPadX() {
