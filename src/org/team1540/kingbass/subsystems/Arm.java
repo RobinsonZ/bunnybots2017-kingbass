@@ -6,6 +6,7 @@ import static com.ctre.CANTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.OI.ARM_AXIS;
 import static org.team1540.kingbass.OI.ARM_JOYSTICK;
 import static org.team1540.kingbass.RobotInfo.ARM_A;
+import static org.team1540.kingbass.RobotInfo.ARM_B;
 import static org.team1540.kingbass.Tuning.armD;
 import static org.team1540.kingbass.Tuning.armI;
 
@@ -42,7 +43,7 @@ public class Arm extends Subsystem {
 
   private boolean armIsCurrentLimited = false;
   private final CANTalon armA = new CANTalon(ARM_A);
-  private final CANTalon armB = new CANTalon(ARM_A);
+  private final CANTalon armB = new CANTalon(ARM_B);
   private final Object talonLock = new Object();
 
   /**
@@ -55,7 +56,7 @@ public class Arm extends Subsystem {
     armA.enableBrakeMode(true);
     armA.reverseOutput(true);
     armB.enableBrakeMode(true);
-    armB.reverseOutput(false);
+    armB.reverseOutput(true);
     armA.setP(Tuning.armP);
     armA.setI(armI);
     armA.setD(armD);

@@ -1,5 +1,11 @@
 package org.team1540.kingbass;
 
+import static org.team1540.base.Utilities.processAxisDeadzone;
+import static org.team1540.kingbass.OI.ARM_AXIS;
+import static org.team1540.kingbass.OI.copilot;
+import static org.team1540.kingbass.Tuning.armMult;
+import static org.team1540.kingbass.Tuning.deadzone;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -10,7 +16,7 @@ import org.team1540.kingbass.subsystems.Arm;
 public class ArmTestRobot extends IterativeRobot {
   private Arm arm;
   private JoystickButton button;
-
+  private double position = 0;
 
   @Override
   public void robotInit() {
@@ -35,7 +41,9 @@ public class ArmTestRobot extends IterativeRobot {
 
   @Override
   public void teleopPeriodic() {
-    arm.setPosition(SmartDashboard.getNumber("Position setpoint", arm.getPositionA()));
+    arm.setPosition(
+        position += processAxisDeadzone(copilot.getRawAxis(ARM_AXIS), deadzone) * armMult);
+    SmartDashboard.putNumber("Position setpoint", position);
     if (button.get()) {
       arm.setPosition(0);
     }
