@@ -5,6 +5,7 @@ import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
 import static com.ctre.CANTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.RobotInfo.L_CLAW;
 import static org.team1540.kingbass.RobotInfo.R_CLAW;
+import static org.team1540.kingbass.Tuning.clawBounceBack;
 import static org.team1540.kingbass.Tuning.clawD;
 import static org.team1540.kingbass.Tuning.clawI;
 import static org.team1540.kingbass.Tuning.clawP;
@@ -12,6 +13,7 @@ import static org.team1540.kingbass.Tuning.clawP;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.kingbass.Tuning;
 import org.team1540.lib.motionprofile.ProfileExecuter;
 
 /**
@@ -25,6 +27,9 @@ public class Claw extends Subsystem {
 
   private ProfileExecuter leftProfile;
   private ProfileExecuter rightProfile;
+  private boolean clawIsCurrentLimited = false;
+  private double clawLimit = Tuning.clawLimit;
+
 
   public Claw() {
     super();
@@ -114,10 +119,17 @@ public class Claw extends Subsystem {
     right.set(value);
   }
 
-  public void setPosition(double pos) {
-    setTalonsToPositionMode();
-    left.set(pos);
-    right.set(-pos);
+  public double setPosition(double pos) {
+    boolean atLim = false;
+    if (!clawIsCurrentLimited) {
+        atLim = pos >= clawLimit || pos < 0;
+        pos = pos < clawLimit ? pos : clawLimit - clawBounceBack;
+        pos = pos >= 0 ? pos : 0 + clawBounceBack;
+        setTalonsToPositionMode();
+        left.set(pos);
+        right.set(-pos);
+    }
+    return pos;
   }
 
   public double getPosition() {

@@ -99,4 +99,10 @@ public class Tuning {
   public static double openClawPos = 0.1;
   @Tunable("Close Claw Value")
   public static double closeClawPos = 0.0;
+  @Tunable("Claw Limit")
+  public static double clawLimit = 0.7;
+  @Tunable("Claw Bounce Back")
+  public static double clawBounceBack = 0.05;
+  @Tunable("Claw end threshold")
+  public static double clawEndThreshold = 0.05;
 }
