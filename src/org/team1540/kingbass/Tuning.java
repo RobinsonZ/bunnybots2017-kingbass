@@ -30,7 +30,7 @@ public class Tuning {
   public static double profileF = 7.795;
 
   @Tunable("Claw P")
-  public static double clawP = 0.1;
+  public static double clawP = 1;
   @Tunable("Claw I")
   public static double clawI = 0.00001;
   @Tunable("Claw D")
@@ -95,14 +95,10 @@ public class Tuning {
   public static double armEndThreshold = 0.05;
   @Tunable("Claw multiplier")
   public static double clawMult = 0.01;
-  @Tunable("Open Claw Value")
-  public static double openClawPos = 0.1;
-  @Tunable("Close Claw Value")
-  public static double closeClawPos = 0.0;
   @Tunable("Claw Limit")
-  public static double clawLimit = 0.7;
+  public static double clawLimit = 0.09;
   @Tunable("Claw Bounce Back")
-  public static double clawBounceBack = 0.05;
+  public static double clawBounceBack = 0.005;
   @Tunable("Claw end threshold")
-  public static double clawEndThreshold = 0.05;
+  public static double clawEndThreshold = 0.005;
 }
