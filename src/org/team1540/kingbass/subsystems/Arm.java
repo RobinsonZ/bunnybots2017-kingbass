@@ -7,8 +7,10 @@ import static org.team1540.kingbass.OI.ARM_AXIS;
 import static org.team1540.kingbass.OI.ARM_JOYSTICK;
 import static org.team1540.kingbass.RobotInfo.ARM_A;
 import static org.team1540.kingbass.RobotInfo.ARM_B;
+import static org.team1540.kingbass.Tuning.armBounceBack;
 import static org.team1540.kingbass.Tuning.armD;
 import static org.team1540.kingbass.Tuning.armI;
+import static org.team1540.kingbass.Tuning.armLimit;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -87,14 +89,18 @@ public class Arm extends Subsystem {
     }
   }
 
-  public void setPosition(double position) {
+  public double setPosition(double position) {
+    boolean atLim = false;
     if (!armIsCurrentLimited) {
       synchronized (talonLock) {
+        atLim = position >= armLimit || position < 0;
+        position = position < armLimit ? position : armLimit - armBounceBack;
+        position = position >= 0 ? position : 0 + armBounceBack;
         setTalonsToPositionMode();
-
         armA.set(position);
       }
     }
+    return position;
   }
 
   public void zeroPosition() {

@@ -86,4 +86,8 @@ public class Tuning {
   public static double armCurrLimThresh = 100;
   @Tunable("Arm multiplier")
   public static double armMult = 0.010;
+  @Tunable("Arm Limit")
+  public static double armLimit = 0.7;
+  @Tunable("Arm bounceback")
+  public static double armBounceBack = 0.05;
 }

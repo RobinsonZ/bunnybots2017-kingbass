@@ -11,6 +11,7 @@ import org.team1540.base.adjustables.AdjustableManager;
 import org.team1540.kingbass.commands.auto.DriveForward;
 import org.team1540.kingbass.subsystems.Arm;
 import org.team1540.kingbass.subsystems.Claw;
+import org.team1540.kingbass.subsystems.Controller;
 import org.team1540.kingbass.subsystems.DriveTrain;
 import org.team1540.kingbass.subsystems.Intake;
 import org.team1540.kingbass.subsystems.Shifters;
@@ -27,9 +28,11 @@ public class Robot extends IterativeRobot {
   public static DriveTrain driveTrain = new DriveTrain();
   public static Intake intake = new Intake();
   public static Shifters shifters = new Shifters();
+  public static Controller controller = new Controller();
 
   private Command autonomousCommand;
   private SendableChooser<Command> chooser = new SendableChooser<>();
+
 
   /**
    * This autonomous (along with the chooser code above) shows how to select between different
