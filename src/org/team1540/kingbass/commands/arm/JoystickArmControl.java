@@ -33,7 +33,7 @@ public class JoystickArmControl extends Command {
 
   @Override
   protected void initialize() {
-    position = arm.getPositionA();
+    position = arm.getPosition();
   }
 
   @Override

@@ -109,7 +109,7 @@ public class Arm extends Subsystem {
     }
   }
 
-  public double getPositionA() {
+  public double getPosition() {
     return armA.getPosition();
   }
 

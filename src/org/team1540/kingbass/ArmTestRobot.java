@@ -23,14 +23,14 @@ public class ArmTestRobot extends IterativeRobot {
     AdjustableManager.getInstance().add(new Tuning());
     arm = new Arm();
     button = new JoystickButton(new Joystick(0), 1);
-    SmartDashboard.putNumber("Position setpoint", arm.getPositionA());
+    SmartDashboard.putNumber("Position setpoint", arm.getPosition());
   }
 
   @Override
   public void robotPeriodic() {
     arm.updatePIDs();
     AdjustableManager.getInstance().update();
-    SmartDashboard.putNumber("A position", arm.getPositionA());
+    SmartDashboard.putNumber("A position", arm.getPosition());
     SmartDashboard.putNumber("A current", arm.getCurrentA());
     SmartDashboard.putNumber("B current", arm.getCurrentB());
     SmartDashboard.putBoolean("Current limited", arm.isCurrentLimited());
