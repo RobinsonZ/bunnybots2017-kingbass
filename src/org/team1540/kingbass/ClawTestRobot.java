@@ -1,28 +1,59 @@
 package org.team1540.kingbass;
 
+import static org.team1540.base.Utilities.processAxisDeadzone;
+import static org.team1540.kingbass.OI.ARM_AXIS;
+import static org.team1540.kingbass.OI.copilot;
+import static org.team1540.kingbass.Robot.claw;
+import static org.team1540.kingbass.Tuning.armMult;
+import static org.team1540.kingbass.Tuning.deadzone;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.team1540.kingbass.subsystems.Claw;
+import org.team1540.base.adjustables.AdjustableManager;
+import org.team1540.kingbass.commands.claw.CloseClaw;
+import org.team1540.kingbass.commands.claw.OpenClaw;
 
 public class ClawTestRobot extends IterativeRobot {
-
-  private Claw claw;
-  private JoystickButton aButton;
+  private JoystickButton button;
+  private double position = 0;
 
   @Override
   public void robotInit() {
-    claw = new Claw();
-    aButton = new JoystickButton(new Joystick(0), 1);
+    AdjustableManager.getInstance().add(new Tuning());
+    Joystick joystick = new Joystick(1);
+    button = new JoystickButton(joystick, 3);
+    SmartDashboard.putNumber("Position setpoint", claw.getPosition());
+
+    Button copilotA = new JoystickButton(joystick, 1);
+    Button copilotB = new JoystickButton(joystick, 2);
+
+    copilotA.whenPressed(new OpenClaw());
+    copilotB.whenPressed(new CloseClaw());
+  }
+
+  @Override
+  public void robotPeriodic() {
+    claw.updatePIDs();
+    AdjustableManager.getInstance().update();
+    SmartDashboard.putNumber("L Position", claw.getLeftPosition());
+    SmartDashboard.putNumber("R position", claw.getRightPosition());
+    if (button.get()) {
+      claw.zeroPosition();
+    }
+    Scheduler.getInstance().run();
   }
 
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("Left position", claw.getLeftPosition());
-    SmartDashboard.putNumber("Right position", claw.getRightPosition());
-    if (aButton.get()) {
-      claw.zeroPosition();
+    claw.setPosition(
+        position += processAxisDeadzone(copilot.getRawAxis(ARM_AXIS), deadzone) * armMult);
+    SmartDashboard.putNumber("Position setpoint", position);
+    if (button.get()) {
+      claw.setPosition(0);
     }
   }
 }
