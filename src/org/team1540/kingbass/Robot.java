@@ -1,6 +1,7 @@
 
 package org.team1540.kingbass;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -8,9 +9,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team1540.base.adjustables.AdjustableManager;
+import org.team1540.kingbass.commands.arm.ZeroArmPosition;
 import org.team1540.kingbass.commands.auto.DriveForward;
+import org.team1540.kingbass.commands.claw.ZeroClawPosition;
 import org.team1540.kingbass.subsystems.Arm;
 import org.team1540.kingbass.subsystems.Claw;
+import org.team1540.kingbass.subsystems.Controller;
 import org.team1540.kingbass.subsystems.DriveTrain;
 import org.team1540.kingbass.subsystems.Intake;
 import org.team1540.kingbass.subsystems.Shifters;
@@ -22,14 +26,17 @@ import org.team1540.kingbass.subsystems.Shifters;
  * resource directory.
  */
 public class Robot extends IterativeRobot {
+  public static Compressor compressor = new Compressor();
   public static Arm arm = new Arm();
   public static Claw claw = new Claw();
   public static DriveTrain driveTrain = new DriveTrain();
   public static Intake intake = new Intake();
   public static Shifters shifters = new Shifters();
+  public static Controller controller = new Controller();
 
   private Command autonomousCommand;
   private SendableChooser<Command> chooser = new SendableChooser<>();
+
 
   /**
    * This autonomous (along with the chooser code above) shows how to select between different
@@ -81,6 +88,9 @@ public class Robot extends IterativeRobot {
     chooser.addObject("Drive forward 5 sec", new DriveForward(5));
     chooser.addObject("Drive forward 2.5 sec", new DriveForward(2.5));
     SmartDashboard.putData("Auto mode", chooser);
+    SmartDashboard.putData("Compressor", compressor);
+    SmartDashboard.putData(new ZeroClawPosition());
+    SmartDashboard.putData(new ZeroArmPosition());
   }
 
   @Override

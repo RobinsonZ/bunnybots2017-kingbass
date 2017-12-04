@@ -7,7 +7,7 @@ import static org.team1540.kingbass.Tuning.profileI;
 import static org.team1540.kingbass.Tuning.profileP;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team1540.kingbass.motion.MotionProfileLoader;
+import org.team1540.lib.motionprofile.CSVProfileLoader;
 
 public class RunMotionProfile extends Command {
   boolean done;
@@ -37,8 +37,8 @@ public class RunMotionProfile extends Command {
     done = false;
     driveTrain.setPID(profileP, profileI, profileD, profileF);
 
-    driveTrain.setMp(MotionProfileLoader.loadFromCSV(profile + "_left"),
-        MotionProfileLoader.loadFromCSV(profile + "_left"));
+    driveTrain.setMp(CSVProfileLoader.loadFromCSV(profile + "_left"),
+        CSVProfileLoader.loadFromCSV(profile + "_left"));
 
     driveTrain.startMp();
   }

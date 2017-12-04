@@ -19,7 +19,7 @@ import static org.team1540.kingbass.Tuning.rReverseSensor;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
-import org.team1540.kingbass.motion.MotionProfile;
+import org.team1540.lib.motionprofile.ProfileExecuter;
 
 /**
  * 6-cim drive train.
@@ -41,8 +41,8 @@ public class DriveTrain extends Subsystem {
   private CANTalon[] lSlaves = {lSlaveA, lSlaveB};
   private CANTalon[] rSlaves = {rSlaveA, rSlaveB};
 
-  private MotionProfile leftProfile;
-  private MotionProfile rightProfile;
+  private ProfileExecuter leftProfile;
+  private ProfileExecuter rightProfile;
 
   private int driveDirection = 1;
 
@@ -53,6 +53,7 @@ public class DriveTrain extends Subsystem {
     }
     for (CANTalon c : mains) {
       c.setFeedbackDevice(QuadEncoder);
+      c.configEncoderCodesPerRev(1024);
       c.setProfile(0);
     }
 
@@ -66,6 +67,7 @@ public class DriveTrain extends Subsystem {
     rMain.changeMotionControlFramePeriod(5);
   }
 
+  @SuppressWarnings("Duplicates")
   public boolean controlMp() {
     if (leftProfile != null && rightProfile != null) {
       boolean done = leftProfile.control();
@@ -119,8 +121,8 @@ public class DriveTrain extends Subsystem {
   }
 
   public void setMp(double[][] left, double[][] right) {
-    leftProfile = new MotionProfile(lMain, left, left.length);
-    rightProfile = new MotionProfile(rMain, right, right.length);
+    leftProfile = new ProfileExecuter(lMain, left, left.length);
+    rightProfile = new ProfileExecuter(rMain, right, right.length);
   }
 
   public void setPID(double p, double i, double d, double f) {
@@ -162,6 +164,7 @@ public class DriveTrain extends Subsystem {
     setRightMotors(0);
   }
 
+  @SuppressWarnings("Duplicates")
   public void stopMp() {
     if (leftProfile != null && rightProfile != null) {
       leftProfile.reset();

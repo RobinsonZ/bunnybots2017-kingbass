@@ -52,28 +52,27 @@ public class RobotInfo {
   /**
    * Intake drive motor.
    */
-  public static final int INTAKE_A = 7;
-  public static final int INTAKE_B = 8;
+  public static final int INTAKE_A = 11;
 
   // arm
   /**
    * Arm motor with encoder.
    */
-  public static final int ARM_A = 8;
+  public static final int ARM_A = 7;
   /**
    * Arm motor without encoder.
    */
-  public static final int ARM_B = 9;
+  public static final int ARM_B = 8;
 
   // claw
   /**
    * Motor for the left claw finger.
    */
-  public static final int L_CLAW = 10;
+  public static final int L_CLAW = 9;
   /**
    * Motor for the right claw finger.
    */
-  public static final int R_CLAW = 11;
+  public static final int R_CLAW = 10;
 
 
   // pneumatics
@@ -81,11 +80,11 @@ public class RobotInfo {
   /**
    * Shifter for the left gearbox.
    */
-  public static final int L_SHIFTER = 1;
+  public static final int L_SHIFTER = 0;
   /**
    * Shifter for the right gearbox.
    */
-  public static final int R_SHIFTER = 2;
+  public static final int R_SHIFTER = 1;
   public static final int CAMERA_CENTER_X = 320;
   public static final int CAMERA_CENTER_Y = 240;
 }
