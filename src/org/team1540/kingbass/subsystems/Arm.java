@@ -1,15 +1,22 @@
 package org.team1540.kingbass.subsystems;
 
 import static com.ctre.CANTalon.TalonControlMode.Follower;
+import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
+import static com.ctre.CANTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.OI.ARM_AXIS;
-import static org.team1540.kingbass.OI.ARM_AXIS_2;
 import static org.team1540.kingbass.OI.ARM_JOYSTICK;
 import static org.team1540.kingbass.RobotInfo.ARM_A;
-import static org.team1540.kingbass.Tuning.armSpeed;
+import static org.team1540.kingbass.RobotInfo.ARM_B;
+import static org.team1540.kingbass.Tuning.armBounceBack;
+import static org.team1540.kingbass.Tuning.armD;
+import static org.team1540.kingbass.Tuning.armI;
+import static org.team1540.kingbass.Tuning.armLimit;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.Notifier;
 import org.team1540.base.ChickenSubsystem;
-import org.team1540.kingbass.OI;
+import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.commands.arm.JoystickArmControl;
 
 /**
@@ -18,31 +25,44 @@ import org.team1540.kingbass.commands.arm.JoystickArmControl;
  * @author Zachary Robinson
  */
 public class Arm extends ChickenSubsystem {
-  private CANTalon armA = new CANTalon(ARM_A);
-  private CANTalon armB = new CANTalon(ARM_A);
+  private Notifier powerLimiterNotifier = new Notifier(new Runnable() {
+    @Override
+    public void run() {
+      armIsCurrentLimited = armA.getOutputCurrent() > Tuning.armCurrLimThresh
+          || armB.getOutputCurrent() > Tuning.armCurrLimThresh;
+      if (armIsCurrentLimited) {
+        // This is synchronized so we don't have, for example, the arm's control mode being set to
+        // vbus and then getting passed a value from setPos()
+        synchronized (talonLock) {
+          armA.changeControlMode(PercentVbus);
+          armA.set(0);
+          armB.changeControlMode(PercentVbus);
+          armB.set(0);
+        }
+      }
+    }
+  });
+
+  private boolean armIsCurrentLimited = false;
+  private final CANTalon armA = new CANTalon(ARM_A);
+  private final CANTalon armB = new CANTalon(ARM_B);
+  private final Object talonLock = new Object();
 
   /**
    * Constructs an {@link Arm}.
    */
   public Arm() {
-    armB.changeControlMode(Follower);
-    armB.set(armA.getDeviceID());
+    super();
+    armA.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    armA.configEncoderCodesPerRev(1024);
     armA.enableBrakeMode(true);
+    armA.reverseOutput(true);
     armB.enableBrakeMode(true);
-  }
-
-  /**
-   * Lowers the arm at the speed set by {@code Tuning.ARM_SPEED}.
-   */
-  public void lowerArm() {
-    armA.set(armSpeed);
-  }
-
-  /**
-   * Raises the arm at the speed set by {@code Tuning.ARM_SPEED}.
-   */
-  public void raiseArm() {
-    armB.set(armSpeed);
+    armB.reverseOutput(true);
+    armA.setP(Tuning.armP);
+    armA.setI(armI);
+    armA.setD(armD);
+    powerLimiterNotifier.startPeriodic(0.05);
   }
 
   /**
@@ -51,23 +71,66 @@ public class Arm extends ChickenSubsystem {
    * @param setPoint The speed of the arm motors, from -1 to 1 inclusive.
    */
   public void setArm(double setPoint) {
-    armA.set(setPoint);
+    if (!armIsCurrentLimited) {
+      synchronized (talonLock) {
+        setTalonsToVbusMode();
+        armA.set(setPoint);
+      }
+    }
   }
 
   /**
    * Stops the arm.
    */
   public void stopArm() {
-    armA.set(0);
+    synchronized (talonLock) {
+      setTalonsToVbusMode();
+      armA.set(0);
+    }
+  }
+
+  public double setPosition(double position) {
+    boolean atLim = false;
+    if (!armIsCurrentLimited) {
+      synchronized (talonLock) {
+        atLim = position >= armLimit || position < 0;
+        position = position < armLimit ? position : armLimit - armBounceBack;
+        position = position >= 0 ? position : 0 + armBounceBack;
+        setTalonsToPositionMode();
+        armA.set(position);
+      }
+    }
+    return position;
+  }
+
+  public void zeroPosition() {
+    synchronized (talonLock) {
+      armA.setPosition(0);
+    }
+  }
+
+  public double getPosition() {
+    return armA.getPosition();
+  }
+
+  public double getCurrentA() {
+    return armA.getOutputCurrent();
+  }
+
+  public double getCurrentB() {
+    return armB.getOutputCurrent();
   }
 
   @Override
   protected void initDefaultCommand() {
-    if (OI.TRIGGERS) {
-      setDefaultCommand(new JoystickArmControl(ARM_JOYSTICK, ARM_AXIS));
-    } else {
-      setDefaultCommand(new JoystickArmControl(ARM_JOYSTICK, ARM_AXIS, ARM_AXIS_2));
-    }
+    setDefaultCommand(new JoystickArmControl(ARM_JOYSTICK, ARM_AXIS));
+  }
+
+  // Following two methods should only be called in a "synchronized (talonLock) {}" block.
+  private void setTalonsToVbusMode() {
+    armA.changeControlMode(PercentVbus);
+    armB.changeControlMode(Follower);
+    armB.set(armA.getDeviceID());
   }
 
   @Override
@@ -88,5 +151,19 @@ public class Arm extends ChickenSubsystem {
   public void stopLimitingPower() {
     armA.EnableCurrentLimit(false);
     armB.EnableCurrentLimit(false);
+  }
+
+  private void setTalonsToPositionMode() {
+    armA.changeControlMode(Position);
+    armB.changeControlMode(Follower);
+    armB.set(armA.getDeviceID());
+  }
+
+  public boolean isCurrentLimited() {
+    return armIsCurrentLimited;
+  }
+
+  public void updatePIDs() {
+    armA.setPID(Tuning.armP, armI, armD);
   }
 }
