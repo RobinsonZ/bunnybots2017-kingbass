@@ -6,20 +6,22 @@ import static org.team1540.kingbass.Robot.arm;
 import static org.team1540.kingbass.Tuning.armEndThreshold;
 import static org.team1540.kingbass.Tuning.armMult;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.base.ChickenCommand;
 
-public class MoveArmToPosition extends Command {
+public class MoveArmToPosition extends ChickenCommand {
   private double endPosition;
   private double position;
 
 
   public MoveArmToPosition(double endPosition) {
-    requires(arm);
+    addRequirement(arm);
+    setPriority(2.5);
     this.endPosition = endPosition;
   }
 
   @Override
   protected void initialize() {
+    super.initialize();
     position = arm.getPosition();
   }
 

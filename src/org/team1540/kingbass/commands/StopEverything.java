@@ -19,6 +19,7 @@ public class StopEverything extends ChickenCommand {
 
   @Override
   protected void initialize() {
+    super.initialize();
     arm.stopArm();
     claw.stop();
     driveTrain.setLeftMotors(0);

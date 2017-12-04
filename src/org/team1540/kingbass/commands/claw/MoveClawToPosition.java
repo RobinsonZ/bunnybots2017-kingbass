@@ -5,21 +5,22 @@ import static java.lang.Math.signum;
 import static org.team1540.kingbass.Robot.claw;
 import static org.team1540.kingbass.Tuning.clawMult;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.team1540.base.ChickenCommand;
 import org.team1540.kingbass.Tuning;
 
-public class MoveClawToPosition extends Command {
+public class MoveClawToPosition extends ChickenCommand {
   private double endPosition;
   private double position;
 
-
   public MoveClawToPosition(double endPosition) {
-    requires(claw);
+    addRequirement(claw);
+    setPriority(2.5);
     this.endPosition = endPosition;
   }
 
   @Override
   protected void initialize() {
+    super.initialize();
     position = claw.getPosition();
   }
 
