@@ -52,6 +52,7 @@ public class DriveTrain extends Subsystem {
     }
     for (CANTalon c : mains) {
       c.setFeedbackDevice(QuadEncoder);
+      c.configEncoderCodesPerRev(1024);
       c.setProfile(0);
     }
 
@@ -65,6 +66,7 @@ public class DriveTrain extends Subsystem {
     rMain.changeMotionControlFramePeriod(5);
   }
 
+  @SuppressWarnings("Duplicates")
   public boolean controlMp() {
     if (leftProfile != null && rightProfile != null) {
       boolean done = leftProfile.control();
@@ -151,6 +153,7 @@ public class DriveTrain extends Subsystem {
     setRightMotors(0);
   }
 
+  @SuppressWarnings("Duplicates")
   public void stopMp() {
     if (leftProfile != null && rightProfile != null) {
       leftProfile.reset();

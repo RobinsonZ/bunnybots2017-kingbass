@@ -24,3 +24,10 @@ hs_err_pid*
 bin/
 build/
 dist/
+
+# IntelliJ
+.gradle/
+.idea/
+*.ipr
+*.iws
+*.iml

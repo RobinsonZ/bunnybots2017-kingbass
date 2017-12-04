@@ -1,15 +1,17 @@
 package org.team1540.kingbass;
 
+import static org.team1540.kingbass.Tuning.clawEndPoint;
+import static org.team1540.kingbass.Tuning.clawLimit;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.team1540.base.triggers.AxisButton;
 import org.team1540.base.triggers.DPadButton;
-import org.team1540.kingbass.commands.claw.CloseClaw;
-import org.team1540.kingbass.commands.claw.OpenClaw;
-import org.team1540.kingbass.commands.drivetrain.AdvancedDrive;
+import org.team1540.kingbass.commands.auto.DriveToObject;
+import org.team1540.kingbass.commands.claw.MoveClawToPosition;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
-import org.team1540.kingbass.commands.drivetrain.ReverseDriveDirection;
+import org.team1540.kingbass.commands.intake.IntakeBunny;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
 import org.team1540.kingbass.commands.shifters.ManualShiftDown;
@@ -24,11 +26,11 @@ public class OI {
   /**
    * Joystick used by the driver.
    */
-  private static final Joystick driver = new Joystick(0);
+  public static final Joystick driver = new Joystick(0);
   /**
    * Joystick used by the copilot.
    */
-  private static final Joystick copilot = new Joystick(1);
+  public static final Joystick copilot = new Joystick(1);
 
   // Axes
   private static final int RIGHT_AXIS_Y = 5;
@@ -103,16 +105,18 @@ public class OI {
     driverLeftBumper.whenPressed(new ManualShiftDown());
 
     driverRightTrigger.whenPressed(new JoystickDrive());
-    driverRightTrigger.whenReleased(AdvancedDrive.getInstance());
+    //driverRightTrigger.whenReleased(AdvancedDrive.getInstance());
 
     // driverDPadLeft.whenPressed(new AutoShift());
 
-    driverLeftStick.whenPressed(new ReverseDriveDirection());
+    copilotRightBumper.whenPressed(new IntakeBunny());
+    //driverRightTrigger.whenPressed(new ReverseDriveDirection());
+    driverLeftStick.whenPressed(new DriveToObject());
 
-    copilotRightBumper.whileHeld(new CloseClaw());
-    copilotLeftBumper.whileHeld(new OpenClaw());
-    copilotB.toggleWhenPressed(new IntakeIn());
+    copilotX.toggleWhenPressed(new IntakeIn());
     copilotY.toggleWhenPressed(new IntakeOut());
+    copilotA.whenPressed(new MoveClawToPosition(clawLimit));
+    copilotB.whenPressed(new MoveClawToPosition(clawEndPoint));
   }
 
   public static double getCopilotDPadX() {
@@ -156,31 +160,4 @@ public class OI {
     return driver.getRawAxis(RIGHT_TRIGGER);
   }
 
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
-
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
-
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
 }

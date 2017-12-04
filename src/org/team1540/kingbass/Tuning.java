@@ -29,7 +29,12 @@ public class Tuning {
   @Tunable("Profile F")
   public static double profileF = 7.795;
 
-
+  @Tunable("Claw P")
+  public static double clawP = 1;
+  @Tunable("Claw I")
+  public static double clawI = 0.00001;
+  @Tunable("Claw D")
+  public static double clawD = 0.1;
   // drivetrain
   @Tunable("Left reverse output")
   public static boolean lReverseOutput = false;
@@ -37,26 +42,16 @@ public class Tuning {
   public static boolean rReverseOutput = false;
   @Tunable("Left reverse sensor")
   public static boolean lReverseSensor = false;
-  @Tunable("Right reverse sensor")
+  //@Tunable("Right reverse sensor")
   public static boolean rReverseSensor = false;
+  //@Tunable("Intake timeout")
+  public static double intakeTimeout = 5;
   // Arm
   /**
    * Motor set point (out of 1) for moving the arm up and down.
    */
   @Tunable("Arm set point")
   public static double armSpeed = 1;
-
-  // Autoshifting
-  /**
-   * The level of acceptable deviation between expected speed (as given by the motor throttle) and
-   * actual speed (as given by the wheel encoders) before the shifter will shift down.
-   */
-  public static double autoShiftDeviationThreshold = 0.1;
-
-  /**
-   * The time, in ticks (about 20ms), between the autoshifter changing gears.
-   */
-  public static int autoshiftCooldown = 5;
 
   // claw
   public static double openClawTime = 1;
@@ -67,8 +62,11 @@ public class Tuning {
   /**
    * Motor set point (out of 1) for running the intake in and out.
    */
-  @Tunable("Intake setpoint")
-  public static double intakeSetPoint = 1;
+  //@Tunable("Intake setpoint")
+  public static double intakeSetPoint = 0.5;
+
+  @Tunable("Intake stop threshold")
+  public static double intakeStopThresh = 7.5;
 
   // Input
   /**
@@ -76,4 +74,33 @@ public class Tuning {
    */
   @Tunable("Deadzone")
   public static double deadzone = 0.1;
+  //@Tunable("Intake min time")
+  public static double intakeMinTime = 1;
+  @Tunable("Arm P")
+  public static double armP = 1;
+  @Tunable("Arm I")
+  public static double armI = 0;
+  @Tunable("Arm D")
+  public static double armD = 1;
+  // Stall current for a 775pro is 134A so this should be sufficient
+  @Tunable("Arm current limit threshold")
+  public static double armCurrLimThresh = 100;
+  @Tunable("Arm multiplier")
+  public static double armMult = 0.010;
+  @Tunable("Arm Limit")
+  public static double armLimit = 0.7;
+  @Tunable("Arm bounceback")
+  public static double armBounceBack = 0.05;
+  @Tunable("Arm end threshold")
+  public static double armEndThreshold = 0.05;
+  @Tunable("Claw multiplier")
+  public static double clawMult = 0.01;
+  @Tunable("Claw Limit")
+  public static double clawLimit = 0.09;
+  @Tunable("Claw Grab Point")
+  public static double clawEndPoint = -0.03;
+  @Tunable("Claw Bounce Back")
+  public static double clawBounceBack = 0.005;
+  @Tunable("Claw end threshold")
+  public static double clawEndThreshold = 0.005;
 }
