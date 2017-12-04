@@ -18,7 +18,7 @@ import org.team1540.kingbass.commands.controller.VibrateController;
 public class JoystickArmControl extends Command {
   private Joystick stick;
   private int axis;
-  private double position = 0;
+  private double position = arm.getPosition();
   private VibrateController vibrateControllerCommand = new VibrateController(0.25, copilot);
 
   /**

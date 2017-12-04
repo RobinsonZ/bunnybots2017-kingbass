@@ -14,5 +14,5 @@ Team 1540K (Kingbass) robot code for the 2017 BunnyBots game Hide and Seek. (Rul
 * A button: Grab bunny
 * B button: Toggle intake in
 * Y button: Toggle intake out
-* LB: Open claw
-* RB: Close claw
+* LT: Open claw
+* RT: Close claw

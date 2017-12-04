@@ -30,16 +30,16 @@ public class Tuning {
   public static double profileF = 7.795;
 
   @Tunable("Claw P")
-  public static double clawP = 0.1;
+  public static double clawP = 1;
   @Tunable("Claw I")
   public static double clawI = 0.00001;
   @Tunable("Claw D")
   public static double clawD = 0.1;
   // drivetrain
   @Tunable("Left reverse output")
-  public static boolean lReverseOutput = true;
+  public static boolean lReverseOutput = false;
   @Tunable("Right reverse output")
-  public static boolean rReverseOutput = true;
+  public static boolean rReverseOutput = false;
   @Tunable("Left reverse sensor")
   public static boolean lReverseSensor = false;
   //@Tunable("Right reverse sensor")
@@ -64,10 +64,9 @@ public class Tuning {
    */
   //@Tunable("Intake setpoint")
   public static double intakeSetPoint = 0.5;
-  
+
   @Tunable("Intake stop threshold")
   public static double intakeStopThresh = 7.5;
-
 
   // Input
   /**
@@ -94,4 +93,14 @@ public class Tuning {
   public static double armBounceBack = 0.05;
   @Tunable("Arm end threshold")
   public static double armEndThreshold = 0.05;
+  @Tunable("Claw multiplier")
+  public static double clawMult = 0.01;
+  @Tunable("Claw Limit")
+  public static double clawLimit = 0.09;
+  @Tunable("Claw Grab Point")
+  public static double clawEndPoint = -0.03;
+  @Tunable("Claw Bounce Back")
+  public static double clawBounceBack = 0.005;
+  @Tunable("Claw end threshold")
+  public static double clawEndThreshold = 0.005;
 }
