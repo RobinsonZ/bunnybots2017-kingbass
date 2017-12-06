@@ -13,6 +13,7 @@ import org.team1540.kingbass.commands.claw.MoveClawToPosition;
 import org.team1540.kingbass.commands.intake.IntakeBunny;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
+import org.team1540.kingbass.commands.intake.OutputBunny;
 import org.team1540.kingbass.commands.shifters.ManualShiftDown;
 import org.team1540.kingbass.commands.shifters.ManualShiftUp;
 
@@ -104,14 +105,14 @@ public class OI {
     driverLeftBumper.whenPressed(new ManualShiftDown());
 
     // driverDPadLeft.whenPressed(new AutoShift());
-
+    copilotLeftBumper.whenPressed(new OutputBunny());
     copilotRightBumper.whenPressed(new IntakeBunny());
     driverLeftStick.whenPressed(new DriveToObject());
 
-    copilotX.toggleWhenPressed(new IntakeIn());
-    copilotY.toggleWhenPressed(new IntakeOut());
-    copilotA.whenPressed(new MoveClawToPosition(clawLimit));
-    copilotB.whenPressed(new MoveClawToPosition(clawEndPoint));
+    copilotX.whileHeld(new IntakeIn());
+    copilotY.whileHeld(new IntakeOut());
+    copilotA.whenPressed(new MoveClawToPosition(clawLimit)); //Opens claw
+    copilotB.whenPressed(new MoveClawToPosition(clawEndPoint)); //Closes claw
   }
 
   public static double getCopilotDPadX() {
