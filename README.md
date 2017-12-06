@@ -18,7 +18,7 @@ Team 1540K (Kingbass) robot code for the 2017 BunnyBots game Hide and Seek. (Rul
 * Right stick Y: Raise/lower arm
 * D-pad up: Move arm to upper limit (dump bucket)
 * D-pad down: Move arm to flat position
-* D-pad left: Grab bunny (close claw, move arm slightly up but don't dump it out)
+* D-pad left: Grab bucket (close claw, move arm slightly up but don't dump it out)
 
 #### Intake
 * X button: Run intake in (while held)
