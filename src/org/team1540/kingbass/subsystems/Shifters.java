@@ -19,16 +19,16 @@ public class Shifters extends Subsystem {
    * Shifts to low gear.
    */
   public void shiftDown() {
-    left.set(true);
-    right.set(false);
+    left.set(false);
+    right.set(true);
   }
 
   /**
    * Shifts to high gear.
    */
   public void shiftUp() {
-    left.set(false);
-    right.set(true);
+    left.set(true);
+    right.set(false);
   }
 
   @Override
