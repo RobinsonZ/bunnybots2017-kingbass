@@ -11,7 +11,6 @@ import org.team1540.base.triggers.DPadButton;
 import org.team1540.kingbass.commands.arm.MoveArmToPosition;
 import org.team1540.kingbass.commands.auto.DriveToObject;
 import org.team1540.kingbass.commands.claw.MoveClawToPosition;
-import org.team1540.kingbass.commands.groups.GrabBucket;
 import org.team1540.kingbass.commands.intake.IntakeBunny;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
@@ -109,7 +108,7 @@ public class OI {
     // driverDPadLeft.whenPressed(new AutoShift());
     copilotDPadDown.whenPressed(new MoveArmToPosition(0));
     copilotDPadUp.whenPressed(new MoveArmToPosition(Tuning.armLimit - .05));
-    copilotDPadLeft.whenPressed(new GrabBucket());
+    //copilotDPadLeft.whenPressed(new GrabBucket());
     copilotLeftBumper.whenPressed(new OutputBunny());
     copilotRightBumper.whenPressed(new IntakeBunny());
     driverLeftStick.whenPressed(new DriveToObject());
