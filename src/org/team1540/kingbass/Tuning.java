@@ -103,4 +103,8 @@ public class Tuning {
   public static double clawBounceBack = 0.005;
   @Tunable("Claw end threshold")
   public static double clawEndThreshold = 0.005;
+  @Tunable("Output Bunny Time")
+  public static double outputBunnyTime = .5;
+  @Tunable("Grab Bucket Claw Position")
+  public static double grabBucketPosition = .3;
 }

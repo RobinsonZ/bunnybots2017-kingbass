@@ -2,7 +2,9 @@ package org.team1540.kingbass.commands.drivetrain;
 
 import static org.team1540.base.Utilities.processAxisDeadzone;
 import static org.team1540.kingbass.OI.getDriveLeftJoystick;
+import static org.team1540.kingbass.OI.getDriveLeftTrigger;
 import static org.team1540.kingbass.OI.getDriveRightJoystick;
+import static org.team1540.kingbass.OI.getDriveRightTrigger;
 import static org.team1540.kingbass.Robot.driveTrain;
 import static org.team1540.kingbass.Tuning.deadzone;
 
@@ -14,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Zachary Robinson
  */
 public class JoystickDrive extends Command {
+
   public JoystickDrive() {
     super("Drive with joysticks");
     requires(driveTrain);
@@ -21,11 +24,14 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    // Don't ask
-    driveTrain.setRightMotors(-processAxisDeadzone(getDriveRightJoystick(),
-        deadzone));
-    driveTrain.setLeftMotors(-processAxisDeadzone(getDriveLeftJoystick(),
-        deadzone));
+    double triggerInput = getDriveRightTrigger() + getDriveLeftTrigger();
+
+    double left = -processAxisDeadzone(getDriveLeftJoystick(),
+        deadzone);
+    driveTrain.setLeftMotors(left + triggerInput);
+    double right = processAxisDeadzone(-getDriveRightJoystick(),
+        deadzone);
+    driveTrain.setRightMotors(right + triggerInput);
   }
 
   @Override

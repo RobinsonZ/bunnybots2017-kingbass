@@ -8,12 +8,13 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.team1540.base.triggers.AxisButton;
 import org.team1540.base.triggers.DPadButton;
+import org.team1540.kingbass.commands.arm.MoveArmToPosition;
 import org.team1540.kingbass.commands.auto.DriveToObject;
 import org.team1540.kingbass.commands.claw.MoveClawToPosition;
-import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
 import org.team1540.kingbass.commands.intake.IntakeBunny;
 import org.team1540.kingbass.commands.intake.IntakeIn;
 import org.team1540.kingbass.commands.intake.IntakeOut;
+import org.team1540.kingbass.commands.intake.OutputBunny;
 import org.team1540.kingbass.commands.shifters.ManualShiftDown;
 import org.team1540.kingbass.commands.shifters.ManualShiftUp;
 
@@ -104,19 +105,18 @@ public class OI {
     driverRightBumper.whenPressed(new ManualShiftUp());
     driverLeftBumper.whenPressed(new ManualShiftDown());
 
-    driverRightTrigger.whenPressed(new JoystickDrive());
-    //driverRightTrigger.whenReleased(AdvancedDrive.getInstance());
-
     // driverDPadLeft.whenPressed(new AutoShift());
-
+    copilotDPadDown.whenPressed(new MoveArmToPosition(0));
+    copilotDPadUp.whenPressed(new MoveArmToPosition(Tuning.armLimit - .05));
+    //copilotDPadLeft.whenPressed(new GrabBucket());
+    copilotLeftBumper.whenPressed(new OutputBunny());
     copilotRightBumper.whenPressed(new IntakeBunny());
-    //driverRightTrigger.whenPressed(new ReverseDriveDirection());
     driverLeftStick.whenPressed(new DriveToObject());
 
-    copilotX.toggleWhenPressed(new IntakeIn());
-    copilotY.toggleWhenPressed(new IntakeOut());
-    copilotA.whenPressed(new MoveClawToPosition(clawLimit));
-    copilotB.whenPressed(new MoveClawToPosition(clawEndPoint));
+    copilotX.whileHeld(new IntakeIn());
+    copilotY.whileHeld(new IntakeOut());
+    copilotA.whenPressed(new MoveClawToPosition(clawLimit)); //Opens claw
+    copilotB.whenPressed(new MoveClawToPosition(clawEndPoint)); //Closes claw
   }
 
   public static double getCopilotDPadX() {
