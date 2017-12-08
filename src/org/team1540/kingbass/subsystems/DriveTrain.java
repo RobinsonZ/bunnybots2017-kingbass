@@ -11,11 +11,11 @@ import static org.team1540.kingbass.RobotInfo.L_SLAVE_B;
 import static org.team1540.kingbass.RobotInfo.R_MASTER;
 import static org.team1540.kingbass.RobotInfo.R_SLAVE_A;
 import static org.team1540.kingbass.RobotInfo.R_SLAVE_B;
+import static org.team1540.kingbass.Tuning.driveD;
+import static org.team1540.kingbass.Tuning.driveI;
+import static org.team1540.kingbass.Tuning.driveP;
 import static org.team1540.kingbass.Tuning.lReverseOutput;
 import static org.team1540.kingbass.Tuning.lReverseSensor;
-import static org.team1540.kingbass.Tuning.profileD;
-import static org.team1540.kingbass.Tuning.profileI;
-import static org.team1540.kingbass.Tuning.profileP;
 import static org.team1540.kingbass.Tuning.rReverseOutput;
 import static org.team1540.kingbass.Tuning.rReverseSensor;
 
@@ -131,8 +131,8 @@ public class DriveTrain extends Subsystem {
   }
 
   public void updatePIDs() {
-    lMain.setPID(profileP, profileI, profileD);
-    rMain.setPID(profileP, profileI, profileD);
+    lMain.setPID(driveP, driveI, driveD);
+    rMain.setPID(driveP, driveI, driveD);
   }
 
   public void setPID(double p, double i, double d, double f) {

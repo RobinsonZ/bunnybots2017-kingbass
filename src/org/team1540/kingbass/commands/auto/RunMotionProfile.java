@@ -1,10 +1,10 @@
 package org.team1540.kingbass.commands.auto;
 
 import static org.team1540.kingbass.Robot.driveTrain;
-import static org.team1540.kingbass.Tuning.profileD;
+import static org.team1540.kingbass.Tuning.driveD;
+import static org.team1540.kingbass.Tuning.driveI;
+import static org.team1540.kingbass.Tuning.driveP;
 import static org.team1540.kingbass.Tuning.profileF;
-import static org.team1540.kingbass.Tuning.profileI;
-import static org.team1540.kingbass.Tuning.profileP;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.team1540.lib.motionprofile.CSVProfileLoader;
@@ -35,7 +35,7 @@ public class RunMotionProfile extends Command {
   @Override
   protected void initialize() {
     done = false;
-    driveTrain.setPID(profileP, profileI, profileD, profileF);
+    driveTrain.setPID(driveP, driveI, driveD, profileF);
 
     driveTrain.setMp(CSVProfileLoader.loadFromCSV(profile + "_left"),
         CSVProfileLoader.loadFromCSV(profile + "_left"));

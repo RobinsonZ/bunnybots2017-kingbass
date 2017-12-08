@@ -18,15 +18,15 @@ public class Tuning {
   //@Tunable("Velocity History Size")
   public static int velHistorySize = 5;
 
-  // motion profiling
-  //values should be changed, these are just copied from henny's code
-  //@Tunable("Profile P")
-  public static double profileP = 0.1;
-  //@Tunable("Profile I")
-  public static double profileI = 0.00001;
-  //@Tunable("Profile D")
-  public static double profileD = 0.1;
-  //@Tunable("Profile F")
+  //TODO: Tune
+  @Tunable("Drive P")
+  public static double driveP = 0.1;
+  @Tunable("Drive I")
+  public static double driveI = 0.00001;
+  @Tunable("Drive D")
+  public static double driveD = 0.1;
+
+  @Tunable("Profile F")
   public static double profileF = 7.795;
 
   @Tunable("Claw P")
