@@ -95,6 +95,10 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Arm Position", arm.getPosition());
+    SmartDashboard.putNumber("Arm A Current", arm.getCurrentA());
+    SmartDashboard.putNumber("Arm B Current", arm.getCurrentB());
+    arm.updatePIDs();
     AdjustableManager.getInstance().update();
   }
 
