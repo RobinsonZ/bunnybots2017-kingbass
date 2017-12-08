@@ -47,6 +47,7 @@ public class Arm extends Subsystem {
   private final CANTalon armA = new CANTalon(ARM_A);
   private final CANTalon armB = new CANTalon(ARM_B);
   private final Object talonLock = new Object();
+  private boolean useLimits = true;
 
   /**
    * Constructs an {@link Arm}.
@@ -93,9 +94,10 @@ public class Arm extends Subsystem {
     boolean atLim = false;
     if (!armIsCurrentLimited) {
       synchronized (talonLock) {
-        atLim = position >= armLimit || position < 0;
-        position = position < armLimit ? position : armLimit - armBounceBack;
-        position = position >= 0 ? position : 0 + armBounceBack;
+        if (useLimits) {
+          position = position < armLimit ? position : armLimit - armBounceBack;
+          position = position >= 0 ? position : 0 + armBounceBack;
+        }
         setTalonsToPositionMode();
         armA.set(position);
       }
@@ -145,5 +147,9 @@ public class Arm extends Subsystem {
 
   public void updatePIDs() {
     armA.setPID(Tuning.armP, armI, armD);
+  }
+
+  public void setUseLimits(boolean useLimits) {
+    this.useLimits = useLimits;
   }
 }

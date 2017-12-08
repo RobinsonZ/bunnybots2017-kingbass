@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team1540.base.adjustables.AdjustableManager;
+import org.team1540.kingbass.commands.arm.DisableArmLimits;
 import org.team1540.kingbass.commands.arm.ZeroArmPosition;
 import org.team1540.kingbass.commands.auto.DriveForward;
 import org.team1540.kingbass.commands.claw.ZeroClawPosition;
@@ -91,6 +92,7 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putData("Compressor", compressor);
     SmartDashboard.putData(new ZeroClawPosition());
     SmartDashboard.putData(new ZeroArmPosition());
+    SmartDashboard.putData(new DisableArmLimits());
   }
 
   @Override
