@@ -5,6 +5,7 @@ import static org.team1540.kingbass.RobotInfo.R_SHIFTER;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.kingbass.commands.shifters.ManualShiftDown;
 
 /**
  * Pneumatic gearbox shifters.
@@ -32,5 +33,7 @@ public class Shifters extends Subsystem {
   }
 
   @Override
-  protected void initDefaultCommand() {}
+  protected void initDefaultCommand() {
+    setDefaultCommand(new ManualShiftDown());
+  }
 }
