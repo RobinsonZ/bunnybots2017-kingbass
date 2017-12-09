@@ -4,12 +4,17 @@ import static com.ctre.CANTalon.FeedbackDevice.QuadEncoder;
 import static com.ctre.CANTalon.TalonControlMode.Follower;
 import static com.ctre.CANTalon.TalonControlMode.MotionProfile;
 import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
+import static com.ctre.CANTalon.TalonControlMode.Position;
+import static com.ctre.CANTalon.TalonControlMode.Speed;
 import static org.team1540.kingbass.RobotInfo.L_MASTER;
 import static org.team1540.kingbass.RobotInfo.L_SLAVE_A;
 import static org.team1540.kingbass.RobotInfo.L_SLAVE_B;
 import static org.team1540.kingbass.RobotInfo.R_MASTER;
 import static org.team1540.kingbass.RobotInfo.R_SLAVE_A;
 import static org.team1540.kingbass.RobotInfo.R_SLAVE_B;
+import static org.team1540.kingbass.Tuning.driveD;
+import static org.team1540.kingbass.Tuning.driveI;
+import static org.team1540.kingbass.Tuning.driveP;
 import static org.team1540.kingbass.Tuning.dtRampRate;
 import static org.team1540.kingbass.Tuning.lReverseOutput;
 import static org.team1540.kingbass.Tuning.lReverseSensor;
@@ -65,6 +70,8 @@ public class DriveTrain extends Subsystem {
 
     lMain.changeMotionControlFramePeriod(5);
     rMain.changeMotionControlFramePeriod(5);
+
+    updatePIDs();
   }
 
   @SuppressWarnings("Duplicates")
@@ -123,6 +130,11 @@ public class DriveTrain extends Subsystem {
   public void setMp(double[][] left, double[][] right) {
     leftProfile = new ProfileExecuter(lMain, left, left.length);
     rightProfile = new ProfileExecuter(rMain, right, right.length);
+  }
+
+  public void updatePIDs() {
+    lMain.setPID(driveP, driveI, driveD);
+    rMain.setPID(driveP, driveI, driveD);
   }
 
   public void setPID(double p, double i, double d, double f) {
@@ -192,12 +204,58 @@ public class DriveTrain extends Subsystem {
     }
   }
 
+  private void groupTalonsSpeed() {
+    groupTalons();
+
+    for (CANTalon c : mains) {
+      c.changeControlMode(Speed);
+    }
+  }
+
+  private void groupTalonsPosition() {
+    groupTalons();
+
+    for (CANTalon c : mains) {
+      c.changeControlMode(Position);
+    }
+  }
+
+  public void setSpeed(double left, double right) {
+    groupTalonsSpeed();
+
+    lMain.set(left);
+    rMain.set(right);
+  }
+
+  public void setPosition(double left, double right) {
+    groupTalonsPosition();
+
+    lMain.set(left);
+    rMain.set(right);
+  }
+
   public double getLeftVelocity() {
     return lMain.getEncVelocity();
   }
 
   public double getRightVelocity() {
     return rMain.getEncVelocity();
+  }
+
+  public double getLeftPosition() {
+    return lMain.getEncPosition();
+  }
+
+  public double getRightPosition() {
+    return rMain.getEncPosition();
+  }
+
+  public double getLeftError() {
+    return lMain.getError();
+  }
+
+  public double getRightError() {
+    return rMain.getError();
   }
 
   @Override

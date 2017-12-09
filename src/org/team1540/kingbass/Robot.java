@@ -92,12 +92,14 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void robotPeriodic() {
-    // SmartDashboard.putNumber("Arm Position", arm.getPosition());
-    // SmartDashboard.putNumber("Arm A Current", arm.getCurrentA());
-    // SmartDashboard.putNumber("Arm B Current", arm.getCurrentB());
     SmartDashboard.putNumber("Drive Left Velocity", driveTrain.getLeftVelocity());
     SmartDashboard.putNumber("Drive Right Velocity", driveTrain.getRightVelocity());
+    SmartDashboard.putNumber("Drivetrain Left Position", driveTrain.getLeftPosition());
+    SmartDashboard.putNumber("Drivetrain Right Position", driveTrain.getRightPosition());
+    SmartDashboard.putNumber("Drivetrain Left Error", driveTrain.getLeftError());
+    SmartDashboard.putNumber("Drivetrain Right Error", driveTrain.getRightError());
     arm.updatePIDs();
+    driveTrain.updatePIDs();
     AdjustableManager.getInstance().update();
   }
 
