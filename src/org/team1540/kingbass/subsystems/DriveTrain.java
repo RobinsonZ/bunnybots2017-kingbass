@@ -4,6 +4,7 @@ import static com.ctre.CANTalon.FeedbackDevice.QuadEncoder;
 import static com.ctre.CANTalon.TalonControlMode.Follower;
 import static com.ctre.CANTalon.TalonControlMode.MotionProfile;
 import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
+import static com.ctre.CANTalon.TalonControlMode.Position;
 import static com.ctre.CANTalon.TalonControlMode.Speed;
 import static org.team1540.kingbass.RobotInfo.L_MASTER;
 import static org.team1540.kingbass.RobotInfo.L_SLAVE_A;
@@ -210,8 +211,23 @@ public class DriveTrain extends Subsystem {
     }
   }
 
-  private void setSpeed(double left, double right) {
+  private void groupTalonsPosition() {
+    groupTalons();
+
+    for (CANTalon c : mains) {
+      c.changeControlMode(Position);
+    }
+  }
+
+  public void setSpeed(double left, double right) {
     groupTalonsSpeed();
+
+    lMain.set(left);
+    rMain.set(right);
+  }
+
+  public void setPosition(double left, double right) {
+    groupTalonsPosition();
 
     lMain.set(left);
     rMain.set(right);
@@ -223,6 +239,22 @@ public class DriveTrain extends Subsystem {
 
   public double getRightVelocity() {
     return rMain.getEncVelocity();
+  }
+
+  public double getLeftPosition() {
+    return lMain.getEncPosition();
+  }
+
+  public double getRightPosition() {
+    return rMain.getEncPosition();
+  }
+
+  public double getLeftError() {
+    return lMain.getError();
+  }
+
+  public double getRightError() {
+    return rMain.getError();
   }
 
   @Override
