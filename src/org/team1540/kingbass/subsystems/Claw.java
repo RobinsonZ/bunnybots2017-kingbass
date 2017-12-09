@@ -23,6 +23,7 @@ import org.team1540.lib.motionprofile.ProfileExecuter;
  * @author Zachary Robinson
  */
 public class Claw extends Subsystem {
+
   private CANTalon left = new CANTalon(L_CLAW);
   private CANTalon right = new CANTalon(R_CLAW);
 
@@ -30,6 +31,7 @@ public class Claw extends Subsystem {
   private ProfileExecuter rightProfile;
   private boolean clawIsCurrentLimited = false;
   private double clawLimit = Tuning.clawLimit;
+  private boolean useLimits;
 
 
   public Claw() {
@@ -122,11 +124,13 @@ public class Claw extends Subsystem {
 
   public double setPosition(double pos) {
     if (!clawIsCurrentLimited) {
+      if (useLimits) {
         pos = pos < clawLimit ? pos : clawLimit - clawBounceBack;
-      pos = pos >= clawEndPoint ? pos : clawEndPoint + clawBounceBack;
-        setTalonsToPositionMode();
-        left.set(pos);
-        right.set(-pos);
+        pos = pos >= clawEndPoint ? pos : clawEndPoint + clawBounceBack;
+      }
+      setTalonsToPositionMode();
+      left.set(pos);
+      right.set(-pos);
     }
     return pos;
   }
@@ -166,5 +170,9 @@ public class Claw extends Subsystem {
   public void updatePIDs() {
     left.setPID(clawP, clawI, clawD);
     right.setPID(clawP, clawI, clawD);
+  }
+
+  public void setUseLimits(boolean useLimits) {
+    this.useLimits = useLimits;
   }
 }
