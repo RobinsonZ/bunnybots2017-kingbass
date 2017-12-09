@@ -2,17 +2,16 @@
 package org.team1540.kingbass;
 
 import static org.team1540.kingbass.Tuning.clawEndPoint;
+import static org.team1540.kingbass.Tuning.doAuto;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team1540.base.adjustables.AdjustableManager;
 import org.team1540.kingbass.commands.arm.ZeroArmPosition;
-import org.team1540.kingbass.commands.auto.DriveForward;
+import org.team1540.kingbass.commands.auto.RunAutonomous;
 import org.team1540.kingbass.commands.claw.MoveClawToPosition;
 import org.team1540.kingbass.commands.claw.ZeroClawPosition;
 import org.team1540.kingbass.subsystems.Arm;
@@ -38,10 +37,6 @@ public class Robot extends IterativeRobot {
   public static Controller controller = new Controller();
   private boolean clawHasMoved = false;
 
-  private Command autonomousCommand;
-  private SendableChooser<Command> chooser = new SendableChooser<>();
-
-
   /**
    * This autonomous (along with the chooser code above) shows how to select between different
    * autonomous modes using the dashboard. The sendable chooser code works with the Java
@@ -54,14 +49,12 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void autonomousInit() {
-    if (!clawHasMoved) {
+    if (!(clawHasMoved || doAuto)) {
       new MoveClawToPosition(clawEndPoint).start(); // close the claw
       clawHasMoved = true;
+    } else if (doAuto) {
+      new RunAutonomous().start();
     }
-    autonomousCommand = chooser.getSelected();
-
-    // schedule the autonomous command (example)
-    if (autonomousCommand != null) { autonomousCommand.start(); }
   }
 
   /**
@@ -93,10 +86,6 @@ public class Robot extends IterativeRobot {
   @Override
   public void robotInit() {
     AdjustableManager.getInstance().add(new Tuning());
-    chooser.addObject("Drive forward 5 sec", new DriveForward(5));
-    chooser.addObject("Drive forward 2.5 sec", new DriveForward(2.5));
-    SmartDashboard.putData("Auto mode", chooser);
-    SmartDashboard.putData("Compressor", compressor);
     SmartDashboard.putData(new ZeroClawPosition());
     SmartDashboard.putData(new ZeroArmPosition());
   }
@@ -118,11 +107,6 @@ public class Robot extends IterativeRobot {
       new MoveClawToPosition(clawEndPoint).start(); // close the claw
       clawHasMoved = true;
     }
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (autonomousCommand != null) { autonomousCommand.cancel(); }
   }
 
   /**
