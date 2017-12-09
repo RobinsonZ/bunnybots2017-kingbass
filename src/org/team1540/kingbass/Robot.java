@@ -1,6 +1,8 @@
 
 package org.team1540.kingbass;
 
+import static org.team1540.kingbass.Tuning.clawEndPoint;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team1540.base.adjustables.AdjustableManager;
 import org.team1540.kingbass.commands.arm.ZeroArmPosition;
 import org.team1540.kingbass.commands.auto.DriveForward;
+import org.team1540.kingbass.commands.claw.MoveClawToPosition;
 import org.team1540.kingbass.commands.claw.ZeroClawPosition;
 import org.team1540.kingbass.subsystems.Arm;
 import org.team1540.kingbass.subsystems.Claw;
@@ -33,6 +36,7 @@ public class Robot extends IterativeRobot {
   public static Intake intake = new Intake();
   public static Shifters shifters = new Shifters();
   public static Controller controller = new Controller();
+  private boolean clawHasMoved = false;
 
   private Command autonomousCommand;
   private SendableChooser<Command> chooser = new SendableChooser<>();
@@ -50,6 +54,10 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void autonomousInit() {
+    if (!clawHasMoved) {
+      new MoveClawToPosition(clawEndPoint).start(); // close the claw
+      clawHasMoved = true;
+    }
     autonomousCommand = chooser.getSelected();
 
     // schedule the autonomous command (example)
@@ -70,7 +78,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void disabledInit() {
-
+    clawHasMoved = false;
   }
 
   @Override
@@ -106,6 +114,10 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
+    if (!clawHasMoved) {
+      new MoveClawToPosition(clawEndPoint).start(); // close the claw
+      clawHasMoved = true;
+    }
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

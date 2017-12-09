@@ -149,9 +149,7 @@ public class Claw extends Subsystem {
   }
 
   @Override
-  protected void initDefaultCommand() {
-    //setDefaultCommand(new TriggerClawControl());
-  }
+  protected void initDefaultCommand() {}
 
   private void setTalonsToPositionMode() {
     left.changeControlMode(Position);
