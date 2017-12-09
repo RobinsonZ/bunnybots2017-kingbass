@@ -10,6 +10,12 @@ import org.team1540.base.adjustables.Tunable;
  */
 public class Tuning {
 
+  @Tunable("Do autonomous")
+  public static boolean doAuto = true;
+  @Tunable("Auto distance")
+  public static double autoDistance = 25;
+  @Tunable("Auto back distance")
+  public static double autoBackDistance = 2;
   //@Tunable("Vision P")
   public static double visionP = 0.5;
   //@Tunable("Return Threshold")
@@ -29,11 +35,11 @@ public class Tuning {
   //@Tunable("Profile F")
   public static double profileF = 7.795;
 
-  @Tunable("Claw P")
+  // @Tunable("Claw P")
   public static double clawP = 1;
-  @Tunable("Claw I")
+  // @Tunable("Claw I")
   public static double clawI = 0.00001;
-  @Tunable("Claw D")
+  // @Tunable("Claw D")
   public static double clawD = 0.1;
   // drivetrain
   //@Tunable("Left reverse output")
@@ -65,34 +71,34 @@ public class Tuning {
   public static double deadzone = 0.1;
   //@Tunable("Intake min time")
   public static double intakeMinTime = 1;
-  @Tunable("Arm P")
+  // @Tunable("Arm P")
   public static double armP = 1;
-  @Tunable("Arm I")
+  // @Tunable("Arm I")
   public static double armI = 0;
-  @Tunable("Arm D")
+  // @Tunable("Arm D")
   public static double armD = 1;
   // Stall current for a 775pro is 134A so this should be sufficient
-  @Tunable("Arm current limit threshold")
+  // @Tunable("Arm current limit threshold")
   public static double armCurrLimThresh = 100;
-  @Tunable("Arm multiplier")
+  // @Tunable("Arm multiplier")
   public static double armMult = 0.010;
-  @Tunable("Arm Limit")
+  // @Tunable("Arm Limit")
   public static double armLimit = 0.7;
-  @Tunable("Arm bounceback")
+  // @Tunable("Arm bounceback")
   public static double armBounceBack = 0.05;
-  @Tunable("Arm end threshold")
+  // @Tunable("Arm end threshold")
   public static double armEndThreshold = 0.05;
-  @Tunable("Claw multiplier")
+  // @Tunable("Claw multiplier")
   public static double clawMult = 0.01;
-  @Tunable("Claw Limit")
+  // @Tunable("Claw Limit")
   public static double clawLimit = 0.09;
-  @Tunable("Claw Grab Point")
+  // @Tunable("Claw Grab Point")
   public static double clawEndPoint = -0.03;
-  @Tunable("Claw Bounce Back")
+  // @Tunable("Claw Bounce Back")
   public static double clawBounceBack = 0.005;
-  @Tunable("Claw end threshold")
+  // @Tunable("Claw end threshold")
   public static double clawEndThreshold = 0.005;
-  @Tunable("Output Bunny Time")
+  // @Tunable("Output Bunny Time")
   public static double outputBunnyTime = .5;
   @Tunable("Grab Bucket Claw Position")
   public static double grabBucketPosition = .3;
