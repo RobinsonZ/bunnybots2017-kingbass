@@ -96,4 +96,6 @@ public class Tuning {
   public static double outputBunnyTime = .5;
   @Tunable("Grab Bucket Claw Position")
   public static double grabBucketPosition = .3;
+  @Tunable("DT Ramp Rate")
+  public static double dtRampRate = 1;
 }

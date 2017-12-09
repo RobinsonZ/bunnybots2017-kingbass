@@ -10,6 +10,7 @@ import static org.team1540.kingbass.RobotInfo.L_SLAVE_B;
 import static org.team1540.kingbass.RobotInfo.R_MASTER;
 import static org.team1540.kingbass.RobotInfo.R_SLAVE_A;
 import static org.team1540.kingbass.RobotInfo.R_SLAVE_B;
+import static org.team1540.kingbass.Tuning.dtRampRate;
 import static org.team1540.kingbass.Tuning.lReverseOutput;
 import static org.team1540.kingbass.Tuning.lReverseSensor;
 import static org.team1540.kingbass.Tuning.rReverseOutput;
@@ -47,7 +48,7 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain() {
     for (CANTalon c : talons) {
-      c.setVoltageRampRate(0);
+      c.setVoltageRampRate(dtRampRate);
       c.enableBrakeMode(true);
     }
     for (CANTalon c : mains) {
