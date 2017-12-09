@@ -15,6 +15,7 @@ public class Intake extends Subsystem {
   private CANTalon intake = new CANTalon(INTAKE_A);
 
   public Intake() {
+    intake.enableBrakeMode(true);
     intake.setInverted(true);
   }
 
