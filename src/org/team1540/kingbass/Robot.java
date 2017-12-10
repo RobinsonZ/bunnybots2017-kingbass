@@ -2,8 +2,10 @@
 package org.team1540.kingbass;
 
 import static org.team1540.kingbass.Tuning.clawEndPoint;
-import static org.team1540.kingbass.Tuning.doAuto;
 
+import edu.wpi.cscore.MjpegServer;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -11,6 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team1540.base.adjustables.AdjustableManager;
 import org.team1540.kingbass.commands.arm.ZeroArmPosition;
+import org.team1540.kingbass.commands.auto.PiDriveForward;
 import org.team1540.kingbass.commands.auto.RunAutonomous;
 import org.team1540.kingbass.commands.claw.MoveClawToPosition;
 import org.team1540.kingbass.commands.claw.ZeroClawPosition;
@@ -49,6 +52,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void autonomousInit() {
+    boolean doAuto = SmartDashboard.getBoolean("Do auto", false);
     if (!(clawHasMoved || doAuto)) {
       new MoveClawToPosition(clawEndPoint).start(); // close the claw
       clawHasMoved = true;
@@ -88,10 +92,24 @@ public class Robot extends IterativeRobot {
     AdjustableManager.getInstance().add(new Tuning());
     SmartDashboard.putData(new ZeroClawPosition());
     SmartDashboard.putData(new ZeroArmPosition());
+    SmartDashboard.putData(new PiDriveForward(5, 0.25));
+    SmartDashboard.putData(new RunAutonomous());
+    SmartDashboard.putBoolean("Do auto", true);
+
+    // camera
+    // UsbCamera camera = new UsbCamera("Camera", 0);
+    // MjpegServer mjpegServer = new MjpegServer("Camera Server", 1181);
+    // mjpegServer.setSource(camera);
+    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Camera", 0);
+    camera.setResolution(640, 480);
+    MjpegServer mjpegServer = new MjpegServer("Camera Server", 1181);
+    mjpegServer.setSource(camera);
   }
 
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Arm Position", arm.getPosition());
+    SmartDashboard.putNumber("Claw Position", claw.getPosition());
     SmartDashboard.putNumber("Drive Left Velocity", driveTrain.getLeftVelocity());
     SmartDashboard.putNumber("Drive Right Velocity", driveTrain.getRightVelocity());
     SmartDashboard.putNumber("Drivetrain Left Position", driveTrain.getLeftPosition());

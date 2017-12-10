@@ -25,7 +25,7 @@ public class DriveForward extends TimedCommand {
 
   @Override
   protected void initialize() {
-    driveTrain.setLeftMotors(driveSpeed);
+    driveTrain.setLeftMotors(-driveSpeed);
     driveTrain.setRightMotors(driveSpeed);
   }
 

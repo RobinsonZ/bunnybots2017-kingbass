@@ -10,8 +10,8 @@ import org.team1540.base.adjustables.Tunable;
  */
 public class Tuning {
 
-  @Tunable("Do autonomous")
-  public static boolean doAuto = true;
+  // @Tunable("Do autonomous")
+  // public static boolean doAuto = true;
   @Tunable("Auto distance")
   public static double autoDistance = 25;
   @Tunable("Auto back distance")
