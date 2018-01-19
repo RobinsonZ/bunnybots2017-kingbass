@@ -15,13 +15,11 @@ import static org.team1540.kingbass.Tuning.lReverseSensor;
 import static org.team1540.kingbass.Tuning.rReverseOutput;
 import static org.team1540.kingbass.Tuning.rReverseSensor;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team1540.base.wrappers.ChickenTalon;
 import org.team1540.base.wrappers.ChickenTalon.TalonControlMode;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
-import org.team1540.lib.motionprofile.ProfileExecuter;
 
 /**
  * 6-cim drive train.
@@ -43,8 +41,8 @@ public class DriveTrain extends Subsystem {
   private ChickenTalon[] lSlaves = {lSlaveA, lSlaveB};
   private ChickenTalon[] rSlaves = {rSlaveA, rSlaveB};
 
-  private ProfileExecuter leftProfile;
-  private ProfileExecuter rightProfile;
+//  private ProfileExecuter leftProfile;
+//  private ProfileExecuter rightProfile;
 
   private int driveDirection = 1;
 
@@ -151,30 +149,30 @@ public class DriveTrain extends Subsystem {
     rMain.set(driveDirection * setPoint);
   }
 
-  public void startMp() {
-    if (leftProfile != null && rightProfile != null) {
-      leftProfile.startMotionProfile();
-      rightProfile.startMotionProfile();
-    }
-  }
+//  public void startMp() {
+//    if (leftProfile != null && rightProfile != null) {
+//      leftProfile.startMotionProfile();
+//      rightProfile.startMotionProfile();
+//    }
+//  }
 
   public void stop() {
     setLeftMotors(0);
     setRightMotors(0);
   }
 
-  @SuppressWarnings("Duplicates")
-  public void stopMp() {
-    if (leftProfile != null && rightProfile != null) {
-      leftProfile.reset();
-      lMain.changeControlMode(TalonControlMode.PercentVbus);
-      lMain.set(0);
-
-      rightProfile.reset();
-      rMain.changeControlMode(TalonControlMode.PercentVbus);
-      rMain.set(0);
-    }
-  }
+//  @SuppressWarnings("Duplicates")
+//  public void stopMp() {
+//    if (leftProfile != null && rightProfile != null) {
+//      leftProfile.reset();
+//      lMain.changeControlMode(TalonControlMode.PercentVbus);
+//      lMain.set(0);
+//
+//      rightProfile.reset();
+//      rMain.changeControlMode(TalonControlMode.PercentVbus);
+//      rMain.set(0);
+//    }
+//  }
 
   public void switchDriveDirection() {
     driveDirection *= -1;

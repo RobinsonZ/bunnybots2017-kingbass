@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team1540.base.wrappers.ChickenTalon;
 import org.team1540.base.wrappers.ChickenTalon.TalonControlMode;
 import org.team1540.kingbass.Tuning;
-import org.team1540.lib.motionprofile.ProfileExecuter;
 
 /**
  * Motorized claw.
@@ -24,8 +23,8 @@ public class Claw extends Subsystem {
   private ChickenTalon left = new ChickenTalon(L_CLAW);
   private ChickenTalon right = new ChickenTalon(R_CLAW);
 
-  private ProfileExecuter leftProfile;
-  private ProfileExecuter rightProfile;
+//  private ProfileExecuter leftProfile;
+//  private ProfileExecuter rightProfile;
   private boolean clawIsCurrentLimited = false;
   private double clawLimit = Tuning.clawLimit;
 
@@ -77,12 +76,12 @@ public class Claw extends Subsystem {
     right.setPID(p, i, d);
   }
 
-  public void startMp() {
-    if (leftProfile != null && rightProfile != null) {
-      leftProfile.startMotionProfile();
-      rightProfile.startMotionProfile();
-    }
-  }
+//  public void startMp() {
+//    if (leftProfile != null && rightProfile != null) {
+//      leftProfile.startMotionProfile();
+//      rightProfile.startMotionProfile();
+//    }
+//  }
 
 //  @SuppressWarnings("Duplicates")
 //  public void stopMp() {

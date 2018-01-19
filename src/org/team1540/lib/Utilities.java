@@ -1,6 +1,7 @@
 package org.team1540.lib;
 
 import com.ctre.CANTalon;
+import org.team1540.base.wrappers.ChickenTalon;
 import org.team1540.kingbass.RobotInfo;
 
 /**
@@ -33,7 +34,7 @@ public class Utilities {
    *
    * @deprecated Probably doesn't work
    */
-  public static double calcRPMDeviation(boolean gear, double throttle, CANTalon encoderTalon) {
+  public static double calcRPMDeviation(boolean gear, double throttle, ChickenTalon encoderTalon) {
     encoderTalon.configEncoderCodesPerRev(RobotInfo.ENCODER_CODES_PER_REV);
     double measuredVelocity = encoderTalon.getEncVelocity();
     double expectedVelocity = calcExpectedRPM(gear, throttle);

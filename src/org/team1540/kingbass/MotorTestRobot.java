@@ -1,27 +1,26 @@
 package org.team1540.kingbass;
 
-
-import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team1540.base.wrappers.ChickenTalon;
 
 public class MotorTestRobot extends IterativeRobot {
   private SendableChooser<Integer> chooser;
-  private CANTalon[] talons = new CANTalon[]{
-      new CANTalon(0),
-      new CANTalon(1),
-      new CANTalon(2),
-      new CANTalon(3),
-      new CANTalon(4),
-      new CANTalon(5),
-      new CANTalon(6),
-      new CANTalon(7),
-      new CANTalon(8),
-      new CANTalon(9),
-      new CANTalon(10),
-      new CANTalon(11),
+  private ChickenTalon[] talons = new ChickenTalon[]{
+      new ChickenTalon(0),
+      new ChickenTalon(1),
+      new ChickenTalon(2),
+      new ChickenTalon(3),
+      new ChickenTalon(4),
+      new ChickenTalon(5),
+      new ChickenTalon(6),
+      new ChickenTalon(7),
+      new ChickenTalon(8),
+      new ChickenTalon(9),
+      new ChickenTalon(10),
+      new ChickenTalon(11),
   };
   private Joystick joystick = new Joystick(0);
 
@@ -48,7 +47,7 @@ public class MotorTestRobot extends IterativeRobot {
 
   @Override
   public void teleopPeriodic() {
-    CANTalon talon = talons[chooser.getSelected()];
+    ChickenTalon talon = talons[chooser.getSelected()];
     double output = SmartDashboard.getNumber("Motor Output", 0.5);
 
     if (joystick.getRawButton(1)) {
