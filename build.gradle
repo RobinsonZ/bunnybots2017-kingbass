@@ -5,7 +5,7 @@ import jaci.openrio.gradle.frc.RoboRIO
 plugins {
     id "java"
     id "idea"
-    id "jaci.openrio.gradle.GradleRIO" version "2017.10.30"
+    id "jaci.openrio.gradle.GradleRIO" version "2018.01.11"
 }
 
 def TEAM = 1540
@@ -32,7 +32,8 @@ dependencies {
     compile wpilib()
     compile navx()
     compile ctre()
-    compile 'org.team1540:reference-libraries:gradle-integration-SNAPSHOT'
+    compile pathfinder()
+    compile 'org.team1540:rooster:compatibility-SNAPSHOT'
 }
 
 // setting the source directory for all the code

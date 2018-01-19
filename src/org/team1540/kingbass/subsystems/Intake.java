@@ -1,10 +1,10 @@
 package org.team1540.kingbass.subsystems;
 
-import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
 import static org.team1540.kingbass.RobotInfo.INTAKE_A;
 
-import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.base.wrappers.ChickenTalon;
+import org.team1540.base.wrappers.ChickenTalon.TalonControlMode;
 
 /**
  * Intake for bunnies.
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Zachary Robinson
  */
 public class Intake extends Subsystem {
-  private CANTalon intake = new CANTalon(INTAKE_A);
+  private ChickenTalon intake = new ChickenTalon(INTAKE_A);
 
   public Intake() {
     intake.enableBrakeMode(true);
@@ -35,7 +35,7 @@ public class Intake extends Subsystem {
    * @param setPoint The point to set the motor to, between -1 and 1 inclusive.
    */
   public void setMotor(double setPoint) {
-    intake.changeControlMode(PercentVbus);
+    intake.changeControlMode(TalonControlMode.PercentVbus);
     intake.set(setPoint);
   }
 }

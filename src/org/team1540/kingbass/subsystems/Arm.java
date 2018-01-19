@@ -1,8 +1,5 @@
 package org.team1540.kingbass.subsystems;
 
-import static com.ctre.CANTalon.TalonControlMode.Follower;
-import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
-import static com.ctre.CANTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.OI.ARM_AXIS;
 import static org.team1540.kingbass.OI.ARM_JOYSTICK;
 import static org.team1540.kingbass.RobotInfo.ARM_A;
@@ -12,10 +9,11 @@ import static org.team1540.kingbass.Tuning.armD;
 import static org.team1540.kingbass.Tuning.armI;
 import static org.team1540.kingbass.Tuning.armLimit;
 
-import com.ctre.CANTalon;
-import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.base.wrappers.ChickenTalon;
+import org.team1540.base.wrappers.ChickenTalon.TalonControlMode;
 import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.commands.arm.JoystickArmControl;
 
@@ -34,9 +32,9 @@ public class Arm extends Subsystem {
         // This is synchronized so we don't have, for example, the arm's control mode being set to
         // vbus and then getting passed a value from setPos()
         synchronized (talonLock) {
-          armA.changeControlMode(PercentVbus);
+          armA.changeControlMode(TalonControlMode.PercentVbus);
           armA.set(0);
-          armB.changeControlMode(PercentVbus);
+          armB.changeControlMode(TalonControlMode.PercentVbus);
           armB.set(0);
         }
       }
@@ -44,8 +42,8 @@ public class Arm extends Subsystem {
   });
 
   private boolean armIsCurrentLimited = false;
-  private final CANTalon armA = new CANTalon(ARM_A);
-  private final CANTalon armB = new CANTalon(ARM_B);
+  private final ChickenTalon armA = new ChickenTalon(ARM_A);
+  private final ChickenTalon armB = new ChickenTalon(ARM_B);
   private final Object talonLock = new Object();
 
   /**
@@ -128,14 +126,14 @@ public class Arm extends Subsystem {
 
   // Following two methods should only be called in a "synchronized (talonLock) {}" block.
   private void setTalonsToVbusMode() {
-    armA.changeControlMode(PercentVbus);
-    armB.changeControlMode(Follower);
+    armA.changeControlMode(TalonControlMode.PercentVbus);
+    armB.changeControlMode(TalonControlMode.Follower);
     armB.set(armA.getDeviceID());
   }
 
   private void setTalonsToPositionMode() {
-    armA.changeControlMode(Position);
-    armB.changeControlMode(Follower);
+    armA.changeControlMode(TalonControlMode.Position);
+    armB.changeControlMode(TalonControlMode.Follower);
     armB.set(armA.getDeviceID());
   }
 
