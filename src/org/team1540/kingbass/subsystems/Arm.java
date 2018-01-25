@@ -1,8 +1,8 @@
 package org.team1540.kingbass.subsystems;
 
-import static com.ctre.CANTalon.TalonControlMode.Follower;
-import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
-import static com.ctre.CANTalon.TalonControlMode.Position;
+import static org.team1540.base.wrappers.ChickenTalon.TalonControlMode.Follower;
+import static org.team1540.base.wrappers.ChickenTalon.TalonControlMode.PercentVbus;
+import static org.team1540.base.wrappers.ChickenTalon.TalonControlMode.Position;
 import static org.team1540.kingbass.OI.ARM_AXIS;
 import static org.team1540.kingbass.OI.ARM_JOYSTICK;
 import static org.team1540.kingbass.RobotInfo.ARM_A;
@@ -12,10 +12,10 @@ import static org.team1540.kingbass.Tuning.armD;
 import static org.team1540.kingbass.Tuning.armI;
 import static org.team1540.kingbass.Tuning.armLimit;
 
-import com.ctre.CANTalon;
-import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.base.wrappers.ChickenTalon;
 import org.team1540.kingbass.Tuning;
 import org.team1540.kingbass.commands.arm.JoystickArmControl;
 
@@ -44,8 +44,8 @@ public class Arm extends Subsystem {
   });
 
   private boolean armIsCurrentLimited = false;
-  private final CANTalon armA = new CANTalon(ARM_A);
-  private final CANTalon armB = new CANTalon(ARM_B);
+  private final ChickenTalon armA = new ChickenTalon(ARM_A);
+  private final ChickenTalon armB = new ChickenTalon(ARM_B);
   private final Object talonLock = new Object();
 
   /**

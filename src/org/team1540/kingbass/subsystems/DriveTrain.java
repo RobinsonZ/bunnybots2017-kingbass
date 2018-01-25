@@ -1,11 +1,10 @@
 package org.team1540.kingbass.subsystems;
 
-import static com.ctre.CANTalon.FeedbackDevice.QuadEncoder;
-import static com.ctre.CANTalon.TalonControlMode.Follower;
-import static com.ctre.CANTalon.TalonControlMode.MotionProfile;
-import static com.ctre.CANTalon.TalonControlMode.PercentVbus;
-import static com.ctre.CANTalon.TalonControlMode.Position;
-import static com.ctre.CANTalon.TalonControlMode.Speed;
+import static com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder;
+import static org.team1540.base.wrappers.ChickenTalon.TalonControlMode.Follower;
+import static org.team1540.base.wrappers.ChickenTalon.TalonControlMode.PercentVbus;
+import static org.team1540.base.wrappers.ChickenTalon.TalonControlMode.Position;
+import static org.team1540.base.wrappers.ChickenTalon.TalonControlMode.Speed;
 import static org.team1540.kingbass.RobotInfo.L_MASTER;
 import static org.team1540.kingbass.RobotInfo.L_SLAVE_A;
 import static org.team1540.kingbass.RobotInfo.L_SLAVE_B;
@@ -21,10 +20,9 @@ import static org.team1540.kingbass.Tuning.lReverseSensor;
 import static org.team1540.kingbass.Tuning.rReverseOutput;
 import static org.team1540.kingbass.Tuning.rReverseSensor;
 
-import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.team1540.base.wrappers.ChickenTalon;
 import org.team1540.kingbass.commands.drivetrain.JoystickDrive;
-import org.team1540.lib.motionprofile.ProfileExecuter;
 
 /**
  * 6-cim drive train.
@@ -32,31 +30,29 @@ import org.team1540.lib.motionprofile.ProfileExecuter;
  * @author Zachary Robinson
  */
 public class DriveTrain extends Subsystem {
-  private CANTalon lMain = new CANTalon(L_MASTER);
-  private CANTalon lSlaveA = new CANTalon(L_SLAVE_A);
-  private CANTalon lSlaveB = new CANTalon(L_SLAVE_B);
 
-  private CANTalon rMain = new CANTalon(R_MASTER);
-  private CANTalon rSlaveA = new CANTalon(R_SLAVE_A);
-  private CANTalon rSlaveB = new CANTalon(R_SLAVE_B);
+  private ChickenTalon lMain = new ChickenTalon(L_MASTER);
+  private ChickenTalon lSlaveA = new ChickenTalon(L_SLAVE_A);
+  private ChickenTalon lSlaveB = new ChickenTalon(L_SLAVE_B);
+
+  private ChickenTalon rMain = new ChickenTalon(R_MASTER);
+  private ChickenTalon rSlaveA = new ChickenTalon(R_SLAVE_A);
+  private ChickenTalon rSlaveB = new ChickenTalon(R_SLAVE_B);
 
   // various arrays to make code cleaner and easier to write
-  private CANTalon[] talons = {lMain, rMain, lSlaveA, rSlaveA, lSlaveB, rSlaveB};
-  private CANTalon[] mains = {lMain, rMain};
-  private CANTalon[] lSlaves = {lSlaveA, lSlaveB};
-  private CANTalon[] rSlaves = {rSlaveA, rSlaveB};
-
-  private ProfileExecuter leftProfile;
-  private ProfileExecuter rightProfile;
+  private ChickenTalon[] talons = {lMain, rMain, lSlaveA, rSlaveA, lSlaveB, rSlaveB};
+  private ChickenTalon[] mains = {lMain, rMain};
+  private ChickenTalon[] lSlaves = {lSlaveA, lSlaveB};
+  private ChickenTalon[] rSlaves = {rSlaveA, rSlaveB};
 
   private int driveDirection = 1;
 
   public DriveTrain() {
-    for (CANTalon c : talons) {
+    for (ChickenTalon c : talons) {
       c.setVoltageRampRate(dtRampRate);
       c.enableBrakeMode(true);
     }
-    for (CANTalon c : mains) {
+    for (ChickenTalon c : mains) {
       c.setFeedbackDevice(QuadEncoder);
       c.configEncoderCodesPerRev(1024);
       c.setProfile(0);
@@ -73,23 +69,23 @@ public class DriveTrain extends Subsystem {
 
     updatePIDs();
   }
-
-  @SuppressWarnings("Duplicates")
-  public boolean controlMp() {
-    if (leftProfile != null && rightProfile != null) {
-      boolean done = leftProfile.control();
-      lMain.changeControlMode(MotionProfile);
-      lMain.set(leftProfile.getSetValue().value);
-
-      done = (done || rightProfile.control());
-      rMain.changeControlMode(MotionProfile);
-      rMain.set(rightProfile.getSetValue().value);
-
-      return done;
-    }
-
-    return false;
-  }
+//
+//  @SuppressWarnings("Duplicates")
+//  public boolean controlMp() {
+//    if (leftProfile != null && rightProfile != null) {
+//      boolean done = leftProfile.control();
+//      lMain.changeControlMode(MotionProfile);
+//      lMain.set(leftProfile.getSetValue().value);
+//
+//      done = (done || rightProfile.control());
+//      rMain.changeControlMode(MotionProfile);
+////      rMain.set(rightProfile.getSetValue().value);
+//
+//      return done;
+//    }
+//
+//    return false;
+//  }
 
   /**
    * Gets the output current of each of the talons, averaged.
@@ -97,18 +93,18 @@ public class DriveTrain extends Subsystem {
   public double getAvgCurrentDraw() {
     double totDraw = 0;
 
-    for (CANTalon c : talons) {
+    for (ChickenTalon c : talons) {
       totDraw += c.getOutputCurrent();
     }
 
     return totDraw / 6;
   }
 
-  public CANTalon getLeftMainTalon() {
+  public ChickenTalon getLeftMainTalon() {
     return lMain;
   }
 
-  public CANTalon getRightMainTalon() {
+  public ChickenTalon getRightMainTalon() {
     return rMain;
   }
 
@@ -126,11 +122,11 @@ public class DriveTrain extends Subsystem {
     groupTalons();
     lMain.set(driveDirection * setPoint);
   }
-
-  public void setMp(double[][] left, double[][] right) {
-    leftProfile = new ProfileExecuter(lMain, left, left.length);
-    rightProfile = new ProfileExecuter(rMain, right, right.length);
-  }
+//
+//  public void setMp(double[][] left, double[][] right) {
+//    leftProfile = new ProfileExecuter(lMain, left, left.length);
+//    rightProfile = new ProfileExecuter(rMain, right, right.length);
+//  }
 
   public void updatePIDs() {
     lMain.setPID(driveP, driveI, driveD);
@@ -153,31 +149,31 @@ public class DriveTrain extends Subsystem {
     groupTalons();
     rMain.set(driveDirection * setPoint);
   }
-
-  public void startMp() {
-    if (leftProfile != null && rightProfile != null) {
-      leftProfile.startMotionProfile();
-      rightProfile.startMotionProfile();
-    }
-  }
+//
+//  public void startMp() {
+//    if (leftProfile != null && rightProfile != null) {
+//      leftProfile.startMotionProfile();
+//      rightProfile.startMotionProfile();
+//    }
+//  }
 
   public void stop() {
     setLeftMotors(0);
     setRightMotors(0);
   }
-
-  @SuppressWarnings("Duplicates")
-  public void stopMp() {
-    if (leftProfile != null && rightProfile != null) {
-      leftProfile.reset();
-      lMain.changeControlMode(PercentVbus);
-      lMain.set(0);
-
-      rightProfile.reset();
-      rMain.changeControlMode(PercentVbus);
-      rMain.set(0);
-    }
-  }
+//
+//  @SuppressWarnings("Duplicates")
+//  public void stopMp() {
+//    if (leftProfile != null && rightProfile != null) {
+//      leftProfile.reset();
+//      lMain.changeControlMode(PercentVbus);
+//      lMain.set(0);
+//
+//      rightProfile.reset();
+//      rMain.changeControlMode(PercentVbus);
+//      rMain.set(0);
+//    }
+//  }
 
   public void switchDriveDirection() {
     driveDirection *= -1;
@@ -185,13 +181,13 @@ public class DriveTrain extends Subsystem {
 
   private void groupTalons() {
     lMain.changeControlMode(PercentVbus);
-    for (CANTalon c : lSlaves) {
+    for (ChickenTalon c : lSlaves) {
       c.changeControlMode(Follower);
       c.set(lMain.getDeviceID());
     }
 
     rMain.changeControlMode(PercentVbus);
-    for (CANTalon c : rSlaves) {
+    for (ChickenTalon c : rSlaves) {
       c.changeControlMode(Follower);
       c.set(rMain.getDeviceID());
     }
@@ -199,7 +195,7 @@ public class DriveTrain extends Subsystem {
 
   @SuppressWarnings("unused")
   private void makeTalonsIndependent() {
-    for (CANTalon c : talons) {
+    for (ChickenTalon c : talons) {
       c.changeControlMode(PercentVbus);
     }
   }
@@ -207,7 +203,7 @@ public class DriveTrain extends Subsystem {
   private void groupTalonsSpeed() {
     groupTalons();
 
-    for (CANTalon c : mains) {
+    for (ChickenTalon c : mains) {
       c.changeControlMode(Speed);
     }
   }
@@ -215,7 +211,7 @@ public class DriveTrain extends Subsystem {
   private void groupTalonsPosition() {
     groupTalons();
 
-    for (CANTalon c : mains) {
+    for (ChickenTalon c : mains) {
       c.changeControlMode(Position);
     }
   }

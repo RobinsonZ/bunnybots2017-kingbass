@@ -81,27 +81,27 @@ public class Tuning {
   // @Tunable("Arm current limit threshold")
   public static double armCurrLimThresh = 100;
   // @Tunable("Arm multiplier")
-  public static double armMult = 0.010;
+  public static double armMult = 10.24;
   // @Tunable("Arm Limit")
-  public static double armLimit = 0.7;
+  public static double armLimit = 716.8;
   // @Tunable("Arm bounceback")
-  public static double armBounceBack = 0.05;
+  public static double armBounceBack = 51.2;
   // @Tunable("Arm end threshold")
-  public static double armEndThreshold = 0.05;
+  public static double armEndThreshold = 51.2;
   // @Tunable("Claw multiplier")
-  public static double clawMult = 0.01;
+  public static double clawMult = 10.24;
   // @Tunable("Claw Limit")
-  public static double clawLimit = 0.09;
+  public static double clawLimit = 92.16;
   // @Tunable("Claw Grab Point")
-  public static double clawEndPoint = -0.03;
+  public static double clawEndPoint = -30.72;
   // @Tunable("Claw Bounce Back")
-  public static double clawBounceBack = 0.005;
+  public static double clawBounceBack = 5.12;
   // @Tunable("Claw end threshold")
-  public static double clawEndThreshold = 0.005;
+  public static double clawEndThreshold = 5.12;
   // @Tunable("Output Bunny Time")
   public static double outputBunnyTime = .5;
   @Tunable("Grab Bucket Claw Position")
-  public static double grabBucketPosition = .3;
+  public static double grabBucketPosition = 307.2;
   @Tunable("DT Ramp Rate")
   public static double dtRampRate = 1;
 }
